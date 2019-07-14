@@ -1,0 +1,21 @@
+// Copyright (c) Xenko contributors (https://xenko.com) and Silicon Studio Corp. (https://www.siliconstudio.co.jp)
+// Distributed under the MIT license. See the LICENSE.md file in the project root for more information.
+using Xenko.Rendering.Data;
+
+namespace Xenko.Rendering.Lights
+{
+    /// <summary>
+    /// Base effect
+    /// </summary>
+    effect LightVoxelEffect
+    {
+        using params LightVoxelShaderKeys;
+
+        mixin LightVoxelShader;
+
+        if (LightVoxelShaderKeys.LightDiffuseVoxelColor != null)
+        {
+            mixin compose lightDiffuseVoxelColor = LightVoxelShaderKeys.LightDiffuseVoxelColor;
+        }
+   };
+}

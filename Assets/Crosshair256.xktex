@@ -1,0 +1,8 @@
+!Texture
+Id: 93d5b2c0-fb0a-4c0d-be6e-647902b95ff9
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../Resources/Crosshair256.png
+Type: !ColorTextureType
+    ColorKeyColor: {R: 255, G: 0, B: 255, A: 255}
+IsStreamable: false

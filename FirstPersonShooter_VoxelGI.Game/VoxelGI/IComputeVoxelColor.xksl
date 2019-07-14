@@ -1,0 +1,13 @@
+﻿namespace Xenko.Rendering.Skyboxes
+{
+    /// <summary>
+    /// Base shader to sample an environment
+    /// </summary>
+    shader IComputeVoxelColor
+    {
+        float4 Compute(float3 position, float radius)
+        {
+            return 0;
+        }
+    };
+}

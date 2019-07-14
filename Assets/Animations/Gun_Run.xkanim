@@ -1,0 +1,19 @@
+!Animation
+Id: eb42d3e1-6446-4f12-8e09-6eed283ef985
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../Resources/Animation/Gun_Run.fbx
+ClipDuration:
+    Enabled: false
+    StartAnimationTime: 0:00:00:00.0000000
+    EndAnimationTime: 0:00:30:00.0000000
+PivotPosition: {X: 0.0, Y: 0.0, Z: 0.0}
+RepeatMode: LoopInfinite
+Type: !StandardAnimationAssetType {}
+Skeleton: 93a38085-dbdf-49ac-9314-862583303704:Models/mannequinHandModel Skeleton
+RootMotion: false
+PreviewModel: 37ea69c5-5267-45ec-8448-3eba3ced8d91:Models/mannequinHandModel
+AnimationTimeMinimum: 0:00:00:00.0000000
+~SourceHashes:
+    06f5eee9d44aabd051b61887a8f382af~../../Resources/Animation/Gun_Run.fbx: 8a3be5e2d526a0abb8e2309f8c779456
+AnimationTimeMaximum: 0:00:00:00.5330000

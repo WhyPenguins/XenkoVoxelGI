@@ -1,0 +1,35 @@
+!PrefabAsset
+Id: a2eb8b0b-1dda-4838-9c99-a0f3d7af4a2b
+SerializedVersion: {Xenko: 3.1.0.1}
+Tags: []
+Hierarchy:
+    RootParts:
+        - ref!! 55691071-2afa-4446-a26b-67474badc01c
+    Parts:
+        -   Entity:
+                Id: 55691071-2afa-4446-a26b-67474badc01c
+                Name: Stairs1x1x1_25
+                Components:
+                    4292b7de85fd48479bb9156dc6413501: !TransformComponent
+                        Id: deb79242-fd85-4748-9bb9-156dc6413501
+                        Position: {X: 0.499999046, Y: 0.5, Z: 0.625}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    d7981c98da15b540be8fd89a04a982f0: !ModelComponent
+                        Id: 981c98d7-15da-40b5-be8f-d89a04a982f0
+                        Model: a483a772-e6d4-4c4c-848f-6994f15e5630:Models/Stairs1x1x1_25
+                        Materials:
+                            74dc3e7c6e633f46a3801edd86a197dd~0: 259d3b3a-478f-48c2-ab82-1e7b52022867:Materials/GridMTStairs
+                    3f1956df049c7a4ea6bb02ca241d9c1e: !StaticColliderComponent
+                        Id: df56193f-9c04-4e7a-a6bb-02ca241d9c1e
+                        CanSleep: true
+                        Restitution: 0.0
+                        Friction: 0.5
+                        RollingFriction: 0.0
+                        CcdMotionThreshold: 0.0
+                        CcdSweptSphereRadius: 0.0
+                        IsTrigger: false
+                        ColliderShapes:
+                            ac4e8831eab87b45ac8f9d9e46be95dd: !ColliderShapeAssetDesc
+                                Shape: 01cda052-f310-4678-8cba-f030c8594d5e:CollisionMeshes/Stairs1x1x1_25

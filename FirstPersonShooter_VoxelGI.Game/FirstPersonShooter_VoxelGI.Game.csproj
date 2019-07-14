@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>FirstPersonShooter_VoxelGI</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Xenko.Core" Version="3.1.0.1-beta02" PrivateAssets="contentfiles;analyzers" />
+    <PackageReference Include="Xenko.Core.Assets.CompilerApp" Version="3.1.0.1-beta02" PrivateAssets="contentfiles;analyzers" IncludeAssets="build" />
+    <PackageReference Include="Xenko.Engine" Version="3.1.0.1-beta02" PrivateAssets="contentfiles;analyzers" />
+    <PackageReference Include="Xenko.Particles" Version="3.1.0.1-beta02" PrivateAssets="contentfiles;analyzers" />
+    <PackageReference Include="Xenko.Physics" Version="3.1.0.1-beta02" PrivateAssets="contentfiles;analyzers" />
+    <PackageReference Include="Xenko.UI" Version="3.1.0.1-beta02" PrivateAssets="contentfiles;analyzers" />
+    <PackageReference Include="Xenko.Navigation" Version="3.1.0.1-beta02" PrivateAssets="contentfiles;analyzers" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="VoxelGI\ArrangeFragments.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ArrangeFragments.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\ClearBuffer.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ClearBuffer.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Generate3DMipmaps.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Generate3DMipmaps.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\IComputeVoxelColor.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IComputeVoxelColor.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\IsotropicVoxelColor.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IsotropicVoxelColor.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\IsotropicVoxelFragment.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IsotropicVoxelFragment.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\IsotropicVoxelFragmentEffect.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IsotropicVoxelFragmentEffect.xkfx</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\LightVoxelEffect.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LightVoxelEffect.xkfx</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\LightVoxelShader.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>LightVoxelShader.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\XenkoForwardShadingEffectVXGI.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>XenkoForwardShadingEffectVXGI.xkfx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="VoxelGI\ArrangeFragments.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>ArrangeFragments.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\ClearBuffer.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>ClearBuffer.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Generate3DMipmaps.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>Generate3DMipmaps.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\IComputeVoxelColor.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>IComputeVoxelColor.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\IsotropicVoxelColor.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>IsotropicVoxelColor.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\IsotropicVoxelFragment.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>IsotropicVoxelFragment.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\IsotropicVoxelFragmentEffect.xkfx">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>IsotropicVoxelFragmentEffect.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\LightVoxelEffect.xkfx">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>LightVoxelEffect.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\LightVoxelShader.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>LightVoxelShader.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\XenkoForwardShadingEffectVXGI.xkfx">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>XenkoForwardShadingEffectVXGI.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+</Project>

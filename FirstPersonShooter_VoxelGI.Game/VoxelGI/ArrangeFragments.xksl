@@ -1,0 +1,84 @@
+﻿namespace Xenko.Rendering.Shadows
+{
+    shader ArrangeFragments : ComputeShaderBase
+    {
+        struct VoxelFragment{
+            float4 color;
+            float z;
+            float ndotup;
+        };
+        stage RWBuffer<uint> VoxelFragmentsCounts;
+        stage RWStructuredBuffer<VoxelFragment> VoxelFragments;
+
+
+        stage RWTexture3D<half4> VoxelVolumeW0;
+
+        [Link("Nowhere")]
+        static VoxelFragment sortedFrags[64];
+
+        override void Compute()
+        {
+            uint2 pos = streams.DispatchThreadId.xy;
+            
+            uint countIndex = pos.x + pos.y * 128;
+            uint count = VoxelFragmentsCounts[countIndex];
+            
+            //Sort fragments into sortedFrags
+            uint VoxelFragmentsIndex = countIndex * 64;
+            for(uint i = 0; i < 64; i ++)
+            {
+                sortedFrags[i]  = VoxelFragments[VoxelFragmentsIndex+i];
+            }
+            //Slow bubble-sort
+            for ( int i = count-2 ; i >= 0; --i)
+            {
+                for (int j = 0; j <= i; ++j)
+                {
+                    if (sortedFrags[j].z < sortedFrags[j+1].z)
+                    {
+                        VoxelFragment temp = sortedFrags[j+1];
+                        sortedFrags[j+1] = sortedFrags[j];
+                        sortedFrags[j] = temp;
+                    }
+                }
+            }
+
+            int voxelZ = 0;
+            float4 voxelAccum = float4(0,0,0,0);
+            float voxelCount = 0;
+            float voxelNdotup = 0;
+            //Iterate through the sorted fragments, averaging, writing and filling as we go
+            for ( uint i = 0; i < count; i ++)
+            {
+                VoxelFragment frag = sortedFrags[i];
+                int Z = (int)floor(frag.z);
+                //If we leave the previous voxel
+                if (voxelZ!=Z)
+                {
+                    //Set color to average
+                    VoxelVolumeW0[int3(pos.x,pos.y,voxelZ)] = voxelAccum/max(voxelCount,1);
+
+                    //If front and backface, fill with solid
+                    if (voxelNdotup == 1.0 && sign(frag.ndotup) == -1.0)
+                    {
+                        for ( int z = voxelZ-1; z>Z; z--)
+                        {
+                            VoxelVolumeW0[int3(pos.x,pos.y,z)] = float4(0,0,0,2);
+                        }
+                    }
+
+                    //Setup for next round
+                    voxelZ = Z;
+                    voxelAccum = float4(0,0,0,0);
+                    voxelCount = 0.0;
+                    voxelNdotup = sign(frag.ndotup);
+                }
+                //Accumulate
+                voxelAccum += frag.color;
+                voxelCount += 1.0;
+            }
+            //Write final accumulation
+            VoxelVolumeW0[int3(pos.x, pos.y, voxelZ)] = voxelAccum/max(voxelCount,1);
+        }
+    };
+}

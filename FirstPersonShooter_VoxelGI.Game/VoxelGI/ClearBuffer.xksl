@@ -1,0 +1,11 @@
+﻿namespace Xenko.Rendering.Shadows
+{
+    shader ClearBuffer : ComputeShaderBase
+    {
+		stage RWBuffer<uint> buffer;
+        override void Compute()
+        {
+            buffer[streams.DispatchThreadId.x] = 0;
+        }
+    };
+}

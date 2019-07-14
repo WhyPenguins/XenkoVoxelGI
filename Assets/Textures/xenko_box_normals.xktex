@@ -1,0 +1,6 @@
+!Texture
+Id: fb2f2a45-2bcf-44cc-a5ff-15a35ed18c3d
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file ../../Resources/Textures/xenko_box_normals.png
+Type: !NormalMapTextureType {}

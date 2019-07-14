@@ -1,0 +1,48 @@
+﻿// Copyright (c) Xenko contributors (https://xenko.com) and Silicon Studio Corp. (https://www.siliconstudio.co.jp)
+// Distributed under the MIT license. See the LICENSE.md file in the project root for more information.
+
+namespace Xenko.Rendering.Skyboxes
+{
+    /// <summary>
+    /// Sample a cubemap using the MaterialPixelShadingStream roughness parameter.
+    /// </summary>
+    shader IsotropicVoxelColor : IComputeVoxelColor, Texturing, MaterialPixelShadingStream
+    {
+        cbuffer PerView.Lighting
+        {
+            float MipCount;
+        }
+
+        rgroup PerView.Lighting
+        {
+            Texture3D VoxelVolume;
+            Texture3D VoxelVolumeR1;
+            Texture3D VoxelVolumeR2;
+            Texture3D VoxelVolumeR3;
+            Texture3D VoxelVolumeR4;
+            Texture3D VoxelVolumeR5;
+            Texture3D VoxelVolumeR6;
+        }
+
+        override float4 Compute(float3 position, float radius)
+        {
+            //This is really inefficient, just temporary 'til I figure out how to write to mip-maps :P
+            Texture3D VoxelsTexs[7] = {
+                VoxelVolume,
+                VoxelVolumeR1,
+                VoxelVolumeR2,
+                VoxelVolumeR3,
+                VoxelVolumeR4,
+                VoxelVolumeR5,
+                VoxelVolumeR6
+            };
+            radius = max(1,radius);
+            float lod = min(6,log2(radius));
+            int lodi = int(floor(lod));
+            
+            float3 texrayPos = position;
+
+            return lerp(VoxelsTexs[lodi].Sample(Sampler,texrayPos),VoxelsTexs[min(6,lodi+1)].Sample(Sampler,texrayPos),frac(lod));
+        }
+    };
+}

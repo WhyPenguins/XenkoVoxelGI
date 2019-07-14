@@ -1,0 +1,31 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.0.0
+MinimumVisualStudioVersion = 16.0.0.0
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirstPersonShooter_VoxelGI.Windows", "FirstPersonShooter_VoxelGI.Windows\FirstPersonShooter_VoxelGI.Windows.csproj", "{9C7C2766-8087-4B48-A188-8AD40DA9C655}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirstPersonShooter_VoxelGI.Game", "FirstPersonShooter_VoxelGI.Game\FirstPersonShooter_VoxelGI.Game.csproj", "{130F7C6F-6619-43DF-9943-EA2F32E1B874}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C7C2766-8087-4B48-A188-8AD40DA9C655}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C7C2766-8087-4B48-A188-8AD40DA9C655}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C7C2766-8087-4B48-A188-8AD40DA9C655}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C7C2766-8087-4B48-A188-8AD40DA9C655}.Release|Any CPU.Build.0 = Release|Any CPU
+		{130F7C6F-6619-43DF-9943-EA2F32E1B874}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{130F7C6F-6619-43DF-9943-EA2F32E1B874}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{130F7C6F-6619-43DF-9943-EA2F32E1B874}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{130F7C6F-6619-43DF-9943-EA2F32E1B874}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {07F14E76-2F79-41D8-8A5B-3997C26659B6}
+	EndGlobalSection
+EndGlobal

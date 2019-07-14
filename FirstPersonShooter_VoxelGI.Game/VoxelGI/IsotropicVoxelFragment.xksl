@@ -1,0 +1,78 @@
+﻿// Copyright (c) Xenko contributors (https://xenko.com) and Silicon Studio Corp. (https://www.siliconstudio.co.jp)
+// Distributed under the MIT license. See the LICENSE.md file in the project root for more information.
+namespace Xenko.Rendering.Shadows
+{
+    /// <summary>
+    /// Voxelization, projects to axis of largest area and writes fragments to buffer
+    /// </summary>
+    shader IsotropicVoxelFragment : Math, Transformation, ShaderBase, Texturing, NormalStream, PositionStream4, MaterialPixelStream, MaterialPixelShadingStream
+    {
+        struct VoxelFragment{
+            float4 color;
+            float z;
+            float ndotup;
+        };
+        cbuffer PerView.VoxelizerStorer
+        {
+            float4x4 VoxelMatrix;
+            float4x4 VoxelMatrixViewport;
+        }
+        rgroup PerView.VoxelizerStorer
+	    {
+		    stage RWTexture3D<half4> VoxelVolumeW0;
+            stage RWStructuredBuffer<VoxelFragment> VoxelFragments;
+            stage RWBuffer<uint> VoxelFragmentsCounter;
+	    }
+
+        override stage void PSMain()
+        {
+            streams.IsFrontFace = true;
+                base.PSMain();
+
+            float3 texPos = mul(float4(streams.PositionWS.xyz,1.0),VoxelMatrix).xyz;
+
+            int3 pixelPos = int3(floor(saturate(texPos) * float3(128,128,64)));
+            uint VoxelFragmentsIndex = (pixelPos.x+pixelPos.y*128);
+
+            uint index = 0;
+            InterlockedAdd(VoxelFragmentsCounter[VoxelFragmentsIndex], 1, index);
+
+            VoxelFragment frag;
+                frag.color = float4(streams.ColorTarget.rgb,1.0);
+                frag.z = saturate(texPos.z)*64;
+                frag.ndotup = dot(streams.normalWS,float3(0,1,0));
+
+            VoxelFragments[VoxelFragmentsIndex*64 + min(63,index)] = frag;
+        }
+        float triarea(float2 p1, float2 p2, float2 p3)
+        {
+            return abs(((p2.x - p1.x) * (p3.y - p1.y) - (p3.x - p1.x) * (p2.y - p1.y))/2.0);
+        }
+        [maxvertexcount(3)]
+        void GSMain(triangle Input input[3], inout TriangleStream<Output> triangleStream)
+        {
+            for ( int i = 0; i < 3 ; i++)
+            {
+                input[i].ShadingPosition.xyz = mul(float4(input[i].PositionWS.xyz,1.0),VoxelMatrixViewport).xyz;
+            }
+
+            float areaX = triarea(input[0].ShadingPosition.yz,input[1].ShadingPosition.yz,input[2].ShadingPosition.yz);
+            float areaY = triarea(input[0].ShadingPosition.xz,input[1].ShadingPosition.xz,input[2].ShadingPosition.xz);
+            float areaZ = triarea(input[0].ShadingPosition.xy,input[1].ShadingPosition.xy,input[2].ShadingPosition.xy);
+
+            for ( int i = 0; i < 3 ; i++)
+            {
+                streams = input[i];
+
+                if (areaX > areaY && areaX > areaZ)
+                    streams.ShadingPosition.xyz = streams.ShadingPosition.yzx;
+                else if (areaY > areaZ && areaY > areaX)
+                    streams.ShadingPosition.xyz = streams.ShadingPosition.xzy;
+
+                streams.ShadingPosition.zw = float2(1,1);
+                triangleStream.Append(streams);
+            }
+
+        }
+    };
+}
