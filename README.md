@@ -5,6 +5,11 @@ It's in its early stages but feel free to check it out.
 
 ## Setup  
 
+<p align="center">
+	<img src="Screenshots/Screenshot1.png" alt="Best lighting" width="380" />
+	<img src="Screenshots/Screenshot2.png" alt="Also best lighting" width="380" />
+</p>
+
 Prerequisite  
     You'll need to compile the Xenko fork [here](https://github.com/WhyPenguins/xenko), on the branch GIPatches. I had to add a few features to Xenko for the rest of it to work, the changes are really small so check them out if you wish.  
 
