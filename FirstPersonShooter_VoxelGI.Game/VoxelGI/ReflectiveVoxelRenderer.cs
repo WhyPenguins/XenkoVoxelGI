@@ -26,6 +26,7 @@ namespace Xenko.Rendering.Shadows
 
         public static Xenko.Graphics.Buffer Voxels = null;
         public static Xenko.Graphics.Texture[] VoxelsTex = null;
+        public static Xenko.Graphics.Texture[] VoxelMips = null;
 
         public static Matrix VoxelMatrix;
         public static Matrix VoxelViewportMatrix;
@@ -41,10 +42,20 @@ namespace Xenko.Rendering.Shadows
                 VoxelFragments = Xenko.Graphics.Buffer.Structured.New(Context.GraphicsDevice, 128 * 128 * 64, 24, true);
                 VoxelFragmentsCounter = Xenko.Graphics.Buffer.Typed.New(Context.GraphicsDevice, 128 * 128, PixelFormat.R32_SInt, true);
                 VoxelsTex = new Xenko.Graphics.Texture[7];
+                VoxelMips = new Xenko.Graphics.Texture[7];
+
                 Vector3 resolution = new Vector3(128,128,64);
-                for (int i = 0; i < VoxelsTex.Length; i++)
+
+                VoxelsTex[0] = Xenko.Graphics.Texture.New3D(Context.GraphicsDevice, (int)resolution.X, (int)resolution.Y, (int)resolution.Z, new MipMapCount(true), Xenko.Graphics.PixelFormat.R16G16B16A16_Float, TextureFlags.ShaderResource | TextureFlags.UnorderedAccess);
+                resolution /= 2;
+                for (int i = 0; i < VoxelMips.Length; i++)
                 {
-                    VoxelsTex[i] = Xenko.Graphics.Texture.New3D(Context.GraphicsDevice, (int)resolution.X, (int)resolution.Y, (int)resolution.Z, false, Xenko.Graphics.PixelFormat.R16G16B16A16_Float, TextureFlags.ShaderResource | TextureFlags.UnorderedAccess | TextureFlags.RenderTarget);
+                    VoxelMips[i] = VoxelsTex[0].ToTextureView(ViewType.MipBand, 0, i);
+                }
+
+                for (int i = 1; i < VoxelsTex.Length; i++)
+                {
+                    VoxelsTex[i] = Xenko.Graphics.Texture.New3D(Context.GraphicsDevice, (int)resolution.X, (int)resolution.Y, (int)resolution.Z, false, Xenko.Graphics.PixelFormat.R16G16B16A16_Float, TextureFlags.ShaderResource | TextureFlags.UnorderedAccess);
                     resolution /= 2;
                     if (resolution.X < 1.0f) resolution.X = 1.0f;
                     if (resolution.Y < 1.0f) resolution.Y = 1.0f;
@@ -172,10 +183,21 @@ namespace Xenko.Rendering.Shadows
                                 }
                                 Generate3DMipmaps.ThreadGroupCounts = threadGroupCounts;
                                 Generate3DMipmaps.ThreadNumbers = new Int3((int)resolution.X / threadGroupCounts.X, (int)resolution.Y / threadGroupCounts.Y, (int)resolution.Z / threadGroupCounts.Z);
+
                                 Generate3DMipmaps.Parameters.Set(Generate3DMipmapsKeys.VoxelsTexR, VoxelsTex[i]);
                                 Generate3DMipmaps.Parameters.Set(Generate3DMipmapsKeys.VoxelsTexW, VoxelsTex[i + 1]);
                                 ((RendererBase)Generate3DMipmaps).Draw(context);
+                                //Don't seem to be able to read and write to the same texture, even if the views
+                                //point to different mipmaps.
+                                context.CommandList.CopyRegion(VoxelsTex[i + 1], 0, null, VoxelsTex[0], i + 1);
                             }
+                            //Unbind texture views from compute shader...I'm sure there is a better way to do this
+                            //but if I don't the textures don't work in pixel shaders any more.
+                            //When I just set the parameters to textures it works fine, but
+                            //once I use ToTextureView...not anymore.
+                            Generate3DMipmaps.Parameters.Set(Generate3DMipmapsKeys.VoxelsTexR, null);
+                            Generate3DMipmaps.Parameters.Set(Generate3DMipmapsKeys.VoxelsTexW, null);
+                            ((RendererBase)Generate3DMipmaps).Draw(context);
                         }
                     }
                 }
