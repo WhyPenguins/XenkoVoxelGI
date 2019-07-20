@@ -39,11 +39,11 @@ namespace Xenko.Rendering
                     ParameterCollection VSViewParameters = new ParameterCollection();
                     ParameterCollection ViewParameters = new ParameterCollection();
 
-                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelVolumeW0, ReflectiveVoxelRenderer.VoxelsTex[0]);
-                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelFragments, ReflectiveVoxelRenderer.VoxelFragments);
-                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelFragmentsCounter, ReflectiveVoxelRenderer.VoxelFragmentsCounter);
-                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelMatrix, ReflectiveVoxelRenderer.VoxelMatrix);
-                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelMatrixViewport, ReflectiveVoxelRenderer.VoxelViewportMatrix);
+                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelVolumeW0, ReflectiveVoxelRenderer.ClipMaps);
+                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelFragments, ReflectiveVoxelRenderer.Fragments);
+                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelFragmentsCounter, ReflectiveVoxelRenderer.FragmentsCounter);
+                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelMatrix, ReflectiveVoxelRenderer.clipMaps[0].Matrix);
+                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelMatrixViewport, ReflectiveVoxelRenderer.clipMaps[0].ViewportMatrix);
 
                     var resourceGroup = viewLayout.Entries[view.Index].Resources;
                     resourceGroup.UpdateLogicalGroup(ref voxelizerStorer, VSViewParameters);

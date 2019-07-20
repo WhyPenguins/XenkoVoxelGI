@@ -19,7 +19,9 @@ namespace Xenko.Rendering.Skyboxes
     public static partial class IsotropicVoxelColorKeys
     {
         public static readonly ValueParameterKey<float> MipCount = ParameterKeys.NewValue<float>();
+        public static readonly ValueParameterKey<float> ClipMapCount = ParameterKeys.NewValue<float>();
         public static readonly ObjectParameterKey<Texture> VoxelVolume = ParameterKeys.NewObject<Texture>();
+        public static readonly ObjectParameterKey<Texture> VoxelMipMaps = ParameterKeys.NewObject<Texture>();
         public static readonly ObjectParameterKey<Texture> VoxelVolumeR1 = ParameterKeys.NewObject<Texture>();
         public static readonly ObjectParameterKey<Texture> VoxelVolumeR2 = ParameterKeys.NewObject<Texture>();
         public static readonly ObjectParameterKey<Texture> VoxelVolumeR3 = ParameterKeys.NewObject<Texture>();

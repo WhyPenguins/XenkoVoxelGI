@@ -20,42 +20,57 @@ namespace Xenko.Rendering.Shadows
         public RenderStage VoxelStage { get; set; }
         protected FastList<RenderView> reflectiveVoxelViews = new FastList<RenderView>();
 
+        public static int ClipMapCount = 1;
+        public static Vector3 ClipMapResolution = new Vector3(128, 128, 64);//Z/Y reversed here for now
+        public static Vector3 ClipMapCenter = new Vector3(0, 2.5f, 0);
+        public static Vector3 ClipMapBaseSize = new Vector3(20, 10, 20);
+        public class ClipMap{
+            public Matrix Matrix;
+            public Matrix ViewportMatrix;
+        };
+        public static ClipMap[] clipMaps = null;
 
-        public static Xenko.Graphics.Buffer VoxelFragments = null;
-        public static Xenko.Graphics.Buffer VoxelFragmentsCounter = null;
-
-        public static Xenko.Graphics.Buffer Voxels = null;
-        public static Xenko.Graphics.Texture[] VoxelsTex = null;
-        public static Xenko.Graphics.Texture[] VoxelMips = null;
-
-        public static Matrix VoxelMatrix;
-        public static Matrix VoxelViewportMatrix;
+        public static Xenko.Graphics.Buffer Fragments = null;
+        public static Xenko.Graphics.Buffer FragmentsCounter = null;
+        public static Xenko.Graphics.Texture ClipMaps = null;
+        public static Xenko.Graphics.Texture OuterClipMap = null;
+        public static Xenko.Graphics.Texture MipMaps = null;
+        public static Xenko.Graphics.Texture[] MipMapsViews = null;
+        public static Xenko.Graphics.Texture[] TempMipMaps = null;
 
         Xenko.Rendering.ComputeEffect.ComputeEffectShader Generate3DMipmaps;
         Xenko.Rendering.ComputeEffect.ComputeEffectShader ClearBuffer;
         Xenko.Rendering.ComputeEffect.ComputeEffectShader ArrangeFragments;
         public virtual void Collect(RenderContext Context, IShadowMapRenderer ShadowMapRenderer)
         {
-            if (Voxels == null)
+            if (ClipMaps == null)
             {
-                Voxels = Xenko.Graphics.Buffer.Structured.New(Context.GraphicsDevice, 100, 28, true);
-                VoxelFragments = Xenko.Graphics.Buffer.Structured.New(Context.GraphicsDevice, 128 * 128 * 64, 24, true);
-                VoxelFragmentsCounter = Xenko.Graphics.Buffer.Typed.New(Context.GraphicsDevice, 128 * 128, PixelFormat.R32_SInt, true);
-                VoxelsTex = new Xenko.Graphics.Texture[7];
-                VoxelMips = new Xenko.Graphics.Texture[7];
+                Vector3 resolution = ClipMapResolution;
+                int size = (int)(resolution.X * resolution.Y * resolution.Z);
+                int layersize = (int)(resolution.X * resolution.Y);
 
-                Vector3 resolution = new Vector3(128,128,64);
+                Fragments = Xenko.Graphics.Buffer.Structured.New(Context.GraphicsDevice, size * ClipMapCount, 24, true);
+                FragmentsCounter = Xenko.Graphics.Buffer.Typed.New(Context.GraphicsDevice, layersize * ClipMapCount, PixelFormat.R32_SInt, true);
 
-                VoxelsTex[0] = Xenko.Graphics.Texture.New3D(Context.GraphicsDevice, (int)resolution.X, (int)resolution.Y, (int)resolution.Z, new MipMapCount(true), Xenko.Graphics.PixelFormat.R16G16B16A16_Float, TextureFlags.ShaderResource | TextureFlags.UnorderedAccess);
+                clipMaps = new ClipMap[ClipMapCount];
+                TempMipMaps = new Xenko.Graphics.Texture[7];
+                MipMapsViews = new Xenko.Graphics.Texture[7];
+
+
+                ClipMaps = Xenko.Graphics.Texture.New3D(Context.GraphicsDevice, (int)resolution.X, (int)resolution.Y, (int)resolution.Z * ClipMapCount, new MipMapCount(false), Xenko.Graphics.PixelFormat.R16G16B16A16_Float, TextureFlags.ShaderResource | TextureFlags.UnorderedAccess);
+                OuterClipMap = ClipMaps.ToTextureView(ViewType.MipBand, (int)resolution.Z * (ClipMapCount - 1), 0);
+
                 resolution /= 2;
-                for (int i = 0; i < VoxelMips.Length; i++)
+
+                MipMaps = Xenko.Graphics.Texture.New3D(Context.GraphicsDevice, (int)resolution.X, (int)resolution.Y, (int)resolution.Z, new MipMapCount(true), Xenko.Graphics.PixelFormat.R16G16B16A16_Float, TextureFlags.ShaderResource | TextureFlags.UnorderedAccess);
+                for (int i = 0; i < MipMapsViews.Length; i++)
                 {
-                    VoxelMips[i] = VoxelsTex[0].ToTextureView(ViewType.MipBand, 0, i);
+                    MipMapsViews[i] = MipMaps.ToTextureView(ViewType.MipBand, 0, i);
                 }
 
-                for (int i = 1; i < VoxelsTex.Length; i++)
+                for (int i = 0; i < TempMipMaps.Length; i++)
                 {
-                    VoxelsTex[i] = Xenko.Graphics.Texture.New3D(Context.GraphicsDevice, (int)resolution.X, (int)resolution.Y, (int)resolution.Z, false, Xenko.Graphics.PixelFormat.R16G16B16A16_Float, TextureFlags.ShaderResource | TextureFlags.UnorderedAccess);
+                    TempMipMaps[i] = Xenko.Graphics.Texture.New3D(Context.GraphicsDevice, (int)resolution.X, (int)resolution.Y, (int)resolution.Z, false, Xenko.Graphics.PixelFormat.R16G16B16A16_Float, TextureFlags.ShaderResource | TextureFlags.UnorderedAccess);
                     resolution /= 2;
                     if (resolution.X < 1.0f) resolution.X = 1.0f;
                     if (resolution.Y < 1.0f) resolution.Y = 1.0f;
@@ -82,22 +97,29 @@ namespace Xenko.Rendering.Shadows
             shadowRenderView.CullingMode = CameraCullingMode.Frustum;
             shadowRenderView.ViewSize = new Vector2(1024, 1024);
 
-            float ResX = 128;
-            float ResY = 128;
-            float ResZ = 64;
 
-            float maxRes = Math.Max(Math.Max(ResX,ResY),ResZ);
 
-            var transmat = Matrix.Translation(0.0f, 2.5f-5.0f, 0.0f);
-            var scalemat = Matrix.Scaling(new Vector3(0.1f, 0.2f, 0.1f));
-            var rotmat = new Matrix(1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1);
+            float maxResolution = Math.Max(Math.Max(ClipMapResolution.X, ClipMapResolution.Y), ClipMapResolution.Z);
 
-            var viewporttrans = Matrix.Translation(0.5f, 0.5f, 0.5f);
-            var viewportscale = Matrix.Scaling(0.5f, 0.5f, 0.5f);
-            VoxelMatrix = transmat * scalemat * rotmat * viewportscale * viewporttrans;
+            var transmat = Matrix.Translation(-ClipMapCenter);
+            var scalemat = Matrix.Scaling(new Vector3(2f)/ClipMapBaseSize);
+            var rotmat = new Matrix(1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1);//xzy
 
-            var viewportsquish = Matrix.Scaling(ResX / maxRes, ResY / maxRes, ResZ / maxRes);
-            VoxelViewportMatrix = transmat * scalemat * rotmat * viewportsquish;// the naming is probably a bit backwards
+            var viewToTexTrans = Matrix.Translation(0.5f, 0.5f, 0.5f);
+            var viewToTexScale = Matrix.Scaling(0.5f, 0.5f, 0.5f);
+            var viewportAspect = Matrix.Scaling(ClipMapResolution / maxResolution);
+
+            Matrix BaseVoxelMatrix = transmat * scalemat * rotmat;
+
+            Vector3 scale = new Vector3(1.0f);
+
+            for (int i = 0; i < ClipMapCount; i++)
+            {
+                clipMaps[i] = new ClipMap();
+
+                clipMaps[i].Matrix = BaseVoxelMatrix * Matrix.Scaling(scale) * viewToTexScale * viewToTexTrans;
+                clipMaps[i].ViewportMatrix = BaseVoxelMatrix * Matrix.Scaling(scale) * viewportAspect;
+            }
 
             shadowRenderView.NearClipPlane = nearClip;
             shadowRenderView.FarClipPlane = farClip;
@@ -140,38 +162,39 @@ namespace Xenko.Rendering.Shadows
                         using (drawContext.QueryManager.BeginProfile(Color.Black, FragmentVoxelizationProfilingKey))
                         {
                             drawContext.CommandList.ResetTargets();
-                            drawContext.CommandList.SetViewport(new Viewport(0, 0, 128, 128));
+                            float maxResolution = Math.Max(Math.Max(ClipMapResolution.X, ClipMapResolution.Y), ClipMapResolution.Z);
+                            drawContext.CommandList.SetViewport(new Viewport(0, 0, (int)maxResolution, (int)maxResolution));
                             renderSystem.Draw(drawContext, voxelizeRenderView, renderSystem.RenderStages[voxelizeRenderView.RenderStages[0].Index]);
                         }
 
                         //Fill and write to voxel volume
                         using (drawContext.QueryManager.BeginProfile(Color.Black, ArrangementVoxelizationProfilingKey))
                         {
-                            context.CommandList.ClearReadWrite(VoxelsTex[0], new Vector4(0.0f));
+                            context.CommandList.ClearReadWrite(ClipMaps, new Vector4(0.0f));
 
                             ArrangeFragments.ThreadGroupCounts = new Int3(16, 16, 1);
-                            ArrangeFragments.ThreadNumbers = new Int3(128 / ArrangeFragments.ThreadGroupCounts.X, 128 / ArrangeFragments.ThreadGroupCounts.Y, 1 / ArrangeFragments.ThreadGroupCounts.Z);
-                                ArrangeFragments.Parameters.Set(ArrangeFragmentsKeys.VoxelFragmentsCounts, VoxelFragmentsCounter);
-                                ArrangeFragments.Parameters.Set(ArrangeFragmentsKeys.VoxelFragments, VoxelFragments);
-                                ArrangeFragments.Parameters.Set(ArrangeFragmentsKeys.VoxelVolumeW0, VoxelsTex[0]);
+                            ArrangeFragments.ThreadNumbers = new Int3(128 / ArrangeFragments.ThreadGroupCounts.X, 128 / ArrangeFragments.ThreadGroupCounts.Y, ClipMapCount / ArrangeFragments.ThreadGroupCounts.Z);
+                                ArrangeFragments.Parameters.Set(ArrangeFragmentsKeys.VoxelFragmentsCounts, FragmentsCounter);
+                                ArrangeFragments.Parameters.Set(ArrangeFragmentsKeys.VoxelFragments, Fragments);
+                                ArrangeFragments.Parameters.Set(ArrangeFragmentsKeys.VoxelVolumeW0, ClipMaps);
                             ((RendererBase)ArrangeFragments).Draw(context);
 
 
-                            context.CommandList.ClearReadWrite(VoxelFragmentsCounter, new Vector4(0));
+                            context.CommandList.ClearReadWrite(FragmentsCounter, new Vector4(0));
                         }
 
                         //Mipmap
                         using (drawContext.QueryManager.BeginProfile(Color.Black, MipmappingVoxelizationProfilingKey))
                         {
                             ClearBuffer.ThreadGroupCounts = new Int3(32, 1, 1);
-                            ClearBuffer.ThreadNumbers = new Int3(VoxelFragmentsCounter.ElementCount / ClearBuffer.ThreadGroupCounts.X, 1 / ClearBuffer.ThreadGroupCounts.Y, 1 / ClearBuffer.ThreadGroupCounts.Z);
-                                ClearBuffer.Parameters.Set(ClearBufferKeys.buffer, VoxelFragmentsCounter);
+                            ClearBuffer.ThreadNumbers = new Int3(FragmentsCounter.ElementCount / ClearBuffer.ThreadGroupCounts.X, 1 / ClearBuffer.ThreadGroupCounts.Y, 1 / ClearBuffer.ThreadGroupCounts.Z);
+                                ClearBuffer.Parameters.Set(ClearBufferKeys.buffer, FragmentsCounter);
                             ((RendererBase)ClearBuffer).Draw(context);
 
                             //Mipmap
                             Vector3 resolution = new Vector3(128, 128, 64);
                             Int3 threadGroupCounts = new Int3(8, 8, 8);
-                            for(int i = 0; i < VoxelsTex.Length - 1; i ++)
+                            for(int i = 0; i < TempMipMaps.Length - 1; i ++)
                             {
                                 resolution /= 2;
                                 if (resolution.X < threadGroupCounts.X|| resolution.Y < threadGroupCounts.Y|| resolution.Z < threadGroupCounts.Z)
@@ -184,12 +207,19 @@ namespace Xenko.Rendering.Shadows
                                 Generate3DMipmaps.ThreadGroupCounts = threadGroupCounts;
                                 Generate3DMipmaps.ThreadNumbers = new Int3((int)resolution.X / threadGroupCounts.X, (int)resolution.Y / threadGroupCounts.Y, (int)resolution.Z / threadGroupCounts.Z);
 
-                                Generate3DMipmaps.Parameters.Set(Generate3DMipmapsKeys.VoxelsTexR, VoxelsTex[i]);
-                                Generate3DMipmaps.Parameters.Set(Generate3DMipmapsKeys.VoxelsTexW, VoxelsTex[i + 1]);
+                                if (i == 0)
+                                {
+                                    Generate3DMipmaps.Parameters.Set(Generate3DMipmapsKeys.VoxelsTexR, ClipMaps);
+                                }
+                                else
+                                {
+                                    Generate3DMipmaps.Parameters.Set(Generate3DMipmapsKeys.VoxelsTexR, TempMipMaps[i - 1]);
+                                }
+                                Generate3DMipmaps.Parameters.Set(Generate3DMipmapsKeys.VoxelsTexW, TempMipMaps[i]);
                                 ((RendererBase)Generate3DMipmaps).Draw(context);
                                 //Don't seem to be able to read and write to the same texture, even if the views
                                 //point to different mipmaps.
-                                context.CommandList.CopyRegion(VoxelsTex[i + 1], 0, null, VoxelsTex[0], i + 1);
+                                context.CommandList.CopyRegion(TempMipMaps[i], 0, null, MipMaps, i);
                             }
                             //Unbind texture views from compute shader...I'm sure there is a better way to do this
                             //but if I don't the textures don't work in pixel shaders any more.

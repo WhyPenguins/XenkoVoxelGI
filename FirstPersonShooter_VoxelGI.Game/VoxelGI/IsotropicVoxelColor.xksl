@@ -11,11 +11,13 @@ namespace Xenko.Rendering.Skyboxes
         cbuffer PerView.Lighting
         {
             float MipCount;
+            float ClipMapCount;
         }
 
         rgroup PerView.Lighting
         {
             Texture3D VoxelVolume;
+            Texture3D VoxelMipMaps;
             Texture3D VoxelVolumeR1;
             Texture3D VoxelVolumeR2;
             Texture3D VoxelVolumeR3;
@@ -30,8 +32,7 @@ namespace Xenko.Rendering.Skyboxes
             float lod = min(6,log2(radius));
             
             float3 texrayPos = position;
-
-            return VoxelVolume.SampleLevel(Sampler,texrayPos,lod);
+            return lerp(VoxelVolume.SampleLevel(Sampler,texrayPos,0),VoxelMipMaps.SampleLevel(Sampler,texrayPos,lod-1.0),min(lod,1.0));
         }
     };
 }
