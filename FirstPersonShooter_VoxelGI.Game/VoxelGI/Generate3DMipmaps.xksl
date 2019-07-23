@@ -13,10 +13,15 @@
             uint depth = 0;
             VoxelsTexW.GetDimensions(width,height,depth);
 
+            uint rwidth = 0;
+            uint rheight = 0;
+            uint rdepth = 0;
+            VoxelsTexR.GetDimensions(rwidth,rheight,rdepth);
+
             //If not a border pixel, average, otherwise fill empty
             if (pos.x!=0&&pos.y!=0&&pos.z!=0&&pos.x!=width-1&&pos.y!=height-1&&pos.z!=depth-1)
             {
-                uint3 posR = pos*2;
+                uint3 posR = pos*2+uint3(0,0,rdepth-depth*2);
                 VoxelsTexW[pos] = (
                     VoxelsTexR.Load(int4(posR,0))+
                     VoxelsTexR.Load(int4(posR+uint3(1,0,0),0))+

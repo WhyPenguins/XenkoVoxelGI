@@ -24,15 +24,22 @@ namespace Xenko.Rendering.Shadows
             stage RWBuffer<uint> VoxelFragmentsCounter;
 	    }
 
+        stage stream uint clipPos;
+        stage stream float clipScale;
+
         override stage void PSMain()
         {
             streams.IsFrontFace = true;
                 base.PSMain();
 
             float3 texPos = mul(float4(streams.PositionWS.xyz,1.0),VoxelMatrix).xyz;
+            texPos = (texPos-0.5)  * streams.clipScale + 0.5;
+
+            //Currently Z clipping doesn't seem to work right, this'll do for now
+            if (dot(texPos,float3(1,1,1)) != dot(saturate(texPos),float3(1,1,1))) discard;
 
             int3 pixelPos = int3(floor(saturate(texPos) * float3(128,128,64)));
-            uint VoxelFragmentsIndex = (pixelPos.x+pixelPos.y*128);
+            uint VoxelFragmentsIndex = (pixelPos.x+pixelPos.y*128) + streams.clipPos;
 
             uint index = 0;
             InterlockedAdd(VoxelFragmentsCounter[VoxelFragmentsIndex], 1, index);
@@ -48,7 +55,7 @@ namespace Xenko.Rendering.Shadows
         {
             return abs(((p2.x - p1.x) * (p3.y - p1.y) - (p3.x - p1.x) * (p2.y - p1.y))/2.0);
         }
-        [maxvertexcount(3)]
+        [maxvertexcount(6)]
         void GSMain(triangle Input input[3], inout TriangleStream<Output> triangleStream)
         {
             for ( int i = 0; i < 3 ; i++)
@@ -60,17 +67,27 @@ namespace Xenko.Rendering.Shadows
             float areaY = triarea(input[0].ShadingPosition.xz,input[1].ShadingPosition.xz,input[2].ShadingPosition.xz);
             float areaZ = triarea(input[0].ShadingPosition.xy,input[1].ShadingPosition.xy,input[2].ShadingPosition.xy);
 
-            for ( int i = 0; i < 3 ; i++)
+            for ( int map = 0 ; map < 2; map++)
             {
-                streams = input[i];
+                uint clippos = map * (128 * 128);
+                float clipscale = pow(2,-map);
+                for ( int i = 0; i < 3 ; i++)
+                {
+                    streams = input[i];
 
-                if (areaX > areaY && areaX > areaZ)
-                    streams.ShadingPosition.xyz = streams.ShadingPosition.yzx;
-                else if (areaY > areaZ && areaY > areaX)
-                    streams.ShadingPosition.xyz = streams.ShadingPosition.xzy;
+                    streams.clipPos = clippos;
+                    streams.clipScale = clipscale;
 
-                streams.ShadingPosition.zw = float2(1,1);
-                triangleStream.Append(streams);
+                    if (areaX > areaY && areaX > areaZ)
+                        streams.ShadingPosition.xyz = streams.ShadingPosition.yzx;
+                    else if (areaY > areaZ && areaY > areaX)
+                        streams.ShadingPosition.xyz = streams.ShadingPosition.xzy;
+
+                    streams.ShadingPosition.xyz *= streams.clipScale;
+                    streams.ShadingPosition.w = 1.0;
+                    triangleStream.Append(streams);
+                }
+                triangleStream.RestartStrip();
             }
 
         }

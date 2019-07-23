@@ -19,12 +19,15 @@
         override void Compute()
         {
             uint2 pos = streams.DispatchThreadId.xy;
-            
-            uint countIndex = pos.x + pos.y * 128;
-            uint count = VoxelFragmentsCounts[countIndex];
+
+            int clip = streams.DispatchThreadId.z;
+            int clipZOffset = 64*clip;
+
+            uint countIndex = pos.x + pos.y * 128 + clip * (128 * 128);
+            uint count = min(VoxelFragmentsCounts[countIndex],63);
             
             //Sort fragments into sortedFrags
-            uint VoxelFragmentsIndex = countIndex * 64;
+            uint VoxelFragmentsIndex = pos.x * 64 + pos.y * 128 * 64 + clip * (128 * 128 * 64);//countIndex * 64;
             for(uint i = 0; i < 64; i ++)
             {
                 sortedFrags[i]  = VoxelFragments[VoxelFragmentsIndex+i];
@@ -56,14 +59,14 @@
                 if (voxelZ!=Z)
                 {
                     //Set color to average
-                    VoxelVolumeW0[int3(pos.x,pos.y,voxelZ)] = voxelAccum/max(voxelCount,1);
+                    VoxelVolumeW0[int3(pos.x,pos.y,voxelZ+clipZOffset)] = voxelAccum/max(voxelCount,1);
 
                     //If front and backface, fill with solid
                     if (voxelNdotup == 1.0 && sign(frag.ndotup) == -1.0)
                     {
                         for ( int z = voxelZ-1; z>Z; z--)
                         {
-                            VoxelVolumeW0[int3(pos.x,pos.y,z)] = float4(0,0,0,2);
+                            VoxelVolumeW0[int3(pos.x,pos.y,z+clipZOffset)] = float4(0,0,0,2);
                         }
                     }
 
@@ -78,7 +81,7 @@
                 voxelCount += 1.0;
             }
             //Write final accumulation
-            VoxelVolumeW0[int3(pos.x, pos.y, voxelZ)] = voxelAccum/max(voxelCount,1);
+            VoxelVolumeW0[int3(pos.x, pos.y, voxelZ+clipZOffset)] = voxelAccum/max(voxelCount,1);
         }
     };
 }

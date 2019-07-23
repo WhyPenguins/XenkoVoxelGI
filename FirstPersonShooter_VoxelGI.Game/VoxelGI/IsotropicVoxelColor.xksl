@@ -30,9 +30,21 @@ namespace Xenko.Rendering.Skyboxes
         {
             radius = max(1,radius);
             float lod = min(6,log2(radius));
+            float baselod = floor(min(lod,1));
             
             float3 texrayPos = position;
-            return lerp(VoxelVolume.SampleLevel(Sampler,texrayPos,0),VoxelMipMaps.SampleLevel(Sampler,texrayPos,lod-1.0),min(lod,1.0));
+
+            float3 texrayPos1 = ((texrayPos-0.5) * (1.0/pow(2,baselod)) + 0.5)/float3(1,1,2) + float3(0,0,baselod/2);
+            float4 tex1 = VoxelVolume.SampleLevel(Sampler,texrayPos1,0);
+
+            float3 texrayPos2 = ((texrayPos-0.5) * (0.5/pow(2,baselod)) + 0.5)/float3(1,1,2) + float3(0,0,(baselod+1.0)/2);
+            float4 tex2 = VoxelVolume.SampleLevel(Sampler,texrayPos2,0);
+
+            float3 finalClipMapPos = ((texrayPos-0.5) * 0.5 + 0.5);
+            float mip = lod-2;
+            float4 tex3 = VoxelMipMaps.SampleLevel(Sampler,finalClipMapPos,mip);
+
+            return lerp(lerp(tex1,tex2,lod-baselod),tex3,saturate(mip+1.0));
         }
     };
 }

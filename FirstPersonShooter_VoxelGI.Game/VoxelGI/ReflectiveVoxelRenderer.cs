@@ -20,7 +20,7 @@ namespace Xenko.Rendering.Shadows
         public RenderStage VoxelStage { get; set; }
         protected FastList<RenderView> reflectiveVoxelViews = new FastList<RenderView>();
 
-        public static int ClipMapCount = 1;
+        public static int ClipMapCount = 2;
         public static Vector3 ClipMapResolution = new Vector3(128, 128, 64);//Z/Y reversed here for now
         public static Vector3 ClipMapCenter = new Vector3(0, 2.5f, 0);
         public static Vector3 ClipMapBaseSize = new Vector3(20, 10, 20);
@@ -33,7 +33,6 @@ namespace Xenko.Rendering.Shadows
         public static Xenko.Graphics.Buffer Fragments = null;
         public static Xenko.Graphics.Buffer FragmentsCounter = null;
         public static Xenko.Graphics.Texture ClipMaps = null;
-        public static Xenko.Graphics.Texture OuterClipMap = null;
         public static Xenko.Graphics.Texture MipMaps = null;
         public static Xenko.Graphics.Texture[] MipMapsViews = null;
         public static Xenko.Graphics.Texture[] TempMipMaps = null;
@@ -58,10 +57,8 @@ namespace Xenko.Rendering.Shadows
 
 
                 ClipMaps = Xenko.Graphics.Texture.New3D(Context.GraphicsDevice, (int)resolution.X, (int)resolution.Y, (int)resolution.Z * ClipMapCount, new MipMapCount(false), Xenko.Graphics.PixelFormat.R16G16B16A16_Float, TextureFlags.ShaderResource | TextureFlags.UnorderedAccess);
-                OuterClipMap = ClipMaps.ToTextureView(ViewType.MipBand, (int)resolution.Z * (ClipMapCount - 1), 0);
 
                 resolution /= 2;
-
                 MipMaps = Xenko.Graphics.Texture.New3D(Context.GraphicsDevice, (int)resolution.X, (int)resolution.Y, (int)resolution.Z, new MipMapCount(true), Xenko.Graphics.PixelFormat.R16G16B16A16_Float, TextureFlags.ShaderResource | TextureFlags.UnorderedAccess);
                 for (int i = 0; i < MipMapsViews.Length; i++)
                 {
@@ -91,7 +88,7 @@ namespace Xenko.Rendering.Shadows
             float farClip = 999.7f;
             //Currently hard coded and kinda odd
             shadowRenderView.View = Matrix.Translation(0.0f, 1.0f, 0.0f) * Matrix.RotationX(-3.1415f / 2.0f);
-            shadowRenderView.Projection = Matrix.OrthoRH(20, 20, nearClip, farClip);
+            shadowRenderView.Projection = Matrix.OrthoRH(ClipMapBaseSize.X*(float)Math.Pow(2,ClipMapCount), ClipMapBaseSize.Z * (float)Math.Pow(2, ClipMapCount), nearClip, farClip);
             Matrix.Multiply(ref shadowRenderView.View, ref shadowRenderView.Projection, out shadowRenderView.ViewProjection);
             shadowRenderView.Frustum = new BoundingFrustum(ref shadowRenderView.ViewProjection);
             shadowRenderView.CullingMode = CameraCullingMode.Frustum;
@@ -186,7 +183,7 @@ namespace Xenko.Rendering.Shadows
                         //Mipmap
                         using (drawContext.QueryManager.BeginProfile(Color.Black, MipmappingVoxelizationProfilingKey))
                         {
-                            ClearBuffer.ThreadGroupCounts = new Int3(32, 1, 1);
+                            ClearBuffer.ThreadGroupCounts = new Int3(64, 1, 1);
                             ClearBuffer.ThreadNumbers = new Int3(FragmentsCounter.ElementCount / ClearBuffer.ThreadGroupCounts.X, 1 / ClearBuffer.ThreadGroupCounts.Y, 1 / ClearBuffer.ThreadGroupCounts.Z);
                                 ClearBuffer.Parameters.Set(ClearBufferKeys.buffer, FragmentsCounter);
                             ((RendererBase)ClearBuffer).Draw(context);
@@ -221,13 +218,6 @@ namespace Xenko.Rendering.Shadows
                                 //point to different mipmaps.
                                 context.CommandList.CopyRegion(TempMipMaps[i], 0, null, MipMaps, i);
                             }
-                            //Unbind texture views from compute shader...I'm sure there is a better way to do this
-                            //but if I don't the textures don't work in pixel shaders any more.
-                            //When I just set the parameters to textures it works fine, but
-                            //once I use ToTextureView...not anymore.
-                            Generate3DMipmaps.Parameters.Set(Generate3DMipmapsKeys.VoxelsTexR, null);
-                            Generate3DMipmaps.Parameters.Set(Generate3DMipmapsKeys.VoxelsTexW, null);
-                            ((RendererBase)Generate3DMipmaps).Draw(context);
                         }
                     }
                 }
