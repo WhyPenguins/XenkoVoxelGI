@@ -32,18 +32,18 @@
             {
                 sortedFrags[i]  = VoxelFragments[VoxelFragmentsIndex+i];
             }
-            //Slow bubble-sort
-            for ( int i = count-2 ; i >= 0; --i)
+
+            //Sort
+            for ( int ii = 1 ; ii < count; ii++)
             {
-                for (int j = 0; j <= i; ++j)
+                VoxelFragment temp = sortedFrags[ii];
+                int j = ii-1;
+                while(j >= 0 && sortedFrags[j].z < temp.z)
                 {
-                    if (sortedFrags[j].z < sortedFrags[j+1].z)
-                    {
-                        VoxelFragment temp = sortedFrags[j+1];
-                        sortedFrags[j+1] = sortedFrags[j];
-                        sortedFrags[j] = temp;
-                    }
+                    sortedFrags[j+1] = sortedFrags[j];
+                    j--;
                 }
+                sortedFrags[j+1] = temp;
             }
 
             int voxelZ = 0;
