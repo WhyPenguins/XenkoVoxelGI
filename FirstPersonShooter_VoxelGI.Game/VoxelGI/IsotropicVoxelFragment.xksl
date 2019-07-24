@@ -29,14 +29,14 @@ namespace Xenko.Rendering.Shadows
 
         override stage void PSMain()
         {
-            streams.IsFrontFace = true;
-                base.PSMain();
-
             float3 texPos = mul(float4(streams.PositionWS.xyz,1.0),VoxelMatrix).xyz;
             texPos = (texPos-0.5)  * streams.clipScale + 0.5;
 
             //Currently Z clipping doesn't seem to work right, this'll do for now
             if (dot(texPos,float3(1,1,1)) != dot(saturate(texPos),float3(1,1,1))) discard;
+
+            streams.IsFrontFace = true;
+                base.PSMain();
 
             int3 pixelPos = int3(floor(saturate(texPos) * float3(128,128,64)));
             uint VoxelFragmentsIndex = (pixelPos.x+pixelPos.y*128) + streams.clipPos;
