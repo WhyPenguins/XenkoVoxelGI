@@ -36,17 +36,21 @@ namespace Xenko.Rendering.Shadows
         public static Xenko.Graphics.Texture MipMaps = null;
         public static Xenko.Graphics.Texture[] MipMapsViews = null;
         public static Xenko.Graphics.Texture[] TempMipMaps = null;
+        public static Xenko.Graphics.Texture MSAARenderTarget = null;
 
         Xenko.Rendering.ComputeEffect.ComputeEffectShader Generate3DMipmaps;
         Xenko.Rendering.ComputeEffect.ComputeEffectShader ClearBuffer;
         Xenko.Rendering.ComputeEffect.ComputeEffectShader ArrangeFragments;
         public virtual void Collect(RenderContext Context, IShadowMapRenderer ShadowMapRenderer)
         {
+            float maxResolution = Math.Max(Math.Max(ClipMapResolution.X, ClipMapResolution.Y), ClipMapResolution.Z);
             if (ClipMaps == null)
             {
                 Vector3 resolution = ClipMapResolution;
                 int size = (int)(resolution.X * resolution.Y * resolution.Z);
                 int layersize = (int)(resolution.X * resolution.Y);
+
+                MSAARenderTarget = Texture.New(Context.GraphicsDevice, TextureDescription.New2D((int)maxResolution, (int)maxResolution, new MipMapCount(false), PixelFormat.R8G8B8A8_UNorm, TextureFlags.RenderTarget, 1, GraphicsResourceUsage.Default, MultisampleCount.X8), null);
 
                 Fragments = Xenko.Graphics.Buffer.Structured.New(Context.GraphicsDevice, size * ClipMapCount, 24, true);
                 FragmentsCounter = Xenko.Graphics.Buffer.Typed.New(Context.GraphicsDevice, layersize * ClipMapCount, PixelFormat.R32_SInt, true);
@@ -95,8 +99,6 @@ namespace Xenko.Rendering.Shadows
             shadowRenderView.ViewSize = new Vector2(1024, 1024);
 
 
-
-            float maxResolution = Math.Max(Math.Max(ClipMapResolution.X, ClipMapResolution.Y), ClipMapResolution.Z);
 
             var transmat = Matrix.Translation(-ClipMapCenter);
             var scalemat = Matrix.Scaling(new Vector3(2f)/ClipMapBaseSize);
@@ -159,6 +161,7 @@ namespace Xenko.Rendering.Shadows
                         using (drawContext.QueryManager.BeginProfile(Color.Black, FragmentVoxelizationProfilingKey))
                         {
                             drawContext.CommandList.ResetTargets();
+                            drawContext.CommandList.SetRenderTarget(null, MSAARenderTarget);
                             float maxResolution = Math.Max(Math.Max(ClipMapResolution.X, ClipMapResolution.Y), ClipMapResolution.Z);
                             drawContext.CommandList.SetViewport(new Viewport(0, 0, (int)maxResolution, (int)maxResolution));
                             renderSystem.Draw(drawContext, voxelizeRenderView, renderSystem.RenderStages[voxelizeRenderView.RenderStages[0].Index]);
