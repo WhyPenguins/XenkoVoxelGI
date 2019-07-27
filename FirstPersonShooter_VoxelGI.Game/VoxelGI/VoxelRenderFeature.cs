@@ -44,6 +44,7 @@ namespace Xenko.Rendering
                     VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelFragmentsCounter, ReflectiveVoxelRenderer.FragmentsCounter);
                     VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelMatrix, ReflectiveVoxelRenderer.clipMaps[0].Matrix);
                     VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelMatrixViewport, ReflectiveVoxelRenderer.clipMaps[0].ViewportMatrix);
+                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.clipMapCount, ReflectiveVoxelRenderer.ClipMapCount);
 
                     var resourceGroup = viewLayout.Entries[view.Index].Resources;
                     resourceGroup.UpdateLogicalGroup(ref voxelizerStorer, VSViewParameters);

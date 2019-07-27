@@ -28,27 +28,28 @@ namespace Xenko.Rendering.Skyboxes
 
         override float4 Compute(float3 position, float radius)
         {
+            float clipMapLastIndex = ClipMapCount-1.0;
             radius = max(1,radius);
             float lod = min(6,log2(radius));
-            float baselod = floor(min(lod,1));
+            float baselod = floor(min(lod,clipMapLastIndex));
             
             float3 texrayPos = position;
 
-            float mip = lod-2;
-            float3 finalClipMapPos = ((texrayPos-0.5) * 0.5 + 0.5);
+            float mip = lod-ClipMapCount;
+            float3 finalClipMapPos = ((texrayPos-0.5) * pow(2,-clipMapLastIndex) + 0.5);
             float4 tex3 = VoxelMipMaps.SampleLevel(Sampler,finalClipMapPos,mip);
 
             if (mip>0.0)
                 return tex3;
 
-            float3 texrayPos1 = ((texrayPos-0.5) * (pow(2,-baselod)) + 0.5)/float3(1,1,2) + float3(0,0,baselod/2);
+            float3 texrayPos1 = ((texrayPos-0.5) * (pow(2,-baselod)) + 0.5)/float3(1,1,ClipMapCount) + float3(0,0,baselod/ClipMapCount);
             float4 tex1 = VoxelVolume.SampleLevel(Sampler,texrayPos1,0);
 
 
             if (mip>-1.0)
                 return lerp(tex1,tex3,mip+1.0);
 
-            float3 texrayPos2 = ((texrayPos-0.5) * (pow(2,-baselod)*0.5) + 0.5)/float3(1,1,2) + float3(0,0,(baselod+1.0)/2);
+            float3 texrayPos2 = ((texrayPos-0.5) * (pow(2,-baselod)*0.5) + 0.5)/float3(1,1,ClipMapCount) + float3(0,0,(baselod+1.0)/ClipMapCount);
             float4 tex2 = VoxelVolume.SampleLevel(Sampler,texrayPos2,0);
 
             return lerp(tex1,tex2,lod-baselod);

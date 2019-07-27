@@ -96,6 +96,7 @@ namespace Xenko.Rendering.Lights
             private ObjectParameterKey<Texture> voxelVolumekeyR5;
             private ObjectParameterKey<Texture> voxelVolumekeyR6;
             private ValueParameterKey<float> voxelVolumeMipCountKey;
+            private ValueParameterKey<float> voxelVolumeClipMapCountKey;
 
             public RenderLight Light { get; set; }
 
@@ -123,6 +124,7 @@ namespace Xenko.Rendering.Lights
                 voxelVolumekeyR5 = IsotropicVoxelColorKeys.VoxelVolumeR5.ComposeWith("lightDiffuseVoxelColor." + compositionName);
                 voxelVolumekeyR6 = IsotropicVoxelColorKeys.VoxelVolumeR6.ComposeWith("lightDiffuseVoxelColor." + compositionName);
                 voxelVolumeMipCountKey = IsotropicVoxelColorKeys.MipCount.ComposeWith("lightDiffuseVoxelColor." + compositionName);
+                voxelVolumeClipMapCountKey = IsotropicVoxelColorKeys.ClipMapCount.ComposeWith("lightDiffuseVoxelColor." + compositionName);
             }
 
             public override void ApplyEffectPermutations(RenderEffect renderEffect)
@@ -170,6 +172,7 @@ namespace Xenko.Rendering.Lights
                     parameters.Set(voxelVolumekeyR6, null);
                 }
                 parameters.Set(voxelVolumeMipCountKey, 1);
+                parameters.Set(voxelVolumeClipMapCountKey, Xenko.Rendering.Shadows.ReflectiveVoxelRenderer.ClipMapCount);
             }
         }
     }

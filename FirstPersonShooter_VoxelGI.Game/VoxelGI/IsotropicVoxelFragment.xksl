@@ -16,6 +16,7 @@ namespace Xenko.Rendering.Shadows
         {
             float4x4 VoxelMatrix;
             float4x4 VoxelMatrixViewport;
+            int clipMapCount;
         }
         rgroup PerView.VoxelizerStorer
 	    {
@@ -55,7 +56,8 @@ namespace Xenko.Rendering.Shadows
         {
             return abs(((p2.x - p1.x) * (p3.y - p1.y) - (p3.x - p1.x) * (p2.y - p1.y))/2.0);
         }
-        [maxvertexcount(6)]
+        //max clipmap count of 3...perhaps there's a way to use the templating?
+        [maxvertexcount(9)]
         void GSMain(triangle Input input[3], inout TriangleStream<Output> triangleStream)
         {
             for ( int i = 0; i < 3 ; i++)
@@ -67,7 +69,7 @@ namespace Xenko.Rendering.Shadows
             float areaY = triarea(input[0].ShadingPosition.xz,input[1].ShadingPosition.xz,input[2].ShadingPosition.xz);
             float areaZ = triarea(input[0].ShadingPosition.xy,input[1].ShadingPosition.xy,input[2].ShadingPosition.xy);
 
-            for ( int map = 0 ; map < 2; map++)
+            for ( int map = 0 ; map < clipMapCount; map++)
             {
                 uint clippos = map * (128 * 128);
                 float clipscale = pow(2,-map);
