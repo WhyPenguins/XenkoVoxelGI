@@ -7,6 +7,7 @@ using Xenko.Core.Mathematics;
 using Xenko.Core.Storage;
 using Xenko.Graphics;
 using Xenko.Rendering.Shadows;
+using Xenko.Rendering.Voxels;
 
 namespace Xenko.Rendering
 {
@@ -39,12 +40,17 @@ namespace Xenko.Rendering
                     ParameterCollection VSViewParameters = new ParameterCollection();
                     ParameterCollection ViewParameters = new ParameterCollection();
 
-                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelVolumeW0, ReflectiveVoxelRenderer.ClipMaps);
+                    RenderVoxelVolumeData data = ReflectiveVoxelRenderer.GetDataForView(view);
+                    if (data == null)
+                        continue;
+
+                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelVolumeW0, data.ClipMaps);
                     VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelFragments, ReflectiveVoxelRenderer.Fragments);
                     VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelFragmentsCounter, ReflectiveVoxelRenderer.FragmentsCounter);
-                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelMatrix, ReflectiveVoxelRenderer.clipMaps[0].Matrix);
-                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelMatrixViewport, ReflectiveVoxelRenderer.clipMaps[0].ViewportMatrix);
-                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.clipMapCount, ReflectiveVoxelRenderer.ClipMapCount);
+                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelMatrix, data.Matrix);
+                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.VoxelMatrixViewport, data.ViewportMatrix);
+                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.clipMapCount, data.ClipMapCount);
+                    VSViewParameters.Set(IsotropicVoxelFragmentKeys.clipMapResolution, data.ClipMapResolution);
 
                     var resourceGroup = viewLayout.Entries[view.Index].Resources;
                     resourceGroup.UpdateLogicalGroup(ref voxelizerStorer, VSViewParameters);

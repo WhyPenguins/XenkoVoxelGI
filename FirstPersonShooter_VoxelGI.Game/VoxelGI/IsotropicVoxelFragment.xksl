@@ -17,6 +17,7 @@ namespace Xenko.Rendering.Shadows
             float4x4 VoxelMatrix;
             float4x4 VoxelMatrixViewport;
             int clipMapCount;
+            float3 clipMapResolution;
         }
         rgroup PerView.VoxelizerStorer
 	    {
@@ -30,6 +31,7 @@ namespace Xenko.Rendering.Shadows
 
         override stage void PSMain()
         {
+            int3 clipMapResolutionI = (int3)clipMapResolution;
             float3 texPos = mul(float4(streams.PositionWS.xyz,1.0),VoxelMatrix).xyz;
             texPos = (texPos-0.5)  * streams.clipScale + 0.5;
 
@@ -39,18 +41,18 @@ namespace Xenko.Rendering.Shadows
             streams.IsFrontFace = true;
                 base.PSMain();
 
-            int3 pixelPos = int3(floor(saturate(texPos) * float3(128,128,64)));
-            uint VoxelFragmentsIndex = (pixelPos.x+pixelPos.y*128) + streams.clipPos;
+            int3 pixelPos = int3(floor(saturate(texPos) * clipMapResolution));
+            uint VoxelFragmentsIndex = (pixelPos.x+pixelPos.y*clipMapResolutionI.x) + streams.clipPos;
 
             uint index = 0;
             InterlockedAdd(VoxelFragmentsCounter[VoxelFragmentsIndex], 1, index);
 
             VoxelFragment frag;
                 frag.color = float4(streams.ColorTarget.rgb,1.0);
-                frag.z = saturate(texPos.z)*64;
+                frag.z = saturate(texPos.z)*clipMapResolutionI.z;
                 frag.ndotup = dot(streams.normalWS,float3(0,1,0));
 
-            VoxelFragments[VoxelFragmentsIndex*64 + min(63,index)] = frag;
+            VoxelFragments[VoxelFragmentsIndex*clipMapResolutionI.z + min(clipMapResolutionI.z-1,index)] = frag;
         }
         float triarea(float2 p1, float2 p2, float2 p3)
         {
@@ -60,6 +62,7 @@ namespace Xenko.Rendering.Shadows
         [maxvertexcount(9)]
         void GSMain(triangle Input input[3], inout TriangleStream<Output> triangleStream)
         {
+            int3 clipMapResolutionI = (int3)clipMapResolution;
             for ( int i = 0; i < 3 ; i++)
             {
                 input[i].ShadingPosition.xyz = mul(float4(input[i].PositionWS.xyz,1.0),VoxelMatrixViewport).xyz;
@@ -71,7 +74,7 @@ namespace Xenko.Rendering.Shadows
 
             for ( int map = 0 ; map < clipMapCount; map++)
             {
-                uint clippos = map * (128 * 128);
+                uint clippos = map * (clipMapResolutionI.x * clipMapResolutionI.y);
                 float clipscale = pow(2,-map);
                 for ( int i = 0; i < 3 ; i++)
                 {

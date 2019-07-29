@@ -9,6 +9,7 @@ using Xenko.Engine;
 using Xenko.Graphics;
 using Xenko.Rendering.Skyboxes;
 using Xenko.Shaders;
+using Xenko.Rendering.Voxels;
 
 namespace Xenko.Rendering.Lights
 {
@@ -143,36 +144,28 @@ namespace Xenko.Rendering.Lights
                 var intensity = Light.Intensity;
                 var intensityBounceScale = lightVoxel.BounceIntensityScale;
 
-                var voxelMatrix = Xenko.Rendering.Shadows.ReflectiveVoxelRenderer.clipMaps[0].Matrix;// ViewProjection;// Matrix.Invert(Matrix.RotationQuaternion(lightVoxel.Rotation));
+                RenderVoxelVolumeData data = Xenko.Rendering.Shadows.ReflectiveVoxelRenderer.GetDataForComponent(lightVoxel.Volume);
+                if (data == null)
+                    return;
+
+                var voxelMatrix = data.Matrix;// ViewProjection;// Matrix.Invert(Matrix.RotationQuaternion(lightVoxel.Rotation));
                 // global parameters
                 parameters.Set(intensityKey, intensity);
                 parameters.Set(intensityBounceScaleKey, intensityBounceScale);
                 parameters.Set(voxelMatrixKey, voxelMatrix);
 
-                if (Xenko.Rendering.Shadows.ReflectiveVoxelRenderer.ClipMaps != null && Xenko.Rendering.Shadows.ReflectiveVoxelRenderer.TempMipMaps[3] != null)
+                if (data.ClipMaps != null)
                 {
-                    parameters.Set(voxelVolumekey, Xenko.Rendering.Shadows.ReflectiveVoxelRenderer.ClipMaps);
-                    parameters.Set(mipMapsVolumekey, Xenko.Rendering.Shadows.ReflectiveVoxelRenderer.MipMaps);
-                    parameters.Set(voxelVolumekeyR1, Xenko.Rendering.Shadows.ReflectiveVoxelRenderer.TempMipMaps[1]);
-                    parameters.Set(voxelVolumekeyR2, Xenko.Rendering.Shadows.ReflectiveVoxelRenderer.TempMipMaps[2]);
-                    parameters.Set(voxelVolumekeyR3, Xenko.Rendering.Shadows.ReflectiveVoxelRenderer.TempMipMaps[3]);
-                    parameters.Set(voxelVolumekeyR4, Xenko.Rendering.Shadows.ReflectiveVoxelRenderer.TempMipMaps[4]);
-                    parameters.Set(voxelVolumekeyR5, Xenko.Rendering.Shadows.ReflectiveVoxelRenderer.TempMipMaps[5]);
-                    parameters.Set(voxelVolumekeyR6, Xenko.Rendering.Shadows.ReflectiveVoxelRenderer.TempMipMaps[6]);
+                    parameters.Set(voxelVolumekey, data.ClipMaps);
+                    parameters.Set(mipMapsVolumekey, data.MipMaps);
                 }
                 else
                 {
                     parameters.Set(voxelVolumekey, null);
                     parameters.Set(mipMapsVolumekey, null);
-                    parameters.Set(voxelVolumekeyR1, null);
-                    parameters.Set(voxelVolumekeyR2, null);
-                    parameters.Set(voxelVolumekeyR3, null);
-                    parameters.Set(voxelVolumekeyR4, null);
-                    parameters.Set(voxelVolumekeyR5, null);
-                    parameters.Set(voxelVolumekeyR6, null);
                 }
                 parameters.Set(voxelVolumeMipCountKey, 1);
-                parameters.Set(voxelVolumeClipMapCountKey, Xenko.Rendering.Shadows.ReflectiveVoxelRenderer.ClipMapCount);
+                parameters.Set(voxelVolumeClipMapCountKey, data.ClipMapCount);
             }
         }
     }

@@ -10,6 +10,7 @@
         stage RWBuffer<uint> VoxelFragmentsCounts;
         stage RWStructuredBuffer<VoxelFragment> VoxelFragments;
 
+        stage float3 clipMapResolution;
 
         stage RWTexture3D<half4> VoxelVolumeW0;
 
@@ -46,15 +47,16 @@
 
         override void Compute()
         {
+            int3 clipMapResolutionI = (int3)clipMapResolution;
             uint2 pos = streams.DispatchThreadId.xy;
 
             int clip = streams.DispatchThreadId.z;
-            int clipZOffset = 64*clip;
+            int clipZOffset = clipMapResolutionI.z*clip;
 
-            uint countIndex = pos.x + pos.y * 128 + clip * (128 * 128);
-            uint count = min(VoxelFragmentsCounts[countIndex],63);
+            uint countIndex = pos.x + pos.y * clipMapResolutionI.x + clip * (clipMapResolutionI.x * clipMapResolutionI.y);
+            uint count = min(VoxelFragmentsCounts[countIndex],clipMapResolutionI.z-1);
 
-            uint VoxelFragmentsIndex = pos.x * 64 + pos.y * 128 * 64 + clip * (128 * 128 * 64);
+            uint VoxelFragmentsIndex = pos.x * clipMapResolutionI.z + pos.y * clipMapResolutionI.x * clipMapResolutionI.z + clip * (clipMapResolutionI.x * clipMapResolutionI.y * clipMapResolutionI.z);
 
             count += VoxelFragmentsIndex;
             for ( uint i = VoxelFragmentsIndex; i < count; i ++)
@@ -79,7 +81,7 @@
             //So I figured I could at least manually unroll by calling a function, but I get the same
             //error. However sticking the function in a loop...gives me the same speed up. ??
             int lastSendZ = 1000;
-            for (int j = 0; j < 64 ; j++)
+            for (int j = 0; j < clipMapResolutionI.z ; j++)
             {
                 SolidificationStep(pos, clipZOffset, j, lastSendZ);
             }

@@ -4,7 +4,7 @@
 using Xenko.Core;
 using Xenko.Core.Mathematics;
 using Xenko.Engine;
-using Xenko.Rendering.Skyboxes;
+using Xenko.Rendering.Voxels;
 
 namespace Xenko.Rendering.Lights
 {
@@ -15,7 +15,7 @@ namespace Xenko.Rendering.Lights
     [Display("Voxel")]
     public class LightVoxel : IEnvironmentLight
     {
-
+        public VoxelVolumeComponent Volume { get; set; }
         public float BounceIntensityScale { get; set; }
 
         public bool Update(RenderLight light)

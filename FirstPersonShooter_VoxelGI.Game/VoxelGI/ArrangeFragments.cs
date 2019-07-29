@@ -20,6 +20,7 @@ namespace Xenko.Rendering.Shadows
     {
         public static readonly ObjectParameterKey<Buffer> VoxelFragmentsCounts = ParameterKeys.NewObject<Buffer>();
         public static readonly ObjectParameterKey<Buffer> VoxelFragments = ParameterKeys.NewObject<Buffer>();
+        public static readonly ValueParameterKey<Vector3> clipMapResolution = ParameterKeys.NewValue<Vector3>();
         public static readonly ObjectParameterKey<Texture> VoxelVolumeW0 = ParameterKeys.NewObject<Texture>();
     }
 }

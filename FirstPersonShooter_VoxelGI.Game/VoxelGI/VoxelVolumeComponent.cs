@@ -5,21 +5,33 @@ using Xenko.Core;
 using Xenko.Core.Mathematics;
 using Xenko.Engine;
 using Xenko.Engine.Design;
+using Xenko.Engine.Processors;
 
-namespace FirstPersonShooter2.Effects
+namespace Xenko.Rendering.Voxels
 {
     /// <summary>
-    /// This does nothing currently!
+    /// 
     /// </summary>
-    [DataContract]
+    [DataContract("VoxelVolumeComponent")]
+    [DefaultEntityComponentRenderer(typeof(VoxelVolumeProcessor))]
     [Display("Voxel Volume")]
     [ComponentCategory("Lights")]
-    public class VoxelVolumeComponent : EntityComponent
+    public class VoxelVolumeComponent : ActivableEntityComponent
     {
-        /// <summary>
-        /// The size of one edge of the bounding box
-        /// </summary>
-        [DataMember(0)]
-        public Vector3 Size { get; set; } = Vector3.One;
+        private bool enabled = true;
+
+        public override bool Enabled
+        {
+            get { return enabled; }
+            set { enabled = value; Changed?.Invoke(this, null); }
+        }
+
+        [DataMember(10)]
+        public int ClipMapCount { get; set; } = 2;
+
+        [DataMember(20)]
+        public float AproximateVoxelSize { get; set; } = 0.15f;
+
+        public event EventHandler Changed;
     }
 }

@@ -7,6 +7,7 @@ Offset: {X: 0.0, Y: 0.0, Z: 0.0}
 Hierarchy:
     RootParts:
         - ref!! 90521c0b-9741-460f-a76e-d413cc4272b5
+        - ref!! 0194b767-fc98-467b-a126-8a66d5da0e0b
         - ref!! 96a9e8b6-3a2d-4d58-83b0-86ce04c80379
         - ref!! 6d2f4791-6113-4783-bbfa-0c268be80a53
         - ref!! fa3c8861-808f-4236-b336-5a5bae55b802
@@ -45,6 +46,7 @@ Hierarchy:
         - ref!! 34dbe268-9dfa-449b-a048-a9a8f987c054
         - ref!! 11b35f05-d8f0-4345-b547-ce73141931cd
         - ref!! 975dd798-2d32-4c4a-965a-8d9e18476539
+        - ref!! b9d3988c-7fdd-4b25-a0d2-daaa14a51aed
     Parts:
         -   Entity:
                 Id: 0157316b-840c-4bb8-aed8-aaeee66c7b90
@@ -57,6 +59,43 @@ Hierarchy:
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children:
                             db07bec9b88cb84e9f8d6d3511eb10f2: ref!! c9be07db-8cb8-4eb8-9f8d-6d3511eb10f2
+        -   Folder: null
+            Entity:
+                Id: 0194b767-fc98-467b-a126-8a66d5da0e0b
+                Name*: EmissiveCube
+                Components:
+                    cafed28ac2678c4e84c546d7570eabd3: !TransformComponent
+                        Id: a746508a-d191-487f-bb40-71c2d64318c4
+                        Position*: {X: 12.15048, Y: 0.21112147, Z: 7.348197}
+                        Rotation*: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale*: {X: 0.004255605, Y: 0.8505241, Z: 0.3349183}
+                        Children: {}
+                    7807e4f88759f5408bc713431dfc8978: !ModelComponent
+                        Id: afcf37d1-2589-45e5-a736-e9343776d9da
+                        Enabled*: true
+                        Model*: f15fc51f-4855-4bac-86dd-9967decc5202:Models/GridBase10x10
+                        Materials:
+                            da3523688bdb70987fa8d72bbabf6ebf*~0: c97ce077-a9b3-492a-8719-0e2e08c8e537:Materials/Emissive (2)
+                            1f66d7610cd6dc4c9b32d800d312e162~: ~(Deleted)
+                    793d2ad2924e3a48a2a869b11f5df718: !StaticColliderComponent
+                        Id: 56c16774-1d22-4042-a41e-7a46f232718e
+                        CanSleep: true
+                        Restitution: 0.0
+                        Friction: 0.5
+                        RollingFriction: 0.0
+                        CcdMotionThreshold: 0.0
+                        CcdSweptSphereRadius: 0.0
+                        IsTrigger: false
+                        ColliderShapes:
+                            16348c7905caf14d82d3668b90f0c07b: !BoxColliderShapeDesc
+                                Is2D: false
+                                Size: {X: 1.0, Y: 1.0, Z: 1.0}
+                                LocalOffset: {X: 0.0, Y: 0.0, Z: 0.0}
+                                LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+            Base:
+                BasePartAsset: 6c0db386-be9e-4381-a787-4b0dd93587b6:BlocksPrefabs/Box1x1x1
+                BasePartId: 496dab69-b03b-4272-a196-8e81329ce249
+                InstanceId: 0cf8d679-c683-4ee2-aecd-f0e6e06b10ff
         -   Entity:
                 Id: 024da5b4-d23b-4daf-8c5c-67f77e09bd0d
                 Name: Wall0x2x5
@@ -5039,6 +5078,7 @@ Hierarchy:
                     63493b70b9e3f8edf81c791cb799ea27: !LightComponent
                         Id: 0e218f99-c135-4cec-93dd-f34012f17691
                         Type: !LightVoxel
+                            Volume: ref!! 9174b993-3718-4a52-996c-78a8cc0af1e1
                             BounceIntensityScale: 1.0
         -   Folder: Ground
             Entity:
@@ -6019,6 +6059,20 @@ Hierarchy:
                 BasePartAsset: 98f53526-f43f-4d1b-ab4c-727727dc2b30:BlocksPrefabs/Stairs1x1x2
                 BasePartId: 1c50115c-c05d-4cb6-ab0e-53e44178a7e6
                 InstanceId: 27724e9a-95d6-4932-b37d-53c14bad9651
+        -   Entity:
+                Id: b9d3988c-7fdd-4b25-a0d2-daaa14a51aed
+                Name: Voxel Volume
+                Components:
+                    f6fda90592f1b6e6e755b9596a5bb92a: !TransformComponent
+                        Id: 317fedb4-098e-450b-9957-8cadbd4df05c
+                        Position: {X: 0.0, Y: 2.5, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 20.0, Y: 10.0, Z: 20.0}
+                        Children: {}
+                    09a82c0e64c623790931cd891c25aa8d: !VoxelVolumeComponent
+                        Id: 9174b993-3718-4a52-996c-78a8cc0af1e1
+                        ClipMapCount: 2
+                        AproximateVoxelSize: 0.15
         -   Entity:
                 Id: ba9dd4e6-d5f2-4e93-ba5d-88395ca0517f
                 Name: Wall0x2x2 (4)
