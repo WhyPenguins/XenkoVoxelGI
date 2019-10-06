@@ -53,22 +53,22 @@ I really hope I haven't forgotten anything, let me know if you need any help.
 - - [x] Averaging of fragments lying in the same voxel
 - - [x] Solid voxelization (fills areas between front and backfaces with solid black)
 - - [x] Downsampling to mip-maps
-- - [ ] MSAA voxelization
-- - [ ] Clipmaps
-- - [ ] Anisotropic Voxels?
+- - [x] MSAA voxelization
+- - [x] Clipmaps
+- - [x] Anisotropic Voxels?
 - - [ ] Partial revoxelization?
 
 Cone Tracing
 - - [x] 12 cone diffuse light (perhaps not done, but working at least)
 - - - [ ] More cone setups for different quality
 - - [x] Infinite bounces (one frame delay between each one)
-- - [ ] Specular
+- - [x] Specular
 - - [ ] Refraction
 - - [ ] Sky light based on sky box?
 
 UI
-- - [ ] Debug Voxels
-- - [ ] Voxel Volume Component
+- - [x] Debug Voxels
+- - [x] Voxel Volume Component
 - - [x] Voxel Light Type
 
 ## Notes and Caveats  
