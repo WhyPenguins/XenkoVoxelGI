@@ -1,0 +1,12 @@
+﻿shader VoxelModifierApplierSolidifyAnisotropicPaired : VoxelModifierApplierAnisotropicPaired, VoxelModifierSolidifyStreams
+{
+    override void Apply(inout float4 X, inout float4 Y, inout float4 Z)
+    {
+        if (streams.IsSolid)
+        {
+            X.a = 1.0;
+            Y.a = 1.0;
+            Z.a = 1.0;
+        }
+    }
+};

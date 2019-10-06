@@ -1,0 +1,51 @@
+﻿// Copyright (c) Xenko contributors (https://xenko.com) and Silicon Studio Corp. (https://www.siliconstudio.co.jp)
+// Distributed under the MIT license. See the LICENSE.md file in the project root for more information.
+namespace Xenko.Rendering.Voxels
+{
+    /// <summary>
+    /// Voxelization, projects to axis of largest area and writes fragments to buffer
+    /// </summary>
+    shader IsotropicVoxelFragment : Math, Transformation, ShaderBase, Texturing, NormalStream, PositionStream4, VoxelPositionStream, MaterialPixelStream, MaterialPixelShadingStream
+    {
+        compose VoxelStorageShader Storage;
+        override stage void PSMain()
+        {
+            streams.IsFrontFace = true;
+            base.PSMain();
+
+            Storage.StoreFragments();
+        }
+
+        //max clipmap count of 3...perhaps there's a way to use the templating?
+        [maxvertexcount(9)]
+        void GSMain(triangle Input input[3], inout TriangleStream<Output> triangleStream)
+        {
+            float3 nor = cross((input[1].ShadingPosition.xyz-input[0].ShadingPosition.xyz), (input[2].ShadingPosition.xyz-input[0].ShadingPosition.xyz));
+            float areaX = abs(nor.x);
+            float areaY = abs(nor.y);
+            float areaZ = abs(nor.z);
+
+
+            if (areaX > areaY && areaX > areaZ)
+            {
+                input[0].ShadingPosition.xyzw = float4(input[0].ShadingPosition.yzx,1);
+                input[1].ShadingPosition.xyzw = float4(input[1].ShadingPosition.yzx,1);
+                input[2].ShadingPosition.xyzw = float4(input[2].ShadingPosition.yzx,1);
+            }
+            else if (areaY > areaZ && areaY > areaX)
+            {
+                input[0].ShadingPosition.xyzw = float4(input[0].ShadingPosition.xzy,1);
+                input[1].ShadingPosition.xyzw = float4(input[1].ShadingPosition.xzy,1);
+                input[2].ShadingPosition.xyzw = float4(input[2].ShadingPosition.xzy,1);
+            }
+            else
+            {
+                input[0].ShadingPosition.w = 1;
+                input[1].ShadingPosition.w = 1;
+                input[2].ShadingPosition.w = 1;
+            }
+
+            Storage.GenerateTriangles(input, triangleStream);
+        }
+    };
+}

@@ -1,0 +1,12 @@
+﻿shader VoxelModifierApplierAntiAliasingAnisotropic : VoxelModifierApplierAnisotropic, VoxelModifierAntiAliasingStreams
+{
+    override void Apply(inout float4 XP, inout float4 XN, inout float4 YP, inout float4 YN, inout float4 ZP, inout float4 ZN)
+    {
+        XP *= streams.PlaneCoverage.x;
+        XN *= streams.PlaneCoverage.x;
+        YP *= streams.PlaneCoverage.y;
+        YN *= streams.PlaneCoverage.y;
+        ZP *= streams.PlaneCoverage.z;
+        ZN *= streams.PlaneCoverage.z;
+    }
+};

@@ -9,6 +9,6 @@ _ReSharper*
 *.vshost.exe
 *.manifest
 *.sdf
-[Bb]in/
+[Bb]in*/
 obj/
 Cache/

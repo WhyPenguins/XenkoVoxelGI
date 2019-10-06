@@ -1,0 +1,30 @@
+﻿shader VoxelAttributeEmissionOpacityShader : VoxelAttribute, VoxelAttributeEmissionOpacityStream, ShaderBaseStream
+{
+    compose VoxelLayout_Float4 layout;
+    
+	override void SetupStreamsDummy()
+    {
+        layout.SetupStreamsDummy();
+    }
+	override void SetupStreams()
+    {
+        layout.SetupStreams(streams.ColorTarget);
+    }
+	override float4 VoxelizeDirect(uint3 address, uint stride)
+    {
+        layout.VoxelizeDirect(address, stride);
+        return layout.Get();
+    }
+	override void VoxelizeIndirectWrite(RWBuffer<uint> buffer, inout uint address)
+    {
+        layout.VoxelizeIndirectWrite(buffer,address);
+    }
+	override void VoxelizeIndirectRead(RWBuffer<uint> buffer, inout uint address)
+    {
+        layout.VoxelizeIndirectRead(buffer, address);
+    }
+    float4 Get()
+    {
+        return layout.Get();
+    }
+};

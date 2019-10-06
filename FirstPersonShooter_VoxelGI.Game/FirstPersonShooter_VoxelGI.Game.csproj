@@ -4,6 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>FirstPersonShooter_VoxelGI</RootNamespace>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="VoxelGI\Voxelization\VoxelEffect\**" />
+    <EmbeddedResource Remove="VoxelGI\Voxelization\VoxelEffect\**" />
+    <None Remove="VoxelGI\Voxelization\VoxelEffect\**" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xenko.Core" Version="3.1.0.1-beta02" PrivateAssets="contentfiles;analyzers" />
     <PackageReference Include="Xenko.Core.Assets.CompilerApp" Version="3.1.0.1-beta02" PrivateAssets="contentfiles;analyzers" IncludeAssets="build" />
@@ -14,61 +22,254 @@
     <PackageReference Include="Xenko.Navigation" Version="3.1.0.1-beta02" PrivateAssets="contentfiles;analyzers" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="VoxelGI\ArrangeFragments.cs">
+    <Compile Update="VoxelGI\Voxelization\VoxelStorage\Processing\BufferToTexture.cs">
       <DesignTime>True</DesignTime>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
-      <DependentUpon>ArrangeFragments.xksl</DependentUpon>
+      <DependentUpon>BufferToTexture.xksl</DependentUpon>
     </Compile>
-    <Compile Update="VoxelGI\ClearBuffer.cs">
+    <Compile Update="VoxelGI\Voxelization\VoxelStorage\Processing\BufferToTextureColumns.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BufferToTextureColumns.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\VoxelStorage\Processing\BufferToTextureColumnsEffect.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BufferToTextureColumnsEffect.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\VoxelStorage\Processing\BufferToTextureEffect.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BufferToTextureEffect.xkfx</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\VoxelStorage\Processing\ClearBuffer.cs">
       <DesignTime>True</DesignTime>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>ClearBuffer.xksl</DependentUpon>
     </Compile>
-    <Compile Update="VoxelGI\Generate3DMipmaps.cs">
+    <Compile Update="VoxelGI\GraphicsCompositorStuff\DebugVisualizations\Shaders\VoxelVisualizationViewEffect.cs">
       <DesignTime>True</DesignTime>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
-      <DependentUpon>Generate3DMipmaps.xksl</DependentUpon>
     </Compile>
-    <Compile Update="VoxelGI\IComputeVoxelColor.cs">
+    <Compile Update="VoxelGI\GraphicsCompositorStuff\DebugVisualizations\Shaders\VoxelVisualizationViewShader.cs">
       <DesignTime>True</DesignTime>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
-      <DependentUpon>IComputeVoxelColor.xksl</DependentUpon>
     </Compile>
-    <Compile Update="VoxelGI\IsotropicVoxelColor.cs">
+    <Compile Update="VoxelGI\Voxelization\VoxelStorage\Mipmapping\VoxelMipmapSimple.cs">
       <DesignTime>True</DesignTime>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
-      <DependentUpon>IsotropicVoxelColor.xksl</DependentUpon>
     </Compile>
-    <Compile Update="VoxelGI\IsotropicVoxelFragment.cs">
+    <Compile Update="VoxelGI\Marching\IVoxelSampler.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IVoxelSampler.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Attributes\Shaders\VoxelAttributeSolidifyPlanesShader.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelAttributeSolidifyPlanesShader.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Layout\Shaders\VoxelAnisotropicSampler.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelAnisotropicSampler.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Layout\Shaders\VoxelAnisotropicPairedSampler.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelAnisotropicPairedSampler.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Layout\Shaders\VoxelIsotropicSampler.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelIsotropicSampler.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\IsotropicVoxelFragment.cs">
       <DesignTime>True</DesignTime>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>IsotropicVoxelFragment.xksl</DependentUpon>
     </Compile>
-    <Compile Update="VoxelGI\IsotropicVoxelFragmentEffect.cs">
+    <Compile Update="VoxelGI\Voxelization\IsotropicVoxelFragmentEffect.cs">
       <DesignTime>True</DesignTime>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>IsotropicVoxelFragmentEffect.xkfx</DependentUpon>
     </Compile>
-    <Compile Update="VoxelGI\LightVoxelEffect.cs">
+    <Compile Update="VoxelGI\Light\LightVoxelEffect.cs">
       <DesignTime>True</DesignTime>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>LightVoxelEffect.xkfx</DependentUpon>
     </Compile>
-    <Compile Update="VoxelGI\LightVoxelShader.cs">
+    <Compile Update="VoxelGI\Light\LightVoxelShader.cs">
       <DesignTime>True</DesignTime>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>LightVoxelShader.xksl</DependentUpon>
     </Compile>
-    <Compile Update="VoxelGI\XenkoForwardShadingEffectVXGI.cs">
+    <Compile Update="VoxelGI\Voxelization\Attributes\Shaders\VoxelAttribute.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelAttribute.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Attributes\Shaders\VoxelAttributeDirectionalCoverageShader.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelAttributeDirectionalCoverageShader.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Attributes\Shaders\VoxelAttributeEmissionOpacityShader.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelAttributeEmissionOpacityShader.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Attributes\Shaders\VoxelAttributeEmissionOpacityStream.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelAttributeEmissionOpacityStream.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Layout\Shaders\VoxelAnisotropicWriter_Float4.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelAnisotropicWriter_Float4.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Layout\Shaders\VoxelAnisotropicPairedWriter_Float4.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelAnisotropicPairedWriter_Float4.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Layout\Shaders\VoxelIsotropicWriter_Float4.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelIsotropicWriter_Float4.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Layout\Shaders\VoxelLayout_Float4.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelLayout_Float4.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\FragmentPackers\Shaders\DataPacking.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>DataPacking.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\FragmentPackers\Shaders\VoxelFragmentPacker.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelFragmentPacker.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\FragmentPackers\Shaders\VoxelFragmentPackFloat16.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelFragmentPackFloat16.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\FragmentPackers\Shaders\VoxelFragmentPackFloat32.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelFragmentPackFloat32.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\FragmentPackers\Shaders\VoxelFragmentPackFloatR11G11B10.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelFragmentPackFloatR11G11B10.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\BufferWriters\Shaders\VoxelBufferWriter.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelBufferWriter.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\BufferWriters\Shaders\VoxelBufferWriteMax.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelBufferWriteMax.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\BufferWriters\Shaders\VoxelBufferWriteAssign.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelBufferWriteAssign.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Modifiers\Appliers\Isotropic\VoxelModifierApplierIsotropic.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelModifierApplierIsotropic.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Modifiers\Appliers\Isotropic\VoxelModifierApplierSolidifyIsotropic.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelModifierApplierSolidifyIsotropic.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Modifiers\VoxelModifierSolidify.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelModifierSolidify.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Modifiers\VoxelModifierSolidifyStreams.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelModifierSolidifyStreams.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\VoxelPositionStream.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelPositionStream.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Modifiers\VoxelModifier.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\Modifiers\VoxelModifierAntiAliasing.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\VoxelStorage\Shaders\VoxelStorageTextureClipmapShader.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelStorageTextureClipmapShader.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\Voxelization\VoxelStorage\Shaders\VoxelStorageTextureShader.cs">
+      <DesignTime>True</DesignTime>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>VoxelStorageTextureShader.xksl</DependentUpon>
+    </Compile>
+    <Compile Update="VoxelGI\GraphicsCompositorStuff\XenkoForwardShadingEffectVXGI.cs">
       <DesignTime>True</DesignTime>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
@@ -76,43 +277,229 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Update="VoxelGI\ArrangeFragments.xksl">
+    <None Update="VoxelGI\GraphicsCompositorStuff\DebugVisualizations\Shaders\VoxelVisualizationRawEffect.xkfx">
       <Generator>XenkoShaderKeyGenerator</Generator>
-      <LastGenOutput>ArrangeFragments.cs</LastGenOutput>
     </None>
-    <None Update="VoxelGI\ClearBuffer.xksl">
+    <None Update="VoxelGI\GraphicsCompositorStuff\DebugVisualizations\Shaders\VoxelVisualizationRawShader.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Marching\Shaders\MarchAttributes.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Marching\Shaders\MarchAttributesEffect.xkfx">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Marching\Shaders\VoxelMarchCone.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Marching\Shaders\VoxelMarchMethod.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Marching\Shaders\VoxelMarchBeam.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Marching\Shaders\VoxelRadiusMarchMethod.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Voxelization\VoxelStorage\Processing\BufferToTexture.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>BufferToTexture.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\VoxelStorage\Processing\BufferToTextureColumns.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>BufferToTextureColumns.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\VoxelStorage\Processing\BufferToTextureColumnsEffect.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>BufferToTextureColumnsEffect.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\VoxelStorage\Processing\BufferToTextureEffect.xkfx">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>BufferToTextureEffect.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\VoxelStorage\Processing\ClearBuffer.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
       <LastGenOutput>ClearBuffer.cs</LastGenOutput>
     </None>
-    <None Update="VoxelGI\Generate3DMipmaps.xksl">
+    <None Update="VoxelGI\GraphicsCompositorStuff\DebugVisualizations\Shaders\VoxelVisualizationViewEffect.xkfx">
+      <LastGenOutput>DebugVoxelEffect.cs</LastGenOutput>
       <Generator>XenkoShaderKeyGenerator</Generator>
-      <LastGenOutput>Generate3DMipmaps.cs</LastGenOutput>
     </None>
-    <None Update="VoxelGI\IComputeVoxelColor.xksl">
+    <None Update="VoxelGI\GraphicsCompositorStuff\DebugVisualizations\Shaders\VoxelVisualizationViewShader.xksl">
+      <LastGenOutput>DebugVoxelShader.cs</LastGenOutput>
       <Generator>XenkoShaderKeyGenerator</Generator>
-      <LastGenOutput>IComputeVoxelColor.cs</LastGenOutput>
     </None>
-    <None Update="VoxelGI\IsotropicVoxelColor.xksl">
+    <None Update="VoxelGI\Voxelization\Modifiers\Appliers\Anisotropic\VoxelModifierApplierAnisotropic.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
-      <LastGenOutput>IsotropicVoxelColor.cs</LastGenOutput>
     </None>
-    <None Update="VoxelGI\IsotropicVoxelFragment.xksl">
+    <None Update="VoxelGI\Voxelization\Modifiers\Appliers\AnisotropicPaired\VoxelModifierApplierAnisotropicPaired.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Voxelization\Modifiers\Appliers\Anisotropic\VoxelModifierApplierAntiAliasingAnisotropic.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Voxelization\Modifiers\Appliers\AnisotropicPaired\VoxelModifierApplierAntiAliasingAnisotropicPaired.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Voxelization\Modifiers\Appliers\Isotropic\VoxelModifierApplierAntiAliasingIsotropic.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Voxelization\Modifiers\Appliers\Anisotropic\VoxelModifierApplierSolidifyAnisotropic.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Voxelization\Modifiers\Appliers\AnisotropicPaired\VoxelModifierApplierSolidifyAnisotropicPaired.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Voxelization\Modifiers\VoxelModifierAntiAliasingStreams.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Voxelization\VoxelStorage\Mipmapping\VoxelMipmapSimple.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelMipmapSimple.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Marching\IVoxelSampler.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>IVoxelSampler.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Attributes\Shaders\VoxelAttributeSolidifyPlanesShader.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelAttributeSolidifyPlanesShader.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Layout\Shaders\VoxelAnisotropicSampler.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelAnisotropicSampler.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Layout\Shaders\VoxelAnisotropicPairedSampler.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelAnisotropicPairedSampler.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Layout\Shaders\VoxelIsotropicSampler.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelIsotropicSampler.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\IsotropicVoxelFragment.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
       <LastGenOutput>IsotropicVoxelFragment.cs</LastGenOutput>
     </None>
-    <None Update="VoxelGI\IsotropicVoxelFragmentEffect.xkfx">
+    <None Update="VoxelGI\Voxelization\IsotropicVoxelFragmentEffect.xkfx">
       <Generator>XenkoShaderKeyGenerator</Generator>
       <LastGenOutput>IsotropicVoxelFragmentEffect.cs</LastGenOutput>
     </None>
-    <None Update="VoxelGI\LightVoxelEffect.xkfx">
+    <None Update="VoxelGI\Light\LightVoxelEffect.xkfx">
       <Generator>XenkoShaderKeyGenerator</Generator>
       <LastGenOutput>LightVoxelEffect.cs</LastGenOutput>
     </None>
-    <None Update="VoxelGI\LightVoxelShader.xksl">
+    <None Update="VoxelGI\Light\LightVoxelShader.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
       <LastGenOutput>LightVoxelShader.cs</LastGenOutput>
     </None>
-    <None Update="VoxelGI\XenkoForwardShadingEffectVXGI.xkfx">
+    <None Update="VoxelGI\Voxelization\Attributes\Shaders\VoxelAttributeDirectionalCoverageShader.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelAttributeDirectionalCoverageShader.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Attributes\Shaders\VoxelAttributeEmissionOpacityShader.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelAttributeEmissionOpacityShader.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Attributes\Shaders\VoxelAttributeEmissionOpacityStream.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelAttributeEmissionOpacityStream.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Layout\Shaders\VoxelAnisotropicWriter_Float4.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelAnisotropicWriter_Float4.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Layout\Shaders\VoxelIsotropicWriter_Float4.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelIsotropicWriter_Float4.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Layout\Shaders\VoxelAnisotropicPairedWriter_Float4.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelAnisotropicPairedWriter_Float4.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Layout\Shaders\VoxelLayout_Float4.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelLayout_Float4.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\FragmentPackers\Shaders\DataPacking.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>DataPacking.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Attributes\Shaders\VoxelAttribute.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelAttribute.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\FragmentPackers\Shaders\VoxelFragmentPacker.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelFragmentPacker.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\FragmentPackers\Shaders\VoxelFragmentPackFloat16.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelFragmentPackFloat16.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\FragmentPackers\Shaders\VoxelFragmentPackFloat32.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelFragmentPackFloat32.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\FragmentPackers\Shaders\VoxelFragmentPackFloatR11G11B10.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelFragmentPackFloatR11G11B10.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\BufferWriters\Shaders\VoxelBufferWriter.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelBufferWriter.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\BufferWriters\Shaders\VoxelBufferWriteMax.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelBufferWriteMax.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\BufferWriters\Shaders\VoxelBufferWriteAssign.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelBufferWriteAssign.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Modifiers\Appliers\Isotropic\VoxelModifierApplierIsotropic.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelModifierApplierIsotropic.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Modifiers\Appliers\Isotropic\VoxelModifierApplierSolidifyIsotropic.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelModifierApplierSolidifyIsotropic.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Modifiers\VoxelModifierSolidify.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelModifierSolidify.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Modifiers\VoxelModifierSolidifyStreams.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelModifierSolidifyStreams.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\VoxelPositionStream.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelPositionStream.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Modifiers\VoxelModifier.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelModifier.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\Modifiers\VoxelModifierAntiAliasing.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelEffectAntiAliasing.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\VoxelStorage\Shaders\VoxelStorageClipmapShader.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Voxelization\VoxelStorage\Shaders\VoxelStorageShader.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Voxelization\VoxelStorage\Shaders\VoxelStorageTextureClipmapShader.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelStorageTextureClipmapShader.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\Voxelization\VoxelStorage\Shaders\VoxelStorageTextureShader.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+      <LastGenOutput>VoxelStorageTextureShader.cs</LastGenOutput>
+    </None>
+    <None Update="VoxelGI\GraphicsCompositorStuff\XenkoForwardShadingEffectVXGI.xkfx">
       <Generator>XenkoShaderKeyGenerator</Generator>
       <LastGenOutput>XenkoForwardShadingEffectVXGI.cs</LastGenOutput>
     </None>

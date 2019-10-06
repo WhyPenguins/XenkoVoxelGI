@@ -1,0 +1,7 @@
+﻿shader VoxelModifierApplierAntiAliasingIsotropic : VoxelModifierApplierIsotropic, VoxelModifierAntiAliasingStreams
+{
+    override void Apply(inout float4 center)
+    {
+        center *= max(streams.PlaneCoverage.x, max(streams.PlaneCoverage.y, streams.PlaneCoverage.z));
+    }
+};

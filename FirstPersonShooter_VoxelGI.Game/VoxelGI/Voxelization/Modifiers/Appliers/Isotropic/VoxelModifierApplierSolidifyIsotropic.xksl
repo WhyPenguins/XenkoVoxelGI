@@ -1,0 +1,8 @@
+﻿shader VoxelModifierApplierSolidifyIsotropic : VoxelModifierApplierIsotropic, VoxelModifierSolidifyStreams
+{
+    override void Apply(inout float4 center)
+    {
+        if (streams.IsSolid)
+            center.a = 1.0;
+    }
+};

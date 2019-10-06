@@ -1,0 +1,13 @@
+﻿namespace Xenko.Rendering.Images
+{
+    effect VoxelVisualizationRawEffect
+    {
+        using params VoxelVisualizationRawShaderKeys;
+
+        mixin VoxelVisualizationRawShader;
+        if (VoxelVisualizationRawShaderKeys.Attribute != null)
+        {
+            mixin compose Attribute = VoxelVisualizationRawShaderKeys.Attribute;
+        }
+    }
+}

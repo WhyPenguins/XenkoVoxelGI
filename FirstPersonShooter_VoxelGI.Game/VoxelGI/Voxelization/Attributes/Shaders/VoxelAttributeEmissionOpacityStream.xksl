@@ -1,0 +1,4 @@
+﻿shader VoxelAttributeEmissionOpacityStream
+{
+    stage stream float4 Voxel_EmissionOpacity;
+};

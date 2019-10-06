@@ -1,0 +1,26 @@
+﻿shader VoxelModifierAntiAliasing : VoxelModifier, VoxelModifierAntiAliasingStreams
+{
+    compose VoxelAttributeDirectionalCoverageShader coverage;
+
+	override void SetupStreamsDummy()
+    {
+        streams.PlaneCoverage = float3(1,1,1);
+        coverage.SetupStreamsDummy();
+    }
+	override void SetupStreams()
+    {
+        coverage.SetupStreams();
+    }
+	override void VoxelizeDirect(uint3 address, uint stride)
+    {
+    }
+	override void VoxelizeIndirectWrite(RWBuffer<uint> buffer, inout uint address)
+    {
+        coverage.VoxelizeIndirectWrite(buffer,address);
+    }
+	override void VoxelizeIndirectRead(RWBuffer<uint> buffer, inout uint address, uint2 base_stride)
+    {
+        coverage.VoxelizeIndirectRead(buffer,address);
+        streams.PlaneCoverage = coverage.GetResolved();
+    }
+};

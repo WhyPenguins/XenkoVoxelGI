@@ -1,0 +1,61 @@
+﻿shader VoxelAttributeSolidifyPlanesShader : VoxelAttribute, VoxelPositionStream, ShaderBaseStream, NormalStream, DataPacking
+{
+    stream float Voxel_SendZ;
+    stream float Voxel_ReceiveZ;
+
+    Texture3D<float2> DirectOutput;
+
+	override void SetupStreamsDummy()
+    {
+        streams.Voxel_SendZ = 0;
+        streams.Voxel_ReceiveZ = 1;
+    }
+	override void SetupStreams()
+    {
+        uint sendZ = streams.ShadingPosition;
+        if (streams.normalWS.y<-0.5)
+            streams.Voxel_SendZ = streams.PositionVXS.z;
+        if (streams.normalWS.y>0.5)
+            streams.Voxel_ReceiveZ = streams.PositionVXS.z;
+    }
+	override void VoxelizeDirect(uint3 address, uint stride)
+    {
+    }
+	override void VoxelizeIndirectWrite(RWBuffer<uint> buffer, inout uint address)
+    {
+        uint unusedOut;
+        if (streams.normalWS.y<-0.5)
+            InterlockedMax(buffer[address], FloatUnormToUint(streams.Voxel_SendZ), unusedOut);
+        address++;
+        if (streams.normalWS.y>0.5)
+            InterlockedMax(buffer[address], FloatUnormToUint(1.0-streams.Voxel_ReceiveZ), unusedOut);//Would use a Min, but can't change clearing from 0
+        address++;
+    }
+	override void VoxelizeIndirectRead(RWBuffer<uint> buffer, inout uint address)
+    {
+        streams.Voxel_SendZ = UintToFloatUnorm(buffer[address]);
+        address++;
+        streams.Voxel_ReceiveZ = 1.0-UintToFloatUnorm(buffer[address]);
+        address++;
+    }
+    bool ResolvesSelf()
+    {
+        return streams.Voxel_SendZ<streams.Voxel_ReceiveZ && IsSender() && IsReceiver();
+    }
+    bool IsSender()
+    {
+        return streams.Voxel_SendZ>0;
+    }
+    bool IsReceiver()
+    {
+        return streams.Voxel_ReceiveZ<1;
+    }
+    float receiveVal()
+    {
+        return streams.Voxel_ReceiveZ;
+    }
+    float sendVal()
+    {
+        return streams.Voxel_SendZ;
+    }
+};

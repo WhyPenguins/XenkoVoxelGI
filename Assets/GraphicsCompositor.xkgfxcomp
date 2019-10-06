@@ -115,7 +115,7 @@ RenderFeatures:
                         7c3d3d4c86834c3551bacde2527b3836: ~(Deleted)
                         d59ef45dd99e49d3af3887763d153aa7: ~(Deleted)
                         7c8c69ce27034b4c8bbcab0bcdfe954b: ~(Deleted)
-                ReflectiveVoxelRenderer: !Xenko.Rendering.Shadows.ReflectiveVoxelRenderer,FirstPersonShooter_VoxelGI.Game
+                VoxelRenderer: !Xenko.Rendering.Voxels.VoxelRenderer,FirstPersonShooter_VoxelGI.Game
                     VoxelStage: ref!! 25e9a2a1-4e58-4449-a9e5-8b35d1810077
             819b92ac2f3a4b7e47d2687e91a707a2*: !Xenko.Rendering.VoxelRenderFeature,FirstPersonShooter_VoxelGI.Game
                 VoxelizerRenderStage: ref!! 25e9a2a1-4e58-4449-a9e5-8b35d1810077
@@ -206,7 +206,8 @@ SharedRenderers:
         SubsurfaceScatteringBlurEffect: null
         MSAALevel: None
         MSAAResolver: {}
-        VoxelStage: null
+        VoxelStage: ref!! 25e9a2a1-4e58-4449-a9e5-8b35d1810077
+        VoxelVisualization: {}
     34ecb9b2633eacfc439ba8744fe05102: ~(Deleted)
 Game: !Xenko.Rendering.Compositing.SceneCameraRenderer,Xenko.Engine
     Id: 76fe87cf-f574-4ad6-85b8-e9a9586be0e2

@@ -66,7 +66,7 @@ Hierarchy:
                 Components:
                     cafed28ac2678c4e84c546d7570eabd3: !TransformComponent
                         Id: a746508a-d191-487f-bb40-71c2d64318c4
-                        Position*: {X: 12.15048, Y: 0.21112147, Z: 7.348197}
+                        Position*: {X: 11.9529295, Y: 0.21112147, Z: 6.90158653}
                         Rotation*: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale*: {X: 0.004255605, Y: 0.8505241, Z: 0.3349183}
                         Children: {}
@@ -3967,7 +3967,8 @@ Hierarchy:
                                 Filter: !LightShadowMapFilterTypePcf
                                     FilterSize: Filter5x5
                                 Size: Large
-                                DepthRange: {}
+                                DepthRange:
+                                    IsAutomatic: false
                                 PartitionMode: !LightDirectionalShadowMap.PartitionLogarithmic {}
                                 BiasParameters: {}
                                 ComputeTransmittance: false
@@ -5078,8 +5079,17 @@ Hierarchy:
                     63493b70b9e3f8edf81c791cb799ea27: !LightComponent
                         Id: 0e218f99-c135-4cec-93dd-f34012f17691
                         Type: !LightVoxel
+                            DiffuseMarcher: !Xenko.Rendering.Voxels.VoxelMarchCone,FirstPersonShooter_VoxelGI.Game
+                                Steps: 9
+                                StepScale: 1.0
+                                ConeRadius: 1.0
+                            SpecularMarcher: !Xenko.Rendering.Voxels.VoxelMarchCone,FirstPersonShooter_VoxelGI.Game
+                                Steps: 20
+                                StepScale: 0.6
+                                ConeRadius: 1.0
                             Volume: ref!! 9174b993-3718-4a52-996c-78a8cc0af1e1
-                            BounceIntensityScale: 1.0
+                            BounceIntensityScale: 0.32
+                            SpecularIntensityScale: 1.0
         -   Folder: Ground
             Entity:
                 Id: 97ce9347-c06c-42db-ae3e-e366341c3eda
@@ -6067,12 +6077,32 @@ Hierarchy:
                         Id: 317fedb4-098e-450b-9957-8cadbd4df05c
                         Position: {X: 0.0, Y: 2.5, Z: 0.0}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-                        Scale: {X: 20.0, Y: 10.0, Z: 20.0}
+                        Scale: {X: 40.0, Y: 20.0, Z: 40.0}
                         Children: {}
                     09a82c0e64c623790931cd891c25aa8d: !VoxelVolumeComponent
                         Id: 9174b993-3718-4a52-996c-78a8cc0af1e1
-                        ClipMapCount: 2
+                        VoxelizationMethod: !.VoxelizationMethodGeometry,FirstPersonShooter_VoxelGI.Game {}
+                        Storage: !Xenko.Rendering.Voxels.VoxelStorageClipmaps,FirstPersonShooter_VoxelGI.Game
+                            ClipResolution: x128
+                            RenderMethod: GeometryShader
+                        Attributes:
+                            a58902b93476156fafebd8ef494a82c0: !Xenko.Rendering.Voxels.VoxelAttributeEmissionOpacity,FirstPersonShooter_VoxelGI.Game
+                                VoxelLayout: !Xenko.Rendering.Voxels.VoxelLayoutIsotropic,FirstPersonShooter_VoxelGI.Game
+                                    StorageMethod: !Xenko.Rendering.Voxels.StorageMethodIndirect,FirstPersonShooter_VoxelGI.Game
+                                        TempStorageFormat: !Xenko.Rendering.Voxels.VoxelFragmentPackFloatR11G11B10,FirstPersonShooter_VoxelGI.Game {}
+                                        Filter: !Xenko.Rendering.Voxels.VoxelBufferWriteMax,FirstPersonShooter_VoxelGI.Game {}
+                                Modifiers:
+                                    ed41db0608b1ac4dd597d24c09288f4a: !.VoxelModifierEmissionOpacityAntiAliasing,FirstPersonShooter_VoxelGI.Game {}
+                                    21238ceedf0aacf5119a669c6127aeed: !.VoxelModifierEmissionOpacitySolidify,FirstPersonShooter_VoxelGI.Game {}
                         AproximateVoxelSize: 0.15
+                        VoxelVisualization: false
+                        VisualizeVoxels: false
+                        Visualization: !Xenko.Rendering.Voxels.VoxelVisualizationView,FirstPersonShooter_VoxelGI.Game
+                            Background: {R: 25, G: 25, B: 25, A: 255}
+                            MarchMethod: !Xenko.Rendering.Voxels.VoxelMarchBeam,FirstPersonShooter_VoxelGI.Game
+                                Steps: 200
+                                StepScale: 1.0
+                                BeamRadius: 1.0
         -   Entity:
                 Id: ba9dd4e6-d5f2-4e93-ba5d-88395ca0517f
                 Name: Wall0x2x2 (4)

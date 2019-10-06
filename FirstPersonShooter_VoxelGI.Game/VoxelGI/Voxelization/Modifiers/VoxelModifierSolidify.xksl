@@ -1,0 +1,68 @@
+﻿shader VoxelModifierSolidify : VoxelModifier, VoxelPositionStream, VoxelModifierSolidifyStreams
+{
+    compose VoxelAttributeSolidifyPlanesShader coverage;
+
+    stream int sendTo;
+    stream int ignoreTil;
+
+	override void SetupStreamsDummy()
+    {
+        streams.IsSolid = false;
+        streams.sendTo = 0;
+        streams.ignoreTil = 0;
+        coverage.SetupStreamsDummy();
+    }
+	override void SetupStreams()
+    {
+        coverage.SetupStreams();
+    }
+	override void VoxelizeDirect(uint3 address, uint stride)
+    {
+    }
+	override void VoxelizeIndirectWrite(RWBuffer<uint> buffer, inout uint address)
+    {
+        coverage.VoxelizeIndirectWrite(buffer,address);
+    }
+	override void VoxelizeIndirectRead(RWBuffer<uint> buffer, inout uint address, uint2 base_stride)
+    {
+        int Y = streams.PositionVXPS.y;
+        int maxY = streams.VoxelVolumeSize.y;
+
+        uint originalAddress = address;
+        coverage.VoxelizeIndirectRead(buffer, address);
+
+        streams.IsSolid = false;
+        streams.aVoxel_SendY = coverage.sendVal();
+        streams.aVoxel_ReceiveY = coverage.receiveVal();
+        if (Y>streams.ignoreTil)
+        {
+            if (Y>streams.sendTo)
+            {
+                streams.ignoreTil = maxY;
+                for(int y = Y ; y < maxY; y++)
+                {
+                    uint tempAddress = base_stride.x + base_stride.y * y;
+                    coverage.VoxelizeIndirectRead(buffer, tempAddress);
+                    if (coverage.IsSender())
+                    {
+                        streams.ignoreTil = y;
+                        if (coverage.ResolvesSelf())
+                            break;
+                    }
+                    if (coverage.IsReceiver())
+                    {
+                        if (streams.ignoreTil<y)
+                        {
+                            streams.sendTo = y;
+                            break;
+                        }
+                    }
+                }
+            }
+            else if (Y<streams.sendTo)
+            {
+                streams.IsSolid = true;
+            }
+        }
+    }
+};

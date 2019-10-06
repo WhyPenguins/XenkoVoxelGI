@@ -1,0 +1,20 @@
+﻿namespace Xenko.Rendering.Images
+{
+    effect VoxelVisualizationViewEffect
+    {
+        using params VoxelVisualizationViewShaderKeys;
+
+        mixin VoxelVisualizationViewShader;
+        if (VoxelVisualizationViewShaderKeys.marcher != null)
+        {
+            mixin compose marcher = VoxelVisualizationViewShaderKeys.marcher;
+        }
+        if (Voxels.MarchAttributesKeys.AttributeSamplers!=null)
+        {
+            foreach (var attr in Voxels.MarchAttributesKeys.AttributeSamplers)
+            {
+                mixin compose AttributeSamplers += (attr);
+            }
+        }
+    }
+}

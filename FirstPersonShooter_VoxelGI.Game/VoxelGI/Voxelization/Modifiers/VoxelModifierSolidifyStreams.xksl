@@ -1,0 +1,6 @@
+﻿shader VoxelModifierSolidifyStreams
+{
+    stage stream bool IsSolid;
+    stage stream float aVoxel_SendY;
+    stage stream float aVoxel_ReceiveY;
+};

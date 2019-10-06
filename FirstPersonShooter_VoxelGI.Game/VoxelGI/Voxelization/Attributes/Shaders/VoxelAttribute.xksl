@@ -1,0 +1,8 @@
+﻿shader VoxelAttribute
+{
+	void SetupStreamsDummy(){}
+	void SetupStreams(){}
+	float4 VoxelizeDirect(uint3 address, uint stride){}
+	void VoxelizeIndirectWrite(RWBuffer<uint> buffer, inout uint address){}
+	void VoxelizeIndirectRead(RWBuffer<uint> buffer, inout uint address){}
+};

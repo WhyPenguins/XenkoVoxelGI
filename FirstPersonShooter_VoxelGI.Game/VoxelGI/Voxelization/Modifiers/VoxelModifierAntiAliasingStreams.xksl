@@ -1,0 +1,4 @@
+﻿shader VoxelModifierAntiAliasingStreams
+{
+    stage stream float3 PlaneCoverage;
+};

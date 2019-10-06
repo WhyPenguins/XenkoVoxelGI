@@ -1,0 +1,90 @@
+﻿shader VoxelStorageClipmapShader : VoxelStorageShader, Texturing, ShaderBaseStream
+{
+    cbuffer PerView.VoxelizerStorer
+    {
+        float4x4 VoxelMatrix;
+        float3 clipMapResolution;
+        float clipMapCount;
+        float storageUints;
+    }
+    rgroup PerView.VoxelizerStorer
+    {
+        RWBuffer<uint> fragmentsBuffer;
+    }
+    compose VoxelAttribute AttributesTransient[];
+    compose VoxelAttribute AttributesDirect[];
+    compose VoxelAttribute AttributesIndirect[];
+    compose VoxelModifier Modifiers[];
+
+
+    
+    stage stream uint clipPos;
+    stage stream float clipScale;
+    override void StoreFragments()
+    {
+        int3 clipMapResolutionI = (int3)clipMapResolution;
+        
+        float3 texPos = mul(float4(streams.PositionWS.xyz, 1.0), VoxelMatrix).xyz;
+        texPos = (texPos - 0.5) * streams.clipScale + 0.5;
+        if (dot(texPos-saturate(texPos),float3(1,1,1))==0)
+        {
+            streams.PositionVXS = texPos;
+            streams.VoxelVolumeSize = clipMapResolution;
+            streams.PositionVXPS = int3(floor(saturate(texPos) * clipMapResolution));
+
+            int3 pixelPos = streams.PositionVXPS;
+
+            uint index = streams.clipPos + pixelPos.x + pixelPos.y * clipMapResolutionI.x + pixelPos.z * clipMapResolutionI.x * clipMapResolutionI.y;
+
+            uint writeindex = index * (uint)storageUints;
+            foreach (var attr in Modifiers)
+            {
+                attr.SetupStreams();
+            }
+            foreach (var attr in AttributesTransient)
+            {
+                attr.SetupStreams();
+            }
+
+            foreach (var attr in AttributesDirect)
+            {
+                attr.SetupStreams();
+            }
+
+            foreach (var attr in AttributesIndirect)
+            {
+                attr.SetupStreams();
+            }
+
+            foreach (var attr in Modifiers)
+            {
+                attr.VoxelizeIndirectWrite(fragmentsBuffer, writeindex);
+            }
+            foreach (var attr in AttributesIndirect)
+            {
+                attr.VoxelizeIndirectWrite(fragmentsBuffer, writeindex);
+            }
+        }
+    }
+    override void GenerateTriangles(triangle Input input[3], inout TriangleStream<Output> triangleStream)
+    {
+        int3 clipMapResolutionI = (int3)clipMapResolution;
+        streams.clipPos = (clipMapCount-1) * clipMapResolutionI.x * clipMapResolutionI.y * clipMapResolutionI.z;
+        streams.clipScale = 1;
+
+        for (int clip = 0; clip < clipMapCount; clip++)
+        {
+            [unroll]
+            for (int i = 0; i < 3 ; i ++)
+            {
+                streams = input[i];
+                streams.ShadingPosition.xyz *= streams.clipScale;
+                streams.ShadingPosition.z = streams.ShadingPosition.z * 0.5 + 0.5;
+                triangleStream.Append(streams);
+            }
+            triangleStream.RestartStrip();
+            streams.clipScale *= 2;
+            streams.clipPos -= clipMapResolutionI.x * clipMapResolutionI.y * clipMapResolutionI.z;
+        }
+    }
+};

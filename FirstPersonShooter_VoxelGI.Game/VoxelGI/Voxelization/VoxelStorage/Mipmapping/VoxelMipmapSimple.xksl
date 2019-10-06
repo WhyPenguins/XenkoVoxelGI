@@ -1,0 +1,44 @@
+﻿namespace Xenko.Rendering.Voxels
+{
+    shader VoxelMipmapSimple : Math, Texturing, ComputeShaderBase
+    {
+        stage float3 ReadOffset;
+		stage Texture3D<half4> ReadTex;
+		stage RWTexture3D<half4> WriteTex;
+        override void Compute()
+        {
+            uint3 pos = streams.DispatchThreadId;
+
+            uint width = 0;
+            uint height = 0;
+            uint depth = 0;
+            WriteTex.GetDimensions(width,height,depth);
+
+            uint rwidth = 0;
+            uint rheight = 0;
+            uint rdepth = 0;
+            ReadTex.GetDimensions(rwidth,rheight,rdepth);
+            //If not a border pixel, average, otherwise fill empty
+            if (1==1)//pos.x!=0&&pos.y!=0&&pos.z!=0&&pos.x!=width-1&&pos.y!=height-1&&pos.z!=depth-1)
+            {
+                uint3 posR = pos*2+(uint3)ReadOffset;
+                WriteTex[pos] = (
+                    ReadTex.Load(int4(posR,0))+
+                    ReadTex.Load(int4(posR+uint3(1,0,0),0))+
+                    ReadTex.Load(int4(posR+uint3(1,1,0),0))+
+                    ReadTex.Load(int4(posR+uint3(1,0,1),0))+
+                    ReadTex.Load(int4(posR+uint3(0,1,1),0))+
+                    ReadTex.Load(int4(posR+uint3(0,1,0),0))+
+                    ReadTex.Load(int4(posR+uint3(0,0,1),0))+
+                    ReadTex.Load(int4(posR+uint3(1,1,1),0))
+                )/8.0;
+                //I imagine I could just sample in the middle of the texels with linear filtering, 
+                //but for now this is fast enough and easier to make sure it's right
+            }
+            else
+            {
+                WriteTex[pos] = float4(0,0,0,0);
+            }
+        }
+    };
+}

@@ -1,0 +1,15 @@
+﻿shader VoxelStorageShader : VoxelPositionStream, PositionStream4, ShaderBaseStream
+{
+    void StoreFragments(){ }
+    void GenerateTriangles(triangle Input input [3], inout TriangleStream<Output> triangleStream)
+    {
+        [unroll]
+        for ( int i = 0; i < 3 ; i++)
+        {
+            streams = input[i];
+            streams.ShadingPosition.z = streams.ShadingPosition.z * 0.5 + 0.5;
+            triangleStream.Append(streams);
+        }
+        triangleStream.RestartStrip();
+    }
+};

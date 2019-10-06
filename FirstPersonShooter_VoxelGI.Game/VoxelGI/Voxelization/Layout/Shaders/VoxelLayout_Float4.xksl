@@ -1,0 +1,12 @@
+﻿shader VoxelLayout_Float4 : NormalStream
+{
+	void SetupStreamsDummy(){}
+	void SetupStreams(float4 original){}
+	void VoxelizeDirect(uint3 address, uint stride){}
+	void VoxelizeIndirectWrite(RWBuffer<uint> buffer, inout uint address){}
+	void VoxelizeIndirectRead(RWBuffer<uint> buffer, inout uint address){}
+    float4 Get()
+    {
+        return float4(0,0,0,0);
+    }
+};
