@@ -12,16 +12,6 @@ namespace Xenko.Rendering.Voxels
     [Display("Emission+Opacity")]
     public class VoxelAttributeEmissionOpacity : IVoxelAttribute
     {
-        /*public enum PixelFormats
-        {
-            R11FG11FB10F_Alpha8,
-            R11FG11FB10F_Alpha16F,
-            R11FG11FB10F_Alpha32F,
-            R10G10B10A2,
-            RGBA16F,
-            RGBA32F
-        };*/
-
         ShaderClassSource source = new ShaderClassSource("VoxelAttributeEmissionOpacityShader");
 
         [NotNull]

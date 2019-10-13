@@ -19,6 +19,6 @@ namespace Xenko.Rendering
     public static partial class VoxelIsotropicWriter_Float4Keys
     {
         public static readonly ObjectParameterKey<Texture> DirectOutput = ParameterKeys.NewObject<Texture>();
-        public static readonly ObjectParameterKey<Texture> DirectOutput2 = ParameterKeys.NewObject<Texture>();
+        public static readonly ValueParameterKey<float> maxBrightnessInv = ParameterKeys.NewValue<float>();
     }
 }

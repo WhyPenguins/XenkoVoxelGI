@@ -301,6 +301,9 @@
     <None Update="VoxelGI\Marching\Shaders\VoxelRadiusMarchMethod.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
     </None>
+    <None Update="VoxelGI\Voxelization\Modifiers\Appliers\Isotropic\VoxelModifierApplierBrightnessIsotropic.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
     <None Update="VoxelGI\Voxelization\VoxelStorage\Processing\BufferToTexture.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
       <LastGenOutput>BufferToTexture.cs</LastGenOutput>

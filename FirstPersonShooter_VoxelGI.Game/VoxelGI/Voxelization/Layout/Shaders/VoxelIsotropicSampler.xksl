@@ -3,6 +3,10 @@
     shader VoxelIsotropicSampler : IVoxelSampler, Texturing
     {
         compose VoxelStorageTextureShader storage;
+        cbuffer PerView.Lighting
+        {
+            float maxBrightness;
+        }
 
         override float4 ComputeLocal(float3 position)
         {
@@ -10,7 +14,7 @@
         }
         override float4 Sample(float3 position, float3 normal, float radius)
         {
-            return storage.Sample(position, radius, 0);
+            return storage.Sample(position, radius, 0) * float4(maxBrightness, maxBrightness, maxBrightness, 1.0);
         }
         override float4 SampleRaw(float3 pos, float mipmap, int textureID, int axis)
         {

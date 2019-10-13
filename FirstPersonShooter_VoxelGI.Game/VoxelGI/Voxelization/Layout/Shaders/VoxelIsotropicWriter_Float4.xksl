@@ -3,6 +3,8 @@
     stream float4 center;
     RWTexture3D<float4> DirectOutput;
     compose VoxelFragmentPacker writer;
+    
+    float maxBrightnessInv;
 
     compose VoxelModifierApplierIsotropic Modifiers[];
 	override void SetupStreamsDummy()
@@ -21,7 +23,8 @@
             modifier.Apply(tempcenter);
         }
         streams.center = tempcenter;
-        DirectOutput[address] = streams.center;
+
+        DirectOutput[address] = float4(streams.center.rgb * maxBrightnessInv, streams.center.a);
     }
 	override void VoxelizeIndirectWrite(RWBuffer<uint> buffer, inout uint address)
     {

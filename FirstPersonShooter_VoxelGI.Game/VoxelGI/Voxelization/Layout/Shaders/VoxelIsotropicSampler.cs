@@ -18,5 +18,6 @@ namespace Xenko.Rendering
 {
     public static partial class VoxelIsotropicSamplerKeys
     {
+        public static readonly ValueParameterKey<float> maxBrightness = ParameterKeys.NewValue<float>();
     }
 }
