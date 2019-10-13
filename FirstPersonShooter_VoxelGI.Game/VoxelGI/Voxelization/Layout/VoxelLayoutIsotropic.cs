@@ -51,7 +51,7 @@ namespace Xenko.Rendering.Voxels
 
         ValueParameterKey<float> BrightnessInvKey;
         ObjectParameterKey<Xenko.Graphics.Texture> DirectOutput;
-        public void UpdateLayout(string compositionName)
+        public void UpdateLayout(string compositionName, List<IVoxelModifierEmissionOpacity> modifiers)
         {
             DirectOutput = VoxelIsotropicWriter_Float4Keys.DirectOutput.ComposeWith(compositionName);
             BrightnessInvKey = VoxelIsotropicWriter_Float4Keys.maxBrightnessInv.ComposeWith(compositionName);
@@ -79,7 +79,7 @@ namespace Xenko.Rendering.Voxels
             IsotropicTex.ApplyViewParameters(parameters);
         }
 
-        public void ApplyWriteParameters(ParameterCollection parameters)
+        public void ApplyWriteParameters(ParameterCollection parameters, List<IVoxelModifierEmissionOpacity> modifiers)
         {
             if (StorageFormat != StorageFormats.RGBA16F)
                 parameters.Set(BrightnessInvKey, 1.0f / maxBrightness);

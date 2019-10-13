@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Xenko.Core;
+using Xenko.Rendering;
 using Xenko.Rendering.Voxels;
 using Xenko.Shaders;
 
@@ -31,4 +32,6 @@ public class VoxelModifierEmissionOpacitySolidify : VoxelModifierBase, IVoxelMod
         if (!Enabled) return;
         storage.RequestTempStorage(64);
     }
+    public void UpdateLayout(string compositionName) { }
+    public void ApplyWriteParameters(ParameterCollection parameters) { }
 }

@@ -45,11 +45,21 @@ namespace Xenko.Rendering.Voxels
 
         public void UpdateLayout(string compositionName)
         {
-            VoxelLayout.UpdateLayout("layout." + compositionName);
+            int i = 0;
+            foreach (IVoxelModifierEmissionOpacity modifier in Modifiers)
+            {
+                modifier.UpdateLayout("Modifiers[" + i.ToString() + "].layout." + compositionName);
+                i++;
+            }
+            VoxelLayout.UpdateLayout("layout." + compositionName, Modifiers);
         }
         public void ApplyWriteParameters(ParameterCollection parameters)
         {
-            VoxelLayout.ApplyWriteParameters(parameters);
+            foreach (IVoxelModifierEmissionOpacity modifier in Modifiers)
+            {
+                modifier.ApplyWriteParameters(parameters);
+            }
+            VoxelLayout.ApplyWriteParameters(parameters, Modifiers);
         }
         public void PostProcess(RenderDrawContext drawContext)
         {

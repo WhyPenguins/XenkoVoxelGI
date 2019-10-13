@@ -7,10 +7,10 @@ using Xenko.Rendering.Voxels;
 using Xenko.Shaders;
 
 [DataContract(DefaultMemberMode = DataMemberMode.Default)]
-[Display("Anti Aliasing")]
-public class VoxelModifierEmissionOpacityAntiAliasing : VoxelModifierBase, IVoxelModifierEmissionOpacity
+[Display("Opacify")]
+public class VoxelModifierEmissionOpacityOpacify : VoxelModifierBase, IVoxelModifierEmissionOpacity
 {
-    ShaderClassSource source = new ShaderClassSource("VoxelModifierAntiAliasing");
+    public float Amount = 2.0f;
     public bool RequiresColumns()
     {
         if (!Enabled) return false;
@@ -19,19 +19,25 @@ public class VoxelModifierEmissionOpacityAntiAliasing : VoxelModifierBase, IVoxe
     public void AddAttributes(ShaderSourceCollection modifiers)
     {
         if (!Enabled) return;
-        modifiers.Add(source);
     }
     public ShaderSource GetApplier(string layout)
     {
         if (!Enabled) return null;
-        return new ShaderClassSource("VoxelModifierApplierAntiAliasing" + layout);
+        return new ShaderClassSource("VoxelModifierApplierOpacify" + layout);
     }
 
     public void PrepareLocalStorage(VoxelStorageContext context, IVoxelStorage storage)
     {
-        if (!Enabled) return;
-        storage.RequestTempStorage(32);
     }
-    public void UpdateLayout(string compositionName) { }
-    public void ApplyWriteParameters(ParameterCollection parameters) { }
+
+    ValueParameterKey<float> AmountKey;
+    public void UpdateLayout(string compositionName)
+    {
+        AmountKey = VoxelModifierApplierOpacifyIsotropicKeys.Amount.ComposeWith(compositionName);
+    }
+
+    public void ApplyWriteParameters(ParameterCollection parameters)
+    {
+        parameters.Set(AmountKey, Amount);
+    }
 }

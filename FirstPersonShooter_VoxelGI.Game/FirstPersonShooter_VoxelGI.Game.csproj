@@ -301,7 +301,13 @@
     <None Update="VoxelGI\Marching\Shaders\VoxelRadiusMarchMethod.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
     </None>
-    <None Update="VoxelGI\Voxelization\Modifiers\Appliers\Isotropic\VoxelModifierApplierBrightnessIsotropic.xksl">
+    <None Update="VoxelGI\Voxelization\Modifiers\Appliers\AnisotropicPaired\VoxelModifierApplierOpacifyAnisotropicPaired.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Voxelization\Modifiers\Appliers\Anisotropic\VoxelModifierApplierOpacifyAnisotropic.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Voxelization\Modifiers\Appliers\Isotropic\VoxelModifierApplierOpacifyIsotropic.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
     </None>
     <None Update="VoxelGI\Voxelization\VoxelStorage\Processing\BufferToTexture.xksl">

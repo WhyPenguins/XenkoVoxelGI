@@ -27,11 +27,11 @@ namespace Xenko.Rendering.Voxels
         }
 
         ObjectParameterKey<Xenko.Graphics.Texture> DirectOutput;
-        public void UpdateLayout(string compositionName)
+        public void UpdateLayout(string compositionName, List<IVoxelModifierEmissionOpacity> modifier)
         {
             DirectOutput = VoxelAnisotropicPairedWriter_Float4Keys.DirectOutput.ComposeWith(compositionName);
         }
-        public void ApplyWriteParameters(ParameterCollection parameters)
+        public void ApplyWriteParameters(ParameterCollection parameters, List<IVoxelModifierEmissionOpacity> modifiers)
         {
             IsotropicTex.ApplyParametersWrite(DirectOutput, parameters);
         }

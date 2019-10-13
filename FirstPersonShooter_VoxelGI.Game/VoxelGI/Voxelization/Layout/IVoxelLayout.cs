@@ -7,11 +7,11 @@ namespace Xenko.Rendering.Voxels
     public interface IVoxelLayout
     {
         void PrepareLocalStorage(VoxelStorageContext context, IVoxelStorage storage);
-        void UpdateLayout(string compositionName);
+        void UpdateLayout(string compositionName, List<IVoxelModifierEmissionOpacity> modifiers);
         ShaderSource GetSampler();
         void UpdateSamplerLayout(string compositionName);
         void ApplyViewParameters(ParameterCollection parameters);
-        void ApplyWriteParameters(ParameterCollection parameters);
+        void ApplyWriteParameters(ParameterCollection parameters, List<IVoxelModifierEmissionOpacity> modifiers);
         void PostProcess(RenderDrawContext drawContext);
         ShaderSource GetShaderFloat4(List<IVoxelModifierEmissionOpacity> modifiers);
         ShaderSource GetShaderFloat3();
