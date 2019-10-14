@@ -60,6 +60,12 @@ namespace Xenko.Rendering.Voxels
             var mixin = new ShaderMixinSource();
             mixin.Mixins.Add(writer);
             StorageMethod.Apply(mixin);
+            foreach (var attr in modifiers)
+            {
+                ShaderSource applier = attr.GetApplier("AnisotropicPaired");
+                if (applier != null)
+                    mixin.AddCompositionToArray("Modifiers", applier);
+            }
             return mixin;
         }
         public ShaderSource GetShaderFloat3() { return null; }
