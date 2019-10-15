@@ -12,21 +12,21 @@ namespace Xenko.Rendering.Voxels
     {
         public int Steps = 9;
         public float StepScale = 1.0f;
-        public float BeamRadius = 1.0f;
+        public float BeamDiameter = 1.0f;
         public VoxelMarchBeam()
         {
 
         }
-        public VoxelMarchBeam(int steps, float stepScale, float radius)
+        public VoxelMarchBeam(int steps, float stepScale, float diameter)
         {
             Steps = steps;
             StepScale = stepScale;
-            BeamRadius = radius;
+            BeamDiameter = diameter;
         }
         public ShaderSource GetMarcher(int attrID)
         {
             var mixin = new ShaderMixinSource();
-            mixin.Mixins.Add(new ShaderClassSource("VoxelMarchBeam", Steps, StepScale, BeamRadius));
+            mixin.Mixins.Add(new ShaderClassSource("VoxelMarchBeam", Steps, StepScale, BeamDiameter));
             mixin.Macros.Add(new ShaderMacro("AttributeID", attrID));
             return mixin;
         }

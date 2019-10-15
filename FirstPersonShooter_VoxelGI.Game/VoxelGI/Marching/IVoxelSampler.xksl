@@ -5,11 +5,11 @@
     /// </summary>
     shader IVoxelSampler
     {
-        float4 Sample(float3 position, float3 normal, float radius)
+        float4 Sample(float3 position, float3 normal, float diameter)
         {
             return 0;
         }
-        float4 SampleNearestMip(float3 position, float3 normal, float radius)
+        float4 SampleNearestMip(float3 position, float3 normal, float diameter)
         {
             return 0;
         }

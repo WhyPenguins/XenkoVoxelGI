@@ -4,17 +4,17 @@
     {
 
         compose VoxelStorageTextureShader storage;
-        override float4 Sample(float3 position, float3 normal, float radius)
+        override float4 Sample(float3 position, float3 normal, float diameter)
         {
-            return storage.Sample(position, radius, 0)*abs(normal.x)+
-                   storage.Sample(position, radius, 1)*abs(normal.y)+
-                   storage.Sample(position, radius, 2)*abs(normal.z);
+            return storage.Sample(position, diameter, 0)*abs(normal.x)+
+                   storage.Sample(position, diameter, 1)*abs(normal.y)+
+                   storage.Sample(position, diameter, 2)*abs(normal.z);
         }
-        override float4 SampleNearestMip(float3 position, float3 normal, float radius)
+        override float4 SampleNearestMip(float3 position, float3 normal, float diameter)
         {
-            return storage.SampleNearestMip(position, radius, 0) * abs(normal.x) +
-                   storage.SampleNearestMip(position, radius, 1) * abs(normal.y) +
-                   storage.SampleNearestMip(position, radius, 2) * abs(normal.z);
+            return storage.SampleNearestMip(position, diameter, 0) * abs(normal.x) +
+                   storage.SampleNearestMip(position, diameter, 1) * abs(normal.y) +
+                   storage.SampleNearestMip(position, diameter, 2) * abs(normal.z);
         }
         override float4 SampleRaw(float3 pos, float mipmap, int textureID, int axis)
         {

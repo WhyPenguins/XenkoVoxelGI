@@ -1,4 +1,4 @@
-﻿shader VoxelMarchConeFast<int steps, float stepScale, float coneRadius> : VoxelMarchMethod, VoxelRadiusMarchMethod, MarchAttributes
+﻿shader VoxelMarchConeFast<int steps, float stepScale, float coneRatio> : VoxelMarchMethod, VoxelRadiusMarchMethod, MarchAttributes
 {
     override float4 March(float3 rayPos, float3 rayDir)
     {
@@ -12,7 +12,7 @@
         rayPos += voxelSize * rayDir;
         for (int i = 0; i < steps; i++)
         {
-            float size = max(voxelSize, coneRadius * radiusScale * dist);
+            float size = max(voxelSize, coneRatio * radiusScale * dist);
             float3 pos = rayPos + rayDir * dist;
 
             light += AttributeSamplers[AttributeID].SampleNearestMip(pos, -rayDir, size) * saturate(1.0 - light.a);

@@ -13,22 +13,22 @@ namespace Xenko.Rendering.Voxels
         public bool Fast = false;
         public int Steps = 9;
         public float StepScale = 1.0f;
-        public float ConeRadius = 1.0f;
+        public float ConeRatio = 1.0f;
 
         public VoxelMarchCone()
         {
 
         }
-        public VoxelMarchCone(int steps, float stepScale, float radius)
+        public VoxelMarchCone(int steps, float stepScale, float ratio)
         {
             Steps = steps;
             StepScale = stepScale;
-            ConeRadius = radius;
+            ConeRatio = ratio;
         }
         public ShaderSource GetMarcher(int attrID)
         {
             var mixin = new ShaderMixinSource();
-            mixin.Mixins.Add(new ShaderClassSource(Fast? "VoxelMarchConeFast" : "VoxelMarchCone", Steps, StepScale, ConeRadius));
+            mixin.Mixins.Add(new ShaderClassSource(Fast? "VoxelMarchConeFast" : "VoxelMarchCone", Steps, StepScale, ConeRatio));
             mixin.Macros.Add(new ShaderMacro("AttributeID", attrID));
             return mixin;
         }

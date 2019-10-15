@@ -12,13 +12,13 @@
         {
             return float4(0,0,0,1);
         }
-        override float4 Sample(float3 position, float3 normal, float radius)
+        override float4 Sample(float3 position, float3 normal, float diameter)
         {
-            return storage.Sample(position, radius, 0) * float4(maxBrightness, maxBrightness, maxBrightness, 1.0);
+            return storage.Sample(position, diameter, 0) * float4(maxBrightness, maxBrightness, maxBrightness, 1.0);
         }
-        override float4 SampleNearestMip(float3 position, float3 normal, float radius)
+        override float4 SampleNearestMip(float3 position, float3 normal, float diameter)
         {
-            return storage.SampleNearestMip(position, radius, 0) * float4(maxBrightness, maxBrightness, maxBrightness, 1.0);
+            return storage.SampleNearestMip(position, diameter, 0) * float4(maxBrightness, maxBrightness, maxBrightness, 1.0);
         }
         override float4 SampleRaw(float3 pos, float mipmap, int textureID, int axis)
         {
