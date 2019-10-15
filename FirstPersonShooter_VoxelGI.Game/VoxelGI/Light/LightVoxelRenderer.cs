@@ -161,7 +161,7 @@ namespace Xenko.Rendering.Lights
 
                 if (viewIndex != 0)
                 {
-                    intensity *= intensityBounceScale;
+                    intensity *= intensityBounceScale / 3.141592f;
                     specularIntensity = 0.0f;
                 }
 
@@ -171,8 +171,8 @@ namespace Xenko.Rendering.Lights
                 if (data == null)
                     return;
 
-                parameters.Set(intensityKey, intensity * 3.1415f);//I don't understand why I need to multiply by pi here...
-                parameters.Set(specularIntensityKey, specularIntensity * 3.1415f);
+                parameters.Set(intensityKey, intensity);
+                parameters.Set(specularIntensityKey, specularIntensity);
 
                 if (GetTraceAttr() != null)
                 {
