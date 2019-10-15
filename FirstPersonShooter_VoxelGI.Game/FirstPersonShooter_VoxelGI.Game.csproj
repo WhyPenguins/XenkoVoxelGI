@@ -283,6 +283,15 @@
     <None Update="VoxelGI\GraphicsCompositorStuff\DebugVisualizations\Shaders\VoxelVisualizationRawShader.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
     </None>
+    <None Update="VoxelGI\Marching\MarchSets\Shaders\VoxelMarchSet.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Marching\MarchSets\Shaders\VoxelMarchSetHemisphere12.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Marching\MarchSets\Shaders\VoxelMarchSetHemisphere6.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
     <None Update="VoxelGI\Marching\Shaders\MarchAttributes.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
     </None>

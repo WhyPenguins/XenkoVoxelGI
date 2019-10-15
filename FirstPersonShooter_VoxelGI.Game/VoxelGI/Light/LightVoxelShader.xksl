@@ -13,7 +13,7 @@ namespace Xenko.Rendering.Lights
             float SpecularIntensity;
         }
 
-        compose VoxelMarchMethod diffuseMarcher;
+        compose VoxelMarchSet diffuseMarcher;
         compose VoxelRadiusMarchMethod specularMarcher;
 
         override void PrepareEnvironmentLight()
@@ -28,35 +28,10 @@ namespace Xenko.Rendering.Lights
                 float3x3 tangentMatrix = float3x3(tan, bitan, streams.normalWS.xyz);
 
                 float4 reflLighting = float4(0, 0, 0, 0);
-                float3 rayDir = float3(0, 0, 1);
 
-                float3 startPos = worldPos + streams.normalWS.xyz * diffuseMarcher.StepSize();
+                float3 startPos = worldPos + streams.normalWS.xyz * specularMarcher.StepSizeRadius(1.0);
 
-                rayDir = mul(float3(-0.38, -0.37, 0.84), tangentMatrix);
-                reflLighting += diffuseMarcher.March(startPos, rayDir) * 0.1475;
-                rayDir = mul(float3(-0.31, 0.43, 0.84), tangentMatrix);
-                reflLighting += diffuseMarcher.March(startPos, rayDir) * 0.1475;
-                rayDir = mul(float3(0.36, 0.39, 0.84), tangentMatrix);
-                reflLighting += diffuseMarcher.March(startPos, rayDir) * 0.1475;
-                rayDir = mul(float3(0.36, -0.39, 0.84), tangentMatrix);
-                reflLighting += diffuseMarcher.March(startPos, rayDir) * 0.1475;
-
-                rayDir = mul(float3(-0.87, 0.41, 0.22), tangentMatrix);
-                reflLighting += diffuseMarcher.March(startPos, rayDir) * 0.0512;
-                rayDir = mul(float3(-0.35, 0.90, 0.22), tangentMatrix);
-                reflLighting += diffuseMarcher.March(startPos, rayDir) * 0.0512;
-                rayDir = mul(float3(0.40, 0.88, 0.22), tangentMatrix);
-                reflLighting += diffuseMarcher.March(startPos, rayDir) * 0.0512;
-                rayDir = mul(float3(0.92, 0.31, 0.22), tangentMatrix);
-                reflLighting += diffuseMarcher.March(startPos, rayDir) * 0.0512;
-                rayDir = mul(float3(0.87, -0.43, 0.22), tangentMatrix);
-                reflLighting += diffuseMarcher.March(startPos, rayDir) * 0.0512;
-                rayDir = mul(float3(0.30, -0.92, 0.22), tangentMatrix);
-                reflLighting += diffuseMarcher.March(startPos, rayDir) * 0.0512;
-                rayDir = mul(float3(-0.43, -0.87, 0.22), tangentMatrix);
-                reflLighting += diffuseMarcher.March(startPos, rayDir) * 0.0512;
-                rayDir = mul(float3(-0.93, -0.28, 0.22), tangentMatrix);
-                reflLighting += diffuseMarcher.March(startPos, rayDir) * 0.0512;
+                reflLighting = diffuseMarcher.March(worldPos, streams.normalWS.xyz);
 
                 streams.envLightDiffuseColor = reflLighting.rgb * Intensity;
                 if (SpecularIntensity > 0.0)

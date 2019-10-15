@@ -21,4 +21,7 @@
         }
         return light;
     }
+    
+    override float StepSize() { return AttributeSamplers[AttributeID].VoxelSize(); }
+    override float StepSizeRadius(float radiusScale) { return radiusScale * AttributeSamplers[AttributeID].VoxelSize(); }
 };

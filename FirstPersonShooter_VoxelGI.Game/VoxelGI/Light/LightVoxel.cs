@@ -16,8 +16,8 @@ namespace Xenko.Rendering.Lights
     public class LightVoxel : IEnvironmentLight
     {
         public VoxelVolumeComponent Volume { get; set; }
-        public IVoxelMarchMethod DiffuseMarcher = new VoxelMarchCone(9, 1.0f, 1.0f);
-        public IVoxelMarchMethod SpecularMarcher = new VoxelMarchCone(30, 0.5f, 1.0f);
+        public IVoxelMarchSet DiffuseMarcher { get; set; } = new VoxelMarchSetHemisphere12(new VoxelMarchCone(9, 1.0f, 1.0f));
+        public IVoxelMarchMethod SpecularMarcher { get; set; } = new VoxelMarchCone(30, 0.5f, 1.0f);
         public float BounceIntensityScale { get; set; }
         public float SpecularIntensityScale { get; set; }
 
