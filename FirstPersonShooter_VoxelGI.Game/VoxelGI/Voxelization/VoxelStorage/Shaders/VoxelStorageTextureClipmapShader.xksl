@@ -47,6 +47,12 @@
 
     override float4 SampleNearestMip(float3 pos, float diameter, int axis)
     {
+        diameter *= 1.0 / voxelSizeT;
+        float mipmap = log2(max(1, diameter));
+        return SampleByMipNearestMip(pos, mipmap, axis);
+    }
+    override float4 SampleByMipNearestMip(float3 pos, float mipmap, int axis)
+    {
         float3 clipSize = float3(1, 1.0 / (clipCountT * axisCountT), 1);
         float3 axisSize = float3(1, 1.0 / (axisCountT), 1);
         float3 axisStride = float3(0, 1.0 / (clipCountT * axisCountT), 0);
@@ -54,8 +60,6 @@
         float3 clipStride = float3(0, 1.0 / clipCountT, 0);
 
         pos = mul(float4(pos, 1), VoxelMatrix).xyz;
-        diameter *= 1.0 / voxelSizeT;
-        float mipmap = log2(max(1, diameter));
 
         float mipBase = floor(mipmap);
         pos -= 0.5;

@@ -9,6 +9,10 @@
         {
             return 0;
         }
+        float4 SampleByMipNearestMip(float3 position, float3 normal, float diameter)
+        {
+            return 0;
+        }
         float4 SampleNearestMip(float3 position, float3 normal, float diameter)
         {
             return 0;

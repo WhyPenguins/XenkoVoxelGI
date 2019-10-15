@@ -4,15 +4,16 @@
     {
         float voxelSize = AttributeSamplers[AttributeID].VoxelSize();
         float dist = voxelSize;
+        float size = 0;
         float4 light = float4(0.0, 0.0, 0.0, 0.0);
         for (int i = 0; i < steps; i++)
         {
-            float size = dist;
             float3 pos = rayPos + rayDir * dist;
 
-            light += AttributeSamplers[AttributeID].SampleNearestMip(pos, -rayDir, size) * saturate(1.0 - light.a);
+            light += AttributeSamplers[AttributeID].SampleByMipNearestMip(pos, -rayDir, size) * saturate(1.0 - light.a);
 
             dist *= 2;
+            size += 1;
         }
         return light;
     }
