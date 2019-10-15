@@ -21,6 +21,13 @@
         AddressV = Border;
         AddressW = Border;
     };
+    stage SamplerState LinearBorderSampler3D_NearestMip
+    {
+        Filter = MIN_MAG_LINEAR_MIP_POINT;
+        AddressU = Border;
+        AddressV = Border;
+        AddressW = Border;
+    };
     override float VoxelSize()
     {
         return voxelSizeT;
@@ -37,17 +44,67 @@
         }
         return float4(0,0,0,0);
     }
-    override float4 Sample(float3 pos, float mipmap, int axis)
+
+    override float4 SampleNearestMip(float3 pos, float mipmap, int axis)
     {
-        pos = mul(float4(pos,1), VoxelMatrix).xyz;
+        float3 clipSize = float3(1, 1.0 / (clipCountT * axisCountT), 1);
+        float3 axisSize = float3(1, 1.0 / (axisCountT), 1);
+        float3 axisStride = float3(0, 1.0 / (clipCountT * axisCountT), 0);
+        float3 axisStride2 = float3(0, 1.0 / (axisCountT), 0);
+        float3 clipStride = float3(0, 1.0 / clipCountT, 0);
+
+        pos = mul(float4(pos, 1), VoxelMatrix).xyz;
         mipmap *= 1.0 / voxelSizeT;
         mipmap = log2(max(1, mipmap));
 
-        float3 clipSize = float3(1,1.0/(clipCountT*axisCountT),1);
-        float3 axisSize = float3(1,1.0/(axisCountT),1);
-        float3 axisStride = float3(0,1.0/(clipCountT*axisCountT),0);
-        float3 axisStride2 = float3(0,1.0/(axisCountT),0);
-        float3 clipStride = float3(0,1.0/clipCountT,0);
+        float mipBase = floor(mipmap);
+        pos -= 0.5;
+
+        float3 posHigh = pos * pow(2, -min(mipBase, clipCountT - 1));
+
+        posHigh += 0.5;
+
+        if (mipBase >= clipCountT)
+        {
+            //Seperate the different axis within the same texture
+            //by clamping to the usable texel range
+            //and fading out above and below
+            float boundaryFade = 1.0;
+            if (axisCountT > 1)
+            {
+                float height = mipHeightT / (pow(2, mipBase - clipCountT));
+
+                float texelY = posHigh.y * height;
+                float texelYClamped = clamp(texelY, 1, height - 1);
+                float boundaryFade = saturate(1.0 - abs(texelYClamped - texelY));
+
+                posHigh.y = texelYClamped / height;
+
+                posHigh *= axisSize;
+                posHigh += axisStride2 * axis;
+            }
+            return mipMaps.SampleLevel(LinearBorderSampler3D_NearestMip, posHigh, mipmap - clipCountT) * boundaryFade;
+        }
+        else
+        {
+            posHigh.y = saturate(posHigh.y);
+
+            posHigh *= clipSize;
+            posHigh += axisStride * axis + clipStride * mipBase;
+            return clipMaps.SampleLevel(LinearBorderSampler3D_NearestMip, posHigh, 0);
+        }
+    }
+    override float4 Sample(float3 pos, float mipmap, int axis)
+    {
+        float3 clipSize = float3(1, 1.0 / (clipCountT * axisCountT), 1);
+        float3 axisSize = float3(1, 1.0 / (axisCountT), 1);
+        float3 axisStride = float3(0, 1.0 / (clipCountT * axisCountT), 0);
+        float3 axisStride2 = float3(0, 1.0 / (axisCountT), 0);
+        float3 clipStride = float3(0, 1.0 / clipCountT, 0);
+
+        pos = mul(float4(pos,1), VoxelMatrix).xyz;
+        mipmap *= 1.0 / voxelSizeT;
+        mipmap = log2(max(1, mipmap));
 
         float mipBase = floor(mipmap);
         pos -= 0.5;
@@ -73,9 +130,10 @@
                 float boundaryFade = saturate(1.0 - abs(texelYClamped - texelY));
 
                 posHigh.y = texelYClamped / height;
+
+                posHigh *= axisSize;
+                posHigh += axisStride2 * axis;
             }
-            posHigh *= axisSize;
-            posHigh += axisStride2 * axis;
             return mipMaps.SampleLevel(LinearBorderSampler3D, posHigh, mipmap-clipCountT) * boundaryFade;
         }
         else

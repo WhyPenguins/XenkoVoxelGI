@@ -10,6 +10,7 @@ namespace Xenko.Rendering.Voxels
     [Display("Cone")]
     public class VoxelMarchCone : IVoxelMarchMethod
     {
+        public bool Fast = false;
         public int Steps = 9;
         public float StepScale = 1.0f;
         public float ConeRadius = 1.0f;
@@ -27,7 +28,7 @@ namespace Xenko.Rendering.Voxels
         public ShaderSource GetMarcher(int attrID)
         {
             var mixin = new ShaderMixinSource();
-            mixin.Mixins.Add(new ShaderClassSource("VoxelMarchCone", Steps, StepScale, ConeRadius));
+            mixin.Mixins.Add(new ShaderClassSource(Fast? "VoxelMarchConeFast" : "VoxelMarchCone", Steps, StepScale, ConeRadius));
             mixin.Macros.Add(new ShaderMacro("AttributeID", attrID));
             return mixin;
         }
