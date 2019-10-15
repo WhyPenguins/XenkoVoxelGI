@@ -304,6 +304,9 @@
     <None Update="VoxelGI\Marching\Shaders\VoxelMarchConeFast.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
     </None>
+    <None Update="VoxelGI\Marching\Shaders\VoxelMarchConePerMipmap.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
     <None Update="VoxelGI\Marching\Shaders\VoxelMarchMethod.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
     </None>
