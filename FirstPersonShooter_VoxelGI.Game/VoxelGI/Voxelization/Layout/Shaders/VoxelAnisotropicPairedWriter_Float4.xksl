@@ -19,8 +19,9 @@
         streams.axisY = original * abs(streams.normalWS.y);
         streams.axisZ = original * abs(streams.normalWS.z);
     }
-	override void VoxelizeDirect(uint3 address, uint stride)
+	override void VoxelizeDirect(uint3 address, uint strideIndex, uint stride)
     {
+        address.y += strideIndex * stride * 3;
         float4 tempAxisX = streams.axisX;
         float4 tempAxisY = streams.axisY;
         float4 tempAxisZ = streams.axisZ;

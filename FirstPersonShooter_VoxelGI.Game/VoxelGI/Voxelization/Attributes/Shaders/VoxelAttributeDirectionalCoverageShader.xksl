@@ -25,7 +25,7 @@
             shift = 16;
         streams.Voxel_Coverage = uint(streams.coverage)<<shift;
     }
-	override void VoxelizeDirect(uint3 address, uint stride)
+	override void VoxelizeDirect(uint3 address, uint strideIndex, uint stride)
     {
         DirectOutput[address] = streams.Voxel_CoverageResolved;
     }

@@ -10,9 +10,9 @@
     {
         layout.SetupStreams(streams.ColorTarget);
     }
-	override float4 VoxelizeDirect(uint3 address, uint stride)
+	override float4 VoxelizeDirect(uint3 address, uint strideIndex, uint stride)
     {
-        layout.VoxelizeDirect(address, stride);
+        layout.VoxelizeDirect(address, strideIndex, stride);
         return layout.Get();
     }
 	override void VoxelizeIndirectWrite(RWBuffer<uint> buffer, inout uint address)

@@ -18,7 +18,7 @@
         if (streams.normalWS.y>0.5)
             streams.Voxel_ReceiveZ = streams.PositionVXS.z;
     }
-	override void VoxelizeDirect(uint3 address, uint stride)
+	override void VoxelizeDirect(uint3 address, uint strideIndex, uint stride)
     {
     }
 	override void VoxelizeIndirectWrite(RWBuffer<uint> buffer, inout uint address)

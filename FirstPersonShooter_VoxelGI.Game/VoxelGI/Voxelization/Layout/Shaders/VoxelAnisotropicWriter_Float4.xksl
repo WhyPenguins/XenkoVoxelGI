@@ -42,8 +42,9 @@
         else
             streams.axisZN = original * -streams.normalWS.z;
     }
-	override void VoxelizeDirect(uint3 address, uint stride)
+	override void VoxelizeDirect(uint3 address, uint strideIndex, uint stride)
     {
+        address.y += strideIndex * stride * 6;
         float4 tempAxisXP = streams.axisXP;
         float4 tempAxisXN = streams.axisXN;
         float4 tempAxisYP = streams.axisYP;

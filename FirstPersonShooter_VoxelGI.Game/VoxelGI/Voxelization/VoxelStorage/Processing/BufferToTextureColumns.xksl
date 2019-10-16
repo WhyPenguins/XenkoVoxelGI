@@ -42,9 +42,10 @@
             }
 
             VoxelFragmentsIndex += (uint)storageUints * clipMapResolutionI.x;
+
             foreach (var attr in AttributesIndirect)
             {
-                attr.VoxelizeDirect(float3(0, clipMapResolutionI.y * clipIndex, 0) + streams.PositionVXPS, (int)clipMapResolutionI.y);
+                attr.VoxelizeDirect(streams.PositionVXPS, clipIndex, (int)clipMapResolutionI.y);
             }
             streams.PositionVXPS.y++;
             for (int i = 0; streams.PositionVXPS.y < clipMapResolutionI.y-1 ; streams.PositionVXPS.y ++)
@@ -59,7 +60,7 @@
                 foreach (var attr in AttributesIndirect)
                 {
                     attr.VoxelizeIndirectRead(VoxelFragments, VoxelFragmentsIndex);
-                    attr.VoxelizeDirect(float3(0,clipMapResolutionI.y*clipIndex,0)+streams.PositionVXPS, (int)clipMapResolutionI.y);
+                    attr.VoxelizeDirect(streams.PositionVXPS, clipIndex, (int)clipMapResolutionI.y);
                 }
                 VoxelFragmentsIndex = VoxelFragmentsIndexOld + (uint)storageUints * clipMapResolutionI.x;
             }
@@ -70,7 +71,7 @@
             foreach (var attr in AttributesIndirect)
             {
                 attr.SetupStreamsDummy();
-                attr.VoxelizeDirect(float3(0, clipMapResolutionI.y * clipIndex, 0) + streams.PositionVXPS, (int)clipMapResolutionI.y);
+                attr.VoxelizeDirect(streams.PositionVXPS, clipIndex, (int)clipMapResolutionI.y);
             }
         }
     };

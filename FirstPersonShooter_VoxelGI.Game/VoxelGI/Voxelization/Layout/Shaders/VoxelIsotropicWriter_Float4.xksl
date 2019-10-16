@@ -15,8 +15,9 @@
     {
         streams.center = original;
     }
-	override void VoxelizeDirect(uint3 address, uint stride)
+	override void VoxelizeDirect(uint3 address, uint strideIndex, uint stride)
     {
+        address.y += strideIndex * stride;
         float4 tempcenter = streams.center;
         foreach (var modifier in Modifiers)
         {

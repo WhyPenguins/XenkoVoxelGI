@@ -15,6 +15,8 @@ namespace Xenko.Rendering.Voxels
         public Matrix VoxelMatrix;
         public float VoxelSize;
 
+        public bool MipmapInner;
+
         public Xenko.Graphics.Texture ClipMaps = null;
         public Xenko.Graphics.Texture MipMaps = null;
         public Xenko.Graphics.Texture[] TempMipMaps = null;
@@ -53,23 +55,36 @@ namespace Xenko.Rendering.Voxels
                 }
             }
             //Mipmap detailed clipmaps into less detailed ones
-            Vector3 resolution = ClipMapResolution;
+            Vector3 totalResolution = ClipMapResolution * new Vector3(1,LayoutSize,1);
             Int3 threadGroupCounts = new Int3(32, 32, 32);
-            for (int i = 0; i < ClipMapCount - 1; i++)
+            if (MipmapInner)
             {
-                VoxelMipmapSimple.ThreadGroupCounts = threadGroupCounts;
-                VoxelMipmapSimple.ThreadNumbers = new Int3((int)resolution.X / threadGroupCounts.X, (int)resolution.Y / threadGroupCounts.Y, (int)resolution.Z / threadGroupCounts.Z);
+                for (int i = 0; i < ClipMapCount - 1; i++)
+                {
+                    VoxelMipmapSimple.ThreadGroupCounts = threadGroupCounts;
+                    VoxelMipmapSimple.ThreadNumbers = new Int3((int)totalResolution.X / threadGroupCounts.X, (int)totalResolution.Y / threadGroupCounts.Y, (int)totalResolution.Z / threadGroupCounts.Z);
 
-                VoxelMipmapSimple.Parameters.Set(VoxelMipmapSimpleKeys.ReadTex, ClipMaps);
-                VoxelMipmapSimple.Parameters.Set(VoxelMipmapSimpleKeys.WriteTex, TempMipMaps[0]);
-                VoxelMipmapSimple.Parameters.Set(VoxelMipmapSimpleKeys.ReadOffset, new Vector3(0, (int)ClipMapResolution.Y * i, 0));
-                ((RendererBase)VoxelMipmapSimple).Draw(drawContext);
+                    VoxelMipmapSimple.Parameters.Set(VoxelMipmapSimpleKeys.ReadTex, ClipMaps);
+                    VoxelMipmapSimple.Parameters.Set(VoxelMipmapSimpleKeys.WriteTex, TempMipMaps[0]);
+                    VoxelMipmapSimple.Parameters.Set(VoxelMipmapSimpleKeys.ReadOffset, new Vector3(0, (int)totalResolution.Y * i, 0));
+                    ((RendererBase)VoxelMipmapSimple).Draw(drawContext);
 
-                //Don't seem to be able to read and write to the same texture, even if the views
-                //point to different mipmaps.
-                drawContext.CommandList.CopyRegion(TempMipMaps[0], 0, new ResourceRegion(0,1,0, (int)ClipMapResolution.X / 2, (int)ClipMapResolution.Y/2-1, (int)ClipMapResolution.Z / 2), ClipMaps, 0, (int)ClipMapResolution.X / 4, (int)ClipMapResolution.Y * (i + 1) + (int)ClipMapResolution.Y / 4 + 1, (int)ClipMapResolution.Z / 4);
+                    //Copy each axis, ignoring the top and bottom plane
+                    for (int axis = 0; axis < LayoutSize; axis++)
+                    {
+                        int offset = axis * (int)ClipMapResolution.Y;
+                        drawContext.CommandList.CopyRegion(TempMipMaps[0], 0,
+                            new ResourceRegion(
+                                0, offset / 2 + 1, 0,
+                                (int)ClipMapResolution.X / 2, offset / 2 + (int)ClipMapResolution.Y / 2 - 1, (int)ClipMapResolution.Z / 2
+                            ),
+                            ClipMaps, 0,
+                            (int)ClipMapResolution.X / 4, (int)totalResolution.Y * (i + 1) + offset + (int)ClipMapResolution.Y / 4 + 1, (int)ClipMapResolution.Z / 4);
+                    }
+                }
             }
 
+            Vector3 resolution = ClipMapResolution;
             threadGroupCounts = new Int3((int)resolution.X, (int)resolution.Y, (int)resolution.Z) / 4;
             resolution.Y *= LayoutSize;
             //Mipmaps for the largest clipmap
@@ -93,7 +108,7 @@ namespace Xenko.Rendering.Voxels
                 if (i == 0)
                 {
                     mipmapShader.Parameters.Set(VoxelMipmapSimpleKeys.ReadTex, ClipMaps);
-                    mipmapShader.Parameters.Set(VoxelMipmapSimpleKeys.ReadOffset, new Vector3(0, (int)ClipMapResolution.Y * (ClipMapCount - 1), 0));
+                    mipmapShader.Parameters.Set(VoxelMipmapSimpleKeys.ReadOffset, new Vector3(0, (int)ClipMapResolution.Y * LayoutSize * (ClipMapCount - 1), 0));
                 }
                 else
                 {

@@ -2,7 +2,7 @@
 {
 	void SetupStreamsDummy(){}
 	void SetupStreams(){}
-	float4 VoxelizeDirect(uint3 address, uint stride){}
+	float4 VoxelizeDirect(uint3 address, uint strideIndex, uint stride){}
 	void VoxelizeIndirectWrite(RWBuffer<uint> buffer, inout uint address){}
 	void VoxelizeIndirectRead(RWBuffer<uint> buffer, inout uint address){}
 };

@@ -23,8 +23,9 @@ namespace Xenko.Rendering.Voxels
             MultipleRenders,
             GeometryShader
         };
-        public Resolutions ClipResolution = Resolutions.x128;
-        public RenderMethods RenderMethod = RenderMethods.GeometryShader;
+        public Resolutions ClipResolution { get; set; } = Resolutions.x128;
+        public RenderMethods RenderMethod { get; set; } = RenderMethods.GeometryShader;
+        public bool MipmapInner { get; set; } = true;
 
         int storageUints;
         Xenko.Graphics.Buffer FragmentsBuffer = null;
@@ -150,6 +151,7 @@ namespace Xenko.Rendering.Voxels
                     MipMapResolutionMax /= 2;
                 }
             }
+            clipmap.MipmapInner = MipmapInner;
             clipmap.ClipMapResolution = ClipMapResolution;
             clipmap.ClipMapCount = ClipMapCount;
             clipmap.LayoutSize = layoutCount;
