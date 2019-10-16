@@ -12,7 +12,7 @@ namespace Xenko.Rendering.Voxels
         void UpdateSamplerLayout(string compositionName);
         void ApplyViewParameters(ParameterCollection parameters);
         void ApplyWriteParameters(ParameterCollection parameters, List<IVoxelModifierEmissionOpacity> modifiers);
-        void PostProcess(RenderDrawContext drawContext);
+        void PostProcess(RenderDrawContext drawContext, string MipMapShader);
         ShaderSource GetShaderFloat4(List<IVoxelModifierEmissionOpacity> modifiers);
         ShaderSource GetShaderFloat3();
         ShaderSource GetShaderFloat2();

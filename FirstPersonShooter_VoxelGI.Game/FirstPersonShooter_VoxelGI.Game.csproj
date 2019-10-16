@@ -325,6 +325,12 @@
     <None Update="VoxelGI\Voxelization\Modifiers\Appliers\Isotropic\VoxelModifierApplierOpacifyIsotropic.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
     </None>
+    <None Update="VoxelGI\Voxelization\VoxelStorage\Mipmapping\VoxelMipmapHeuristic.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
+    <None Update="VoxelGI\Voxelization\VoxelStorage\Mipmapping\VoxelMipmapPhysicallyBased.xksl">
+      <Generator>XenkoShaderKeyGenerator</Generator>
+    </None>
     <None Update="VoxelGI\Voxelization\VoxelStorage\Processing\BufferToTexture.xksl">
       <Generator>XenkoShaderKeyGenerator</Generator>
       <LastGenOutput>BufferToTexture.cs</LastGenOutput>

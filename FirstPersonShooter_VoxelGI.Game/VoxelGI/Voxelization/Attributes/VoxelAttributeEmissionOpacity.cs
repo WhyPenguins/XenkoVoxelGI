@@ -14,11 +14,19 @@ namespace Xenko.Rendering.Voxels
     {
         ShaderClassSource source = new ShaderClassSource("VoxelAttributeEmissionOpacityShader");
 
+        public enum LightFalloffs
+        {
+            Sharp,
+            PhysicallyBasedButNotAccurate,
+            Heuristic,
+        }
+
         [NotNull]
         public IVoxelLayout VoxelLayout { get; set; } = new VoxelLayoutIsotropic();
 
         public List<IVoxelModifierEmissionOpacity> Modifiers { get; set; } = new List<IVoxelModifierEmissionOpacity>();
 
+        public LightFalloffs LightFalloff { get; set; } = LightFalloffs.Heuristic;
 
         public void AddAttributes(ShaderSourceCollection modifiers)
         {
@@ -63,7 +71,15 @@ namespace Xenko.Rendering.Voxels
         }
         public void PostProcess(RenderDrawContext drawContext)
         {
-            VoxelLayout.PostProcess(drawContext);
+            switch (LightFalloff)
+            {
+                case LightFalloffs.Sharp:
+                    VoxelLayout.PostProcess(drawContext, "VoxelMipmapSimple");break;
+                case LightFalloffs.PhysicallyBasedButNotAccurate:
+                    VoxelLayout.PostProcess(drawContext, "VoxelMipmapPhysicallyBased"); break;
+                case LightFalloffs.Heuristic:
+                    VoxelLayout.PostProcess(drawContext, "VoxelMipmapHeuristic"); break;
+            }
         }
         public ShaderSource GetSampler()
         {

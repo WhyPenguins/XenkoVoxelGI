@@ -31,15 +31,20 @@ namespace Xenko.Rendering.Voxels
         {
             parameters.Set(MainKey, ClipMaps);
         }
+        string curMipMapShader = "";
         Xenko.Rendering.ComputeEffect.ComputeEffectShader VoxelMipmapSimple;
         //Memory leaks if the ThreadGroupCounts/Numbers changes (I suppose due to recompiles...?)
         //so instead cache them as seperate shaders.
         Xenko.Rendering.ComputeEffect.ComputeEffectShader[] VoxelMipmapSimpleGroups;
-        public void PostProcess(RenderDrawContext drawContext)
+        public void PostProcess(RenderDrawContext drawContext, string MipMapShader)
         {
-            if (VoxelMipmapSimple == null)
-                VoxelMipmapSimple = new Xenko.Rendering.ComputeEffect.ComputeEffectShader(drawContext.RenderContext) { ShaderSourceName = "VoxelMipmapSimple" };
-            if (VoxelMipmapSimpleGroups == null || VoxelMipmapSimpleGroups.Length != TempMipMaps.Length)
+            if (VoxelMipmapSimple == null || curMipMapShader != MipMapShader)
+            {
+                if (VoxelMipmapSimple != null)
+                    VoxelMipmapSimple.Dispose();
+                VoxelMipmapSimple = new Xenko.Rendering.ComputeEffect.ComputeEffectShader(drawContext.RenderContext) { ShaderSourceName = MipMapShader };
+            }
+            if (VoxelMipmapSimpleGroups == null || VoxelMipmapSimpleGroups.Length != TempMipMaps.Length || curMipMapShader != MipMapShader)
             {
                 if (VoxelMipmapSimpleGroups != null)
                 {
@@ -51,9 +56,10 @@ namespace Xenko.Rendering.Voxels
                 VoxelMipmapSimpleGroups = new Xenko.Rendering.ComputeEffect.ComputeEffectShader[TempMipMaps.Length];
                 for (int i = 0; i < VoxelMipmapSimpleGroups.Length; i++)
                 {
-                    VoxelMipmapSimpleGroups[i] = new Xenko.Rendering.ComputeEffect.ComputeEffectShader(drawContext.RenderContext) { ShaderSourceName = "VoxelMipmapSimple" };
+                    VoxelMipmapSimpleGroups[i] = new Xenko.Rendering.ComputeEffect.ComputeEffectShader(drawContext.RenderContext) { ShaderSourceName = MipMapShader };
                 }
             }
+            curMipMapShader = MipMapShader;
             //Mipmap detailed clipmaps into less detailed ones
             Vector3 totalResolution = ClipMapResolution * new Vector3(1,LayoutSize,1);
             Int3 threadGroupCounts = new Int3(32, 32, 32);

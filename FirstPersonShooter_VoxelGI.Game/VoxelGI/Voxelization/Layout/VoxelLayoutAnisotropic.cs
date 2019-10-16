@@ -53,9 +53,9 @@ namespace Xenko.Rendering.Voxels
         {
             IsotropicTex.ApplyParametersWrite(DirectOutput, parameters);
         }
-        public void PostProcess(RenderDrawContext drawContext)
+        public void PostProcess(RenderDrawContext drawContext, string MipMapShader)
         {
-            IsotropicTex.PostProcess(drawContext);
+            IsotropicTex.PostProcess(drawContext, MipMapShader);
         }
 
 

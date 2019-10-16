@@ -11,7 +11,7 @@ namespace Xenko.Rendering.Voxels
         void UpdateLayout(string compositionName);
         void UpdateSamplerLayout(string compositionName);
         void ApplyParametersWrite(ObjectParameterKey<Texture> MainKey, ParameterCollection parameters);
-        void PostProcess(RenderDrawContext drawContext);
+        void PostProcess(RenderDrawContext drawContext, string MipMapShader);
         ShaderClassSource GetSampler();
         void Apply(ShaderMixinSource mixin);
         void ApplyViewParameters(ParameterCollection parameters);
