@@ -7,7 +7,6 @@ Offset: {X: 0.0, Y: 0.0, Z: 0.0}
 Hierarchy:
     RootParts:
         - ref!! 90521c0b-9741-460f-a76e-d413cc4272b5
-        - ref!! 0194b767-fc98-467b-a126-8a66d5da0e0b
         - ref!! 96a9e8b6-3a2d-4d58-83b0-86ce04c80379
         - ref!! 6d2f4791-6113-4783-bbfa-0c268be80a53
         - ref!! fa3c8861-808f-4236-b336-5a5bae55b802
@@ -44,9 +43,9 @@ Hierarchy:
         - ref!! 25bc5b70-bc98-4f51-b245-56c77af74122
         - ref!! 0ceaf263-3374-437f-9232-ef205569f93d
         - ref!! 34dbe268-9dfa-449b-a048-a9a8f987c054
+        - ref!! 397220fa-1e69-4469-800a-5b8b1ec7ba5b
         - ref!! 11b35f05-d8f0-4345-b547-ce73141931cd
         - ref!! 975dd798-2d32-4c4a-965a-8d9e18476539
-        - ref!! b9d3988c-7fdd-4b25-a0d2-daaa14a51aed
     Parts:
         -   Entity:
                 Id: 0157316b-840c-4bb8-aed8-aaeee66c7b90
@@ -59,43 +58,6 @@ Hierarchy:
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children:
                             db07bec9b88cb84e9f8d6d3511eb10f2: ref!! c9be07db-8cb8-4eb8-9f8d-6d3511eb10f2
-        -   Folder: null
-            Entity:
-                Id: 0194b767-fc98-467b-a126-8a66d5da0e0b
-                Name*: EmissiveCube
-                Components:
-                    cafed28ac2678c4e84c546d7570eabd3: !TransformComponent
-                        Id: a746508a-d191-487f-bb40-71c2d64318c4
-                        Position*: {X: 11.9529295, Y: 0.21112147, Z: 6.90158653}
-                        Rotation*: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-                        Scale*: {X: 0.004255605, Y: 0.8505241, Z: 0.3349183}
-                        Children: {}
-                    7807e4f88759f5408bc713431dfc8978: !ModelComponent
-                        Id: afcf37d1-2589-45e5-a736-e9343776d9da
-                        Enabled*: true
-                        Model*: f15fc51f-4855-4bac-86dd-9967decc5202:Models/GridBase10x10
-                        Materials:
-                            da3523688bdb70987fa8d72bbabf6ebf*~0: c97ce077-a9b3-492a-8719-0e2e08c8e537:Materials/Emissive (2)
-                            1f66d7610cd6dc4c9b32d800d312e162~: ~(Deleted)
-                    793d2ad2924e3a48a2a869b11f5df718: !StaticColliderComponent
-                        Id: 56c16774-1d22-4042-a41e-7a46f232718e
-                        CanSleep: true
-                        Restitution: 0.0
-                        Friction: 0.5
-                        RollingFriction: 0.0
-                        CcdMotionThreshold: 0.0
-                        CcdSweptSphereRadius: 0.0
-                        IsTrigger: false
-                        ColliderShapes:
-                            16348c7905caf14d82d3668b90f0c07b: !BoxColliderShapeDesc
-                                Is2D: false
-                                Size: {X: 1.0, Y: 1.0, Z: 1.0}
-                                LocalOffset: {X: 0.0, Y: 0.0, Z: 0.0}
-                                LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-            Base:
-                BasePartAsset: 6c0db386-be9e-4381-a787-4b0dd93587b6:BlocksPrefabs/Box1x1x1
-                BasePartId: 496dab69-b03b-4272-a196-8e81329ce249
-                InstanceId: 0cf8d679-c683-4ee2-aecd-f0e6e06b10ff
         -   Entity:
                 Id: 024da5b4-d23b-4daf-8c5c-67f77e09bd0d
                 Name: Wall0x2x5
@@ -620,7 +582,7 @@ Hierarchy:
                 Components:
                     1309b6e0fc6d8ef8140a3766abfde947: !TransformComponent
                         Id: 1d298864-b0f0-48d2-858c-1438b318e1e4
-                        Position: {X: 0.663927, Y: 1.89563513, Z: 3.72556877}
+                        Position: {X: 0.944322348, Y: 1.89563513, Z: 3.61156917}
                         Rotation: {X: -0.658722639, Y: 0.0, Z: 0.0, W: 0.752385855}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
@@ -1801,22 +1763,50 @@ Hierarchy:
                             db07bec9b88cb84e9f8d6d3511eb10f2: ref!! daf27d3e-55a9-45c6-bdf5-469e1cb97b08
         -   Entity:
                 Id: 34dbe268-9dfa-449b-a048-a9a8f987c054
-                Name: Entity
+                Name: Voxel Volume
                 Components:
                     eb2ad7f4461a88032b46acb38148e87c: !TransformComponent
                         Id: 9f721554-c801-4101-91f6-246a2f1d242f
                         Position: {X: 0.0, Y: 0.0, Z: 0.0}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Scale: {X: 40.0, Y: 20.0, Z: 40.0}
                         Children: {}
                     aa17282fc65e35f681ce20c9139e9a8a: !FirstPersonShooter_VoxelGI.GameProfiler,FirstPersonShooter_VoxelGI.Game
                         Id: fad71127-44e8-4273-919c-2d04232865d2
-                        Enabled: false
+                        Enabled: true
                         TextColor: {R: 144, G: 238, B: 144, A: 255}
                         RefreshTime: 500.0
                         SortingMode: ByTime
                         FilteringMode: GpuEvents
                         ResultPage: 1
+                    27e7f8cbdeaa5c23beee1ca395df206e: !VoxelVolumeComponent
+                        Id: 9dc77b58-1463-4da8-b081-1aa4d9b91545
+                        VoxelizationMethod: !.VoxelizationMethodGeometry,FirstPersonShooter_VoxelGI.Game {}
+                        Storage: !Xenko.Rendering.Voxels.VoxelStorageClipmaps,FirstPersonShooter_VoxelGI.Game
+                            ClipResolution: x128
+                            RenderMethod: GeometryShader
+                            MipmapInner: true
+                        Attributes:
+                            3c405d34549bf456c433d2228250ee0c: !Xenko.Rendering.Voxels.VoxelAttributeEmissionOpacity,FirstPersonShooter_VoxelGI.Game
+                                VoxelLayout: !Xenko.Rendering.Voxels.VoxelLayoutIsotropic,FirstPersonShooter_VoxelGI.Game
+                                    maxBrightness: 50.0
+                                    StorageMethod: !Xenko.Rendering.Voxels.StorageMethodIndirect,FirstPersonShooter_VoxelGI.Game
+                                        TempStorageFormat: !Xenko.Rendering.Voxels.VoxelFragmentPackFloatR11G11B10,FirstPersonShooter_VoxelGI.Game {}
+                                        Filter: !Xenko.Rendering.Voxels.VoxelBufferWriteMax,FirstPersonShooter_VoxelGI.Game {}
+                                    StorageFormat: R10G10B10A2
+                                Modifiers:
+                                    b35d31a67f6c335d2544a5a90b818057: !.VoxelModifierEmissionOpacityAntiAliasing,FirstPersonShooter_VoxelGI.Game {}
+                                    b8124b45ac5a53ba35c006ea07aa5aad: !.VoxelModifierEmissionOpacitySolidify,FirstPersonShooter_VoxelGI.Game {}
+                                LightFalloff: Heuristic
+                        AproximateVoxelSize: 0.15
+                        VoxelVisualization: false
+                        VisualizeVoxels: false
+                        Visualization: !Xenko.Rendering.Voxels.VoxelVisualizationView,FirstPersonShooter_VoxelGI.Game
+                            Background: {R: 25, G: 25, B: 25, A: 255}
+                            MarchMethod: !Xenko.Rendering.Voxels.VoxelMarchBeam,FirstPersonShooter_VoxelGI.Game
+                                Steps: 200
+                                StepScale: 1.0
+                                BeamDiameter: 1.0
         -   Entity:
                 Id: 3634f82a-5433-43b8-a97d-56d8bb7f602c
                 Name: Wall0x2x5 (7)
@@ -1895,6 +1885,41 @@ Hierarchy:
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children:
                             c444819e77a60441a6144bd7bd8a4a23: ref!! a4be8509-a2d6-47dc-ab24-86359bdb6389
+        -   Entity:
+                Id: 397220fa-1e69-4469-800a-5b8b1ec7ba5b
+                Name: Box1x1x1
+                Components:
+                    cafed28ac2678c4e84c546d7570eabd3: !TransformComponent
+                        Id: 74996507-c7d1-4172-b43b-c0a697046246
+                        Position*: {X: -1.16717792, Y: 0.5585745, Z: 5.59131432}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    7807e4f88759f5408bc713431dfc8978: !ModelComponent
+                        Id: c6d0d4c2-0297-4d38-8863-d6604b8a444e
+                        Enabled*: false
+                        Model: 6f320f60-4f5b-469c-a9ce-8f90f76a3f26:Models/Box1x1x1
+                        Materials:
+                            1f66d7610cd6dc4c9b32d800d312e162~0: 9b7f5fe5-22b0-4bef-a301-894a2bc8d6e0:Materials/GridMTPlatform
+                    793d2ad2924e3a48a2a869b11f5df718: !StaticColliderComponent
+                        Id: eb220b12-74e5-4e2c-9f25-7bf6b29c7566
+                        CanSleep: true
+                        Restitution: 0.0
+                        Friction: 0.5
+                        RollingFriction: 0.0
+                        CcdMotionThreshold: 0.0
+                        CcdSweptSphereRadius: 0.0
+                        IsTrigger: false
+                        ColliderShapes:
+                            16348c7905caf14d82d3668b90f0c07b: !BoxColliderShapeDesc
+                                Is2D: false
+                                Size: {X: 1.0, Y: 1.0, Z: 1.0}
+                                LocalOffset: {X: 0.0, Y: 0.0, Z: 0.0}
+                                LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+            Base:
+                BasePartAsset: 6c0db386-be9e-4381-a787-4b0dd93587b6:BlocksPrefabs/Box1x1x1
+                BasePartId: 496dab69-b03b-4272-a196-8e81329ce249
+                InstanceId: 064db75f-e4b5-49f9-bca3-c851ca1ea306
         -   Entity:
                 Id: 3a44b3ae-41ff-401c-86f9-6bafc21c09ed
                 Name: Ramp1x1_2x2
@@ -3270,6 +3295,7 @@ Hierarchy:
                         Children: {}
                     7c901dfed21c864283aa0639481520b1: !ModelComponent
                         Id: b8bb8f7f-7abb-443a-8c1f-585154c80d38
+                        Enabled*: true
                         Model: f15fc51f-4855-4bac-86dd-9967decc5202:Models/GridBase10x10
                         Materials: {}
                     e892de73aae78041aa74ca19b0b9f867: !StaticColliderComponent
@@ -3964,15 +3990,14 @@ Hierarchy:
                                 Value: {R: 1.0, G: 0.7025781, B: 0.493749976}
                             Shadow:
                                 Enabled: true
-                                Filter: !LightShadowMapFilterTypePcf
-                                    FilterSize: Filter5x5
-                                Size: Large
-                                DepthRange:
-                                    IsAutomatic: false
+                                Size: XLarge
+                                DepthRange: {}
                                 PartitionMode: !LightDirectionalShadowMap.PartitionLogarithmic {}
-                                BiasParameters: {}
+                                BiasParameters:
+                                    DepthBias: 0.003
+                                    NormalOffsetScale: 0.0
                                 ComputeTransmittance: false
-                        Intensity: 5.0
+                        Intensity: 10.0
         -   Entity:
                 Id: 6d7d7b03-58b1-4a8e-9c62-053e50df4d18
                 Name: Wall0x2x2 (7)
@@ -5079,17 +5104,13 @@ Hierarchy:
                     63493b70b9e3f8edf81c791cb799ea27: !LightComponent
                         Id: 0e218f99-c135-4cec-93dd-f34012f17691
                         Type: !LightVoxel
-                            DiffuseMarcher: !Xenko.Rendering.Voxels.VoxelMarchCone,FirstPersonShooter_VoxelGI.Game
-                                Steps: 9
-                                StepScale: 1.0
-                                ConeRadius: 1.0
-                            SpecularMarcher: !Xenko.Rendering.Voxels.VoxelMarchCone,FirstPersonShooter_VoxelGI.Game
-                                Steps: 20
-                                StepScale: 0.6
-                                ConeRadius: 1.0
-                            Volume: ref!! 9174b993-3718-4a52-996c-78a8cc0af1e1
-                            BounceIntensityScale: 0.32
-                            SpecularIntensityScale: 1.0
+                            Volume: ref!! 9dc77b58-1463-4da8-b081-1aa4d9b91545
+                            DiffuseMarcher: !Xenko.Rendering.Voxels.VoxelMarchSetHemisphere6,FirstPersonShooter_VoxelGI.Game
+                                Marcher: !Xenko.Rendering.Voxels.VoxelMarchConePerMipmap,FirstPersonShooter_VoxelGI.Game
+                                    Steps: 7
+                            SpecularMarcher: null
+                            BounceIntensityScale: 1.0
+                            SpecularIntensityScale: 0.0
         -   Folder: Ground
             Entity:
                 Id: 97ce9347-c06c-42db-ae3e-e366341c3eda
@@ -6069,40 +6090,6 @@ Hierarchy:
                 BasePartAsset: 98f53526-f43f-4d1b-ab4c-727727dc2b30:BlocksPrefabs/Stairs1x1x2
                 BasePartId: 1c50115c-c05d-4cb6-ab0e-53e44178a7e6
                 InstanceId: 27724e9a-95d6-4932-b37d-53c14bad9651
-        -   Entity:
-                Id: b9d3988c-7fdd-4b25-a0d2-daaa14a51aed
-                Name: Voxel Volume
-                Components:
-                    f6fda90592f1b6e6e755b9596a5bb92a: !TransformComponent
-                        Id: 317fedb4-098e-450b-9957-8cadbd4df05c
-                        Position: {X: 0.0, Y: 2.5, Z: 0.0}
-                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-                        Scale: {X: 40.0, Y: 20.0, Z: 40.0}
-                        Children: {}
-                    09a82c0e64c623790931cd891c25aa8d: !VoxelVolumeComponent
-                        Id: 9174b993-3718-4a52-996c-78a8cc0af1e1
-                        VoxelizationMethod: !.VoxelizationMethodGeometry,FirstPersonShooter_VoxelGI.Game {}
-                        Storage: !Xenko.Rendering.Voxels.VoxelStorageClipmaps,FirstPersonShooter_VoxelGI.Game
-                            ClipResolution: x128
-                            RenderMethod: GeometryShader
-                        Attributes:
-                            a58902b93476156fafebd8ef494a82c0: !Xenko.Rendering.Voxels.VoxelAttributeEmissionOpacity,FirstPersonShooter_VoxelGI.Game
-                                VoxelLayout: !Xenko.Rendering.Voxels.VoxelLayoutIsotropic,FirstPersonShooter_VoxelGI.Game
-                                    StorageMethod: !Xenko.Rendering.Voxels.StorageMethodIndirect,FirstPersonShooter_VoxelGI.Game
-                                        TempStorageFormat: !Xenko.Rendering.Voxels.VoxelFragmentPackFloatR11G11B10,FirstPersonShooter_VoxelGI.Game {}
-                                        Filter: !Xenko.Rendering.Voxels.VoxelBufferWriteMax,FirstPersonShooter_VoxelGI.Game {}
-                                Modifiers:
-                                    ed41db0608b1ac4dd597d24c09288f4a: !.VoxelModifierEmissionOpacityAntiAliasing,FirstPersonShooter_VoxelGI.Game {}
-                                    21238ceedf0aacf5119a669c6127aeed: !.VoxelModifierEmissionOpacitySolidify,FirstPersonShooter_VoxelGI.Game {}
-                        AproximateVoxelSize: 0.15
-                        VoxelVisualization: false
-                        VisualizeVoxels: false
-                        Visualization: !Xenko.Rendering.Voxels.VoxelVisualizationView,FirstPersonShooter_VoxelGI.Game
-                            Background: {R: 25, G: 25, B: 25, A: 255}
-                            MarchMethod: !Xenko.Rendering.Voxels.VoxelMarchBeam,FirstPersonShooter_VoxelGI.Game
-                                Steps: 200
-                                StepScale: 1.0
-                                BeamRadius: 1.0
         -   Entity:
                 Id: ba9dd4e6-d5f2-4e93-ba5d-88395ca0517f
                 Name: Wall0x2x2 (4)

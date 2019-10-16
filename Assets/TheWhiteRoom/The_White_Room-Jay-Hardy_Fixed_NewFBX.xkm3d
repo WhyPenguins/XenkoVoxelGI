@@ -1,0 +1,268 @@
+!Model
+Id: b7bae759-95e9-4909-abd9-6c0733579a16
+SerializedVersion: {Xenko: 2.0.0.0}
+Tags: []
+Source: !file The_White_Room-Jay-Hardy_Fixed_NewFBX.fbx
+Skeleton: null
+PivotPosition: {X: 0.0, Y: 0.0, Z: 0.0}
+MergeMeshes: false
+Materials:
+    b5870e4e73c2203322aea9961625b908:
+        Name: lamp-upright-base
+        MaterialInstance:
+            Material: f2a90568-dfac-42e7-bd48-dfa0ed7b796a:TheWhiteRoom/lamp-upright-base
+    744b4549e36a4d5dde746075ca6e2a97:
+        Name: candle-holders
+        MaterialInstance:
+            Material: 32de0b7f-cefd-4526-afc5-11e217f6b921:TheWhiteRoom/candle-holders
+    a2e7a7f0332226cafef7b6f1d4898173:
+        Name: magazine
+        MaterialInstance:
+            Material: 291542fa-f800-42a5-bbc0-f668334b8244:TheWhiteRoom/magazine
+    bb1267bc46394a865d484fc9369d7fc0:
+        Name: Lampshader-outer
+        MaterialInstance:
+            Material: f9b8da6e-b07c-48f4-806d-555d6d986b81:TheWhiteRoom/Lampshader-outer
+    7abff8241c0ea862136459f7f9750f6e:
+        Name: lampshade-inner
+        MaterialInstance:
+            Material: 7b0df45b-df76-4f36-85f1-712ce587564d:TheWhiteRoom/lampshade-inner
+    425266ee58392c40cd38272f234c94c7:
+        Name: Apple
+        MaterialInstance:
+            Material: 78afe5b5-9977-4a9d-a5ef-6dfaccf4cfc1:TheWhiteRoom/Apple
+    131f9b51ecdbafb9827bc9844e697a91:
+        Name: White-teapot
+        MaterialInstance:
+            Material: 6d062208-f493-426e-9ad3-277ae2572bb4:TheWhiteRoom/White-teapot
+    967fa5cf81f1cc4221d73ad64cb36b7f:
+        Name: Love-letters-back
+        MaterialInstance:
+            Material: 52601c1c-1cfd-44a6-af27-b3509eefb43a:TheWhiteRoom/Love-letters-back
+    10c6fcc68f215dac59e86052ba8ef54c:
+        Name: Love-letters
+        MaterialInstance:
+            Material: a3ac8b45-b697-48b4-b482-194eec2c250f:TheWhiteRoom/Love-letters
+    e1be722bcb51af8d2aa6308081da4ae7:
+        Name: Glass-Fake-picframe
+        MaterialInstance:
+            Material: 6ae184e7-e8da-4a46-bd41-b5f9776f6464:TheWhiteRoom/Glass-Fake-picframe
+    da5fdf0808293e155f01c94ea2326024:
+        Name: picframe-picc
+        MaterialInstance:
+            Material: 12beca02-7421-4774-a46a-a60d3d314d6c:TheWhiteRoom/picframe-picc
+    90e68c2d2d635a7bae20476080050e1a:
+        Name: picframe-black
+        MaterialInstance:
+            Material: a3be3878-cacc-4cd8-a04c-219feb6d97fb:TheWhiteRoom/picframe-black
+    ca7504db3fe1749e471e8721c9381ef5:
+        Name: picframe-picb
+        MaterialInstance:
+            Material: e3978efa-c9fd-4237-b34f-bcbbaac065cc:TheWhiteRoom/picframe-picb
+    7a9121def8886e27997cb15eb7ad2453:
+        Name: picframe-pic
+        MaterialInstance:
+            Material: 00d38c96-b5a3-4cdb-b9aa-eb3901b481f2:TheWhiteRoom/picframe-pic
+    a705d79d1771b07e6b34de3481528f86:
+        Name: Cushion3
+        MaterialInstance:
+            Material: 53a41b4f-374d-46ab-9280-d80e06f422b0:TheWhiteRoom/Cushion3
+    1470778cc58cf58bd66171c43c888f67:
+        Name: light-fitting
+        MaterialInstance:
+            Material: 372c6288-dc89-482f-ba93-6fd48e831849:TheWhiteRoom/light-fitting
+    a66744939b10a7c08824e70c907afaea:
+        Name: ceiling-shade-wire
+        MaterialInstance:
+            Material: 61b32582-0c71-42bf-b899-5bc97775b079:TheWhiteRoom/ceiling-shade-wire
+    e8067197e8b74e00f306d3399e2b313e:
+        Name: Ceiling-lampshade
+        MaterialInstance:
+            Material: e01ab61a-92fb-4331-9604-fa2b1e452f52:TheWhiteRoom/Ceiling-lampshade
+    887eaab61ea3ccbd76a34e8e98478ecd:
+        Name: picframe-pica
+        MaterialInstance:
+            Material: b1f9af46-8a62-4c46-aa0e-f2c7f9a89b8f:TheWhiteRoom/picframe-pica
+    16a09c4cad56a1c6a6b314dab19a2452:
+        Name: book-shader
+        MaterialInstance:
+            Material: 9805c64e-8909-4ad0-8172-485e651daa3a:TheWhiteRoom/book-shader
+    c45cfdca325e43bddd9f59bc219e9d7c:
+        Name: C-Table-box
+        MaterialInstance:
+            Material: 3ec6060f-4a76-469b-91cb-c6508cbd4998:TheWhiteRoom/C-Table-box
+    62de15468c80e9b21e486bf20efed6e7:
+        Name: C-Table-handle-metal
+        MaterialInstance:
+            Material: 93fb7485-fe21-4962-a3ab-eaa06bc0d4ba:TheWhiteRoom/C-Table-handle-metal
+    d482158b9ec066a46aaf872cbc7319d5:
+        Name: Wide-tv-bevel
+        MaterialInstance:
+            Material: 70711645-7a17-41c9-8d9d-3dfa709b1a04:TheWhiteRoom/Wide-tv-bevel
+    100931cfe5ee66af150b237cc28b82e4:
+        Name: Wide-tv-screen
+        MaterialInstance:
+            Material: 0ec02f98-c3c3-4ba6-9b14-31cd7e630335:TheWhiteRoom/Wide-tv-screen
+    8af37db9ca2e27c08bc8df7f5be17cd4:
+        Name: Chair-Sofa-feet
+        MaterialInstance:
+            Material: bb82d811-055a-45d4-adae-fefc9c37f23e:TheWhiteRoom/Chair-Sofa-feet
+    b8e43759f0b02170f6dbab14a6108c5d:
+        Name: Chair-sofa-leather
+        MaterialInstance:
+            Material: e42d945c-344b-4f26-bfe8-f1822df64471:TheWhiteRoom/Chair-sofa-leather
+    b52f7238f07f6a5a11e1a64fe97d3d61:
+        Name: Cushion
+        MaterialInstance:
+            Material: 235ad04a-7b30-405d-9157-446973590937:TheWhiteRoom/Cushion
+    693235b706eb89a0a8decbab4777ecfe:
+        Name: Painted-white-wood
+        MaterialInstance:
+            Material: 3e493f21-b8b0-4481-b08a-02ef0b867e8b:TheWhiteRoom/Painted-white-wood
+    42cc2090acf55f27df26962e8472d1e5:
+        Name: Main-wallsocket
+        MaterialInstance:
+            Material: d67df557-8c68-4243-96c5-a9980d9cc267:TheWhiteRoom/Main-wallsocket
+    3d1522fb1e4589ccc197d805d0658e7c:
+        Name: picframe
+        MaterialInstance:
+            Material: e0c1ca9d-db14-4914-a7d3-898234e9a2ed:TheWhiteRoom/picframe
+    eb6d6352aa4c38e18c2ba1a1d59108da:
+        Name: picframe-pic2
+        MaterialInstance:
+            Material: d84263e0-3a41-404a-9727-be4fdb9d71ea:TheWhiteRoom/picframe-pic2
+    480a074965b7cbc6a31cdb9c5a582926:
+        Name: picframe-pic2.001
+        MaterialInstance:
+            Material: 1dc08ad0-e8c4-4571-a251-7f3e3aa31c1d:TheWhiteRoom/picframe-pic2.001
+    8bc13021e72d6aed91326ccf823aa53e:
+        Name: Blind-string-knob
+        MaterialInstance:
+            Material: 40e2b9f6-1039-4844-a788-0646c441e8f1:TheWhiteRoom/Blind-string-knob
+    a5b0343b4f06c8dd087ab55d37de1032:
+        Name: Blind-String
+        MaterialInstance:
+            Material: 00131823-4d4c-4bb3-90f8-d5763b7bf9f0:TheWhiteRoom/Blind-String
+    cce90c6eb03158b53af7c58d3c5e436d:
+        Name: Blind-ends
+        MaterialInstance:
+            Material: 80ce239c-d1f8-4afe-9c5d-7ca2f3bbd5ad:TheWhiteRoom/Blind-ends
+    d9076e7b3bfe599e8fa890e82252bf2a:
+        Name: Blind-wood-strip
+        MaterialInstance:
+            Material: 7e89802d-722c-4c47-9c05-4efc18bc4002:TheWhiteRoom/Blind-wood-strip
+    4215631a2b74c57335cda41370276893:
+        Name: Blind-material
+        MaterialInstance:
+            Material: 664eeee0-7baa-4108-9898-3b8633c8924a:TheWhiteRoom/Blind-material
+    a4b9ba7cee8e09f86729c00d3e520be0:
+        Name: Steel
+        MaterialInstance:
+            Material: 303fc0b1-31f2-4d0a-8c10-193369d41db7:TheWhiteRoom/Steel
+    3f51f1102f18c9a6b911e20cab3f780c:
+        Name: Black-Raught-Iron
+        MaterialInstance:
+            Material: e23e8bf8-cf99-4d0d-82df-d93fca2e8fc5:TheWhiteRoom/Black-Raught-Iron
+    59234d2ff2bb79c464c7981de37444ca:
+        Name: Marble-harf
+        MaterialInstance:
+            Material: a3852fff-fa1a-4eeb-bb32-3c77e20d81a0:TheWhiteRoom/Marble-harf
+    2976f85de4f497b1dda145ed0c2e803b:
+        Name: Walls
+        MaterialInstance:
+            Material: afe38be5-1578-46d0-86f1-8d0d1a963383:TheWhiteRoom/Walls
+    3ab25420f19c2c6dadbb863db0f99288:
+        Name: Floor
+        MaterialInstance:
+            Material: dcb4694e-8767-44df-a588-5738d730ec84:TheWhiteRoom/Floor
+    0ca1431be1bc43afd1dd610d4c7cb8fc:
+        Name: WallsOuter
+        MaterialInstance:
+            Material: null
+    5a4c6c3d9c1f2d14826a0e0a9e92529d:
+        Name: Carpet
+        MaterialInstance:
+            Material: 8321b5dc-752d-4434-b7bb-aeb1d344ae9f:TheWhiteRoom/Carpet
+    8695c0a68aaf877132ee1a979326fa2b:
+        Name: C-Table-box-legs
+        MaterialInstance:
+            Material: e4e08342-7580-4a59-8109-6ee605efac6d:TheWhiteRoom/C-Table-box-legs
+    75f27560abd1c09a663d1775949902c3:
+        Name: Chrome-Dull
+        MaterialInstance:
+            Material: f7f80ba2-ce06-4a33-9787-b9a9ef45cc5b:TheWhiteRoom/Chrome-Dull
+    0271571710bddf46bdc11c54503a5161:
+        Name: Rad-Knob-Outer
+        MaterialInstance:
+            Material: 47d4a738-00b3-4b36-9655-24314ac9b8b5:TheWhiteRoom/Rad-Knob-Outer
+    e06f796888fb7baeda91ccc6d2f96122:
+        Name: Rad-Knob-Centre
+        MaterialInstance:
+            Material: f64d1fda-c08c-4d17-8014-f9d2a8daf89a:TheWhiteRoom/Rad-Knob-Centre
+    2a77322109af9709639b28f184d63404:
+        Name: Rad-Panels-Enamel
+        MaterialInstance:
+            Material: 4d5f462d-e16e-4751-86b8-9b0c96c654bd:TheWhiteRoom/Rad-Panels-Enamel
+    32ac5e26ea8166072c1432e475f001c9:
+        Name: White-pot.001
+        MaterialInstance:
+            Material: cbc2aa1b-ae91-4d22-8052-56bb692f1b82:TheWhiteRoom/White-pot.001
+    92a7e2dd826ac7f2cc3b9e7b7504a5da:
+        Name: Chrome-steel-dull
+        MaterialInstance:
+            Material: e68268bb-d89f-4be1-8672-b4149b64d037:TheWhiteRoom/Chrome-steel-dull
+    45464d020a9d45b02430da3a3d5cf5cd:
+        Name: Radio-handle
+        MaterialInstance:
+            Material: 2c3e3999-2937-47b4-b665-057ef078914d:TheWhiteRoom/Radio-handle
+    47cbc5177bcbea7331f1e394ce5b803e:
+        Name: Radio-plastic
+        MaterialInstance:
+            Material: 2e6b68d4-85c4-4a49-83b3-1a197518e8d0:TheWhiteRoom/Radio-plastic
+    e1e2894a985ff4f22222e65ed584c4c6:
+        Name: bush-logo
+        MaterialInstance:
+            Material: 0f4ab09a-2b21-480f-9d17-20f0e726cce9:TheWhiteRoom/bush-logo
+    decd8dfa604bc0d96c21a0669c3dd5e8:
+        Name: Radio-dial-line
+        MaterialInstance:
+            Material: d3e9da06-7dfe-4ea7-b3e3-f50f018aea68:TheWhiteRoom/Radio-dial-line
+    766460751451eefd7aeeae7feb0dbd08:
+        Name: Radio-dialback
+        MaterialInstance:
+            Material: e7e4df15-a488-4586-bb6f-d0305fd5aaba:TheWhiteRoom/Radio-dialback
+    bdc6c112c08a1e0f36411b7db07ce217:
+        Name: Radio-dial-red
+        MaterialInstance:
+            Material: a1802fe3-2698-4158-afa0-253464d7af34:TheWhiteRoom/Radio-dial-red
+    fc2515df8ac7abbf58c5e493ad7176cf:
+        Name: Radio-metal-ring
+        MaterialInstance:
+            Material: 970f1c60-6444-4c69-b75f-47a905b3886e:TheWhiteRoom/Radio-metal-ring
+    e00483db685615cfb9340b58c46d2e83:
+        Name: Radio-glass
+        MaterialInstance:
+            Material: 2b95b922-eeb2-4309-a048-1135c3e8ec24:TheWhiteRoom/Radio-glass
+    1f3926fef4140a4c86eeaaf8622db656:
+        Name: Handle-chrome
+        MaterialInstance:
+            Material: 705df016-6a38-4403-957a-55f709fd693f:TheWhiteRoom/Handle-chrome
+    77506ef2efd64accfc547ed3d2b7bcd8:
+        Name: Radio-inside
+        MaterialInstance:
+            Material: a6304547-e092-47c9-83a1-87ac7b0b8d19:TheWhiteRoom/Radio-inside
+    8da19e72887d335802591f9318a31ee5:
+        Name: Radio-knob
+        MaterialInstance:
+            Material: fd602ea7-fb24-436c-abe4-1d670827d3a8:TheWhiteRoom/Radio-knob
+    c1f2f13247489bdf40f30319c2e43319:
+        Name: Radio-suround
+        MaterialInstance:
+            Material: 6092ab80-6bc7-4cf1-ab23-09a1f76d6e01:TheWhiteRoom/Radio-suround
+    70671014d3f29a87edb89b8bc2c97dca:
+        Name: Radio-edges
+        MaterialInstance:
+            Material: 258acbec-7b5f-43cc-bcef-6ad3ad78b485:TheWhiteRoom/Radio-edges
+Modifiers: {}
+~SourceHashes:
+    c6cf44f4d62b2613d096e4c4feb1ee31~The_White_Room-Jay-Hardy_Fixed_NewFBX.fbx: 1513f86a8cc6a2250576c91f59a0ea9f

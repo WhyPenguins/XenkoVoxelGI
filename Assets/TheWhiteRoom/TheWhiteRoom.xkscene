@@ -1,0 +1,429 @@
+!SceneAsset
+Id: edf00c32-ae18-4566-932b-01a29bbd6762
+SerializedVersion: {Xenko: 3.1.0.1}
+Tags: []
+ChildrenIds: []
+Offset: {X: 0.0, Y: 0.0, Z: 0.0}
+Hierarchy:
+    RootParts:
+        - ref!! d5acb2b3-00d1-4bd2-8618-85680a4121f8
+        - ref!! d4f55155-caad-4d84-b4e1-cbc3dd3361f6
+        - ref!! 153d0152-0abb-4552-bab3-434a05b2d722
+        - ref!! b1b8fc98-1b73-402c-9a7d-80b9718fdfcd
+        - ref!! b5daede9-3abb-4a0e-a9e7-af3d3d2bc81a
+        - ref!! 480babb2-c02d-436d-a82e-e1ddd0749750
+        - ref!! df19d114-5b9c-404c-b6d2-ac737938f6d0
+        - ref!! ab1d263a-a4eb-4199-9abc-c065cac77377
+        - ref!! 357729fb-b18e-4b8d-ad04-3275d6241793
+        - ref!! 5c45193d-c119-4f11-ac31-e5c52354a99b
+    Parts:
+        -   Entity:
+                Id: 090823f6-82c2-41c8-a0ed-13339aae542a
+                Name: Box1x1x1
+                Components:
+                    1d47a4b96cc9a0ec400abdef4ec71abc: !TransformComponent
+                        Id: 40862b5a-ba57-49e6-9faf-35ec296c2912
+                        Position: {X: 0.401631951, Y: 3.95063353, Z: -7.486418}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.707106769, W: 0.707106769}
+                        Scale: {X: 0.110622086, Y: 1.43176723, Z: 0.4336031}
+                        Children: {}
+                    687ff098549cd68bb1226c9b6de5fb34: !ModelComponent
+                        Id: 30bd0eee-3912-4c70-a3cc-980d8c7462f5
+                        Model: 6f320f60-4f5b-469c-a9ce-8f90f76a3f26:Models/Box1x1x1
+                        Materials:
+                            508e866c67dd6ed8ff53036551d29b03~0: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material
+        -   Folder: null
+            Entity:
+                Id: 153d0152-0abb-4552-bab3-434a05b2d722
+                Name: Point light
+                Components:
+                    368b8c6412a3748701e2ece2b3a27ecb: !TransformComponent
+                        Id: 33d63217-528b-4253-b2f3-7d10f636a6b0
+                        Position: {X: -46.8840256, Y: 1.69328117, Z: 9.46169949}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    a4006ba42e9ce98ba35e3379721c411c: !LightComponent
+                        Id: 76a10284-ca1b-4d8a-8163-441b5ff0d75d
+                        Type: !LightVoxel
+                            Volume: ref!! 964fdfde-65a2-40c1-b37a-b999e936f12a
+                            DiffuseMarcher: !Xenko.Rendering.Voxels.VoxelMarchSetHemisphere6,FirstPersonShooter_VoxelGI.Game
+                                Marcher: !Xenko.Rendering.Voxels.VoxelMarchConePerMipmap,FirstPersonShooter_VoxelGI.Game
+                                    Steps: 7
+                            SpecularMarcher: !Xenko.Rendering.Voxels.VoxelMarchCone,FirstPersonShooter_VoxelGI.Game
+                                Fast: false
+                                Steps: 25
+                                StepScale: 0.7
+                                ConeRatio: 1.0
+                            BounceIntensityScale: 1.2
+                            SpecularIntensityScale: 1.0
+        -   Entity:
+                Id: 357729fb-b18e-4b8d-ad04-3275d6241793
+                Name: Point light
+                Components:
+                    f581177330b75fc0debc5d9f8382c6e4: !TransformComponent
+                        Id: 00ca0781-56df-4a3d-b919-db70b88dd748
+                        Position: {X: 5.40635872, Y: 2.77502346, Z: -4.913577}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    61b4be20195582665dac5d8b34b04a46: !LightComponent
+                        Id: 4fbb9f05-b636-46fd-8001-06f5b7f04829
+                        Enabled: false
+                        Type: !LightPoint
+                            Color: !ColorRgbProvider
+                                Value: {R: 1.0, G: 1.0, B: 1.0}
+                            Radius: 100.0
+                            Shadow:
+                                Size: Small
+                                BiasParameters: {}
+        -   Entity:
+                Id: 3c4c8d37-11b2-4661-9d87-c21744f28ce6
+                Name: Box1x1x1
+                Components:
+                    1d47a4b96cc9a0ec400abdef4ec71abc: !TransformComponent
+                        Id: daccc270-0cc5-468f-92f6-77566291b839
+                        Position: {X: -1.65935791, Y: 3.96845722, Z: -6.806843}
+                        Rotation: {X: 0.169975862, Y: 0.169975832, Z: 0.686373234, W: 0.686373234}
+                        Scale: {X: 0.38005653, Y: 3.6087873, Z: 1.03401589}
+                        Children: {}
+                    687ff098549cd68bb1226c9b6de5fb34: !ModelComponent
+                        Id: eac465c9-960f-4ede-b10d-4f1a179d3959
+                        Enabled: false
+                        Model: 6f320f60-4f5b-469c-a9ce-8f90f76a3f26:Models/Box1x1x1
+                        Materials:
+                            508e866c67dd6ed8ff53036551d29b03~0: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material
+        -   Entity:
+                Id: 480babb2-c02d-436d-a82e-e1ddd0749750
+                Name: The_White_Room-Jay-Hardy_Fixed_NewFBX
+                Components:
+                    a07ee0ce484fd3069a17ad7a1bab7cd5: !TransformComponent
+                        Id: 83da905f-df57-487f-8fc3-20b6fa26c184
+                        Position: {X: 0.0, Y: 0.0, Z: -8.365383}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 2.0, Y: 2.0, Z: 2.0}
+                        Children: {}
+                    8dd56fd8c2052d702b7b885d978df130: !ModelComponent
+                        Id: fe049035-f81e-4155-aaa4-7cbc3864e139
+                        Model: b7bae759-95e9-4909-abd9-6c0733579a16:TheWhiteRoom/The_White_Room-Jay-Hardy_Fixed_NewFBX
+                        Materials:
+                            894bdb26b16b4f15a4cb66b516506eaa~0: f2a90568-dfac-42e7-bd48-dfa0ed7b796a:TheWhiteRoom/lamp-upright-base
+                            b2d964abf53634736e91680e1ce43004~1: 32de0b7f-cefd-4526-afc5-11e217f6b921:TheWhiteRoom/candle-holders
+                            dba208a6ac8d9237542d3e31858a3da2~2: 291542fa-f800-42a5-bbc0-f668334b8244:TheWhiteRoom/magazine
+                            5fba19a4ab93e3cdc8f334835a2e2c60~3: f9b8da6e-b07c-48f4-806d-555d6d986b81:TheWhiteRoom/Lampshader-outer
+                            164e954b99d0f2f0f35dddb2180406c8~4: 7b0df45b-df76-4f36-85f1-712ce587564d:TheWhiteRoom/lampshade-inner
+                            cff79843378b53c95655065f445f33ba~5: 78afe5b5-9977-4a9d-a5ef-6dfaccf4cfc1:TheWhiteRoom/Apple
+                            09f79a1a7ab5e52da88bc532e1267f8d~6: 6d062208-f493-426e-9ad3-277ae2572bb4:TheWhiteRoom/White-teapot
+                            3f0d0c02268bb6e110913670f50bfaa0~7: 52601c1c-1cfd-44a6-af27-b3509eefb43a:TheWhiteRoom/Love-letters-back
+                            bfea3a9a57204ba756e96628e73290bb~8: a3ac8b45-b697-48b4-b482-194eec2c250f:TheWhiteRoom/Love-letters
+                            021e8a75ded05076289e89b208f2f5b9~9: 6ae184e7-e8da-4a46-bd41-b5f9776f6464:TheWhiteRoom/Glass-Fake-picframe
+                            cf33869ff103aa439bc8974dbf11edb9~10: 12beca02-7421-4774-a46a-a60d3d314d6c:TheWhiteRoom/picframe-picc
+                            b490acc526cf8ce8bdfc1f27b0f2bfd3~11: a3be3878-cacc-4cd8-a04c-219feb6d97fb:TheWhiteRoom/picframe-black
+                            2838c8de4ef6e4b78ef0de2b0ddbc243~12: e3978efa-c9fd-4237-b34f-bcbbaac065cc:TheWhiteRoom/picframe-picb
+                            50433af8ea667f7db521d7d39eef79db~13: 00d38c96-b5a3-4cdb-b9aa-eb3901b481f2:TheWhiteRoom/picframe-pic
+                            1852646e8ec6c7d8f112fa98578ecc19~14: 53a41b4f-374d-46ab-9280-d80e06f422b0:TheWhiteRoom/Cushion3
+                            a308fad5d5d9ef8c7af3ce1c55b462c3~15: 372c6288-dc89-482f-ba93-6fd48e831849:TheWhiteRoom/light-fitting
+                            f47daf1cb9abf02bb87f4943f9cb6d50~16: 61b32582-0c71-42bf-b899-5bc97775b079:TheWhiteRoom/ceiling-shade-wire
+                            a92efc46047b1f5fb0a356b6c2d42ac6~17: e01ab61a-92fb-4331-9604-fa2b1e452f52:TheWhiteRoom/Ceiling-lampshade
+                            f56b9110dd67d2b6bbe21682a5c124e5~18: b1f9af46-8a62-4c46-aa0e-f2c7f9a89b8f:TheWhiteRoom/picframe-pica
+                            94b8e3287800f72eb6e049239f126058~19: 9805c64e-8909-4ad0-8172-485e651daa3a:TheWhiteRoom/book-shader
+                            abdc8726b4d39d2eef70522e910da668~20: 3ec6060f-4a76-469b-91cb-c6508cbd4998:TheWhiteRoom/C-Table-box
+                            fb275380358c0f51d0bb34e2dfb82316~21: 93fb7485-fe21-4962-a3ab-eaa06bc0d4ba:TheWhiteRoom/C-Table-handle-metal
+                            a21ce323e41f1302460efd9c3d18daad~22: 70711645-7a17-41c9-8d9d-3dfa709b1a04:TheWhiteRoom/Wide-tv-bevel
+                            3dcd47d4acc3da68b47b32272d70652b~23: 0ec02f98-c3c3-4ba6-9b14-31cd7e630335:TheWhiteRoom/Wide-tv-screen
+                            533cdadfab355e09c71283d73d6f7791~24: bb82d811-055a-45d4-adae-fefc9c37f23e:TheWhiteRoom/Chair-Sofa-feet
+                            9d8bea9f46d0458b586ea35e0b28b8e1~25: e42d945c-344b-4f26-bfe8-f1822df64471:TheWhiteRoom/Chair-sofa-leather
+                            b6201a8151f203042cd147665c65f30b~26: 235ad04a-7b30-405d-9157-446973590937:TheWhiteRoom/Cushion
+                            f2320f8617178456a6b8824cea4fe1ad~27: 3e493f21-b8b0-4481-b08a-02ef0b867e8b:TheWhiteRoom/Painted-white-wood
+                            abfe615cd4b2973a58aef104008a7c88~28: d67df557-8c68-4243-96c5-a9980d9cc267:TheWhiteRoom/Main-wallsocket
+                            34408e7331cc6bae79f5e72498e729af~29: e0c1ca9d-db14-4914-a7d3-898234e9a2ed:TheWhiteRoom/picframe
+                            44e38036e8632b1150e6315c3ece907c~30: d84263e0-3a41-404a-9727-be4fdb9d71ea:TheWhiteRoom/picframe-pic2
+                            8bbf804a873d5b15656378618d0d8f5a~31: 1dc08ad0-e8c4-4571-a251-7f3e3aa31c1d:TheWhiteRoom/picframe-pic2.001
+                            0c3e24c9098b4eb807f1dab9b70bad03~32: 40e2b9f6-1039-4844-a788-0646c441e8f1:TheWhiteRoom/Blind-string-knob
+                            f347cfdea1792ea540e5aad5abfde460~33: 00131823-4d4c-4bb3-90f8-d5763b7bf9f0:TheWhiteRoom/Blind-String
+                            87708ee9952feedb81677543b6bd75c8~34: 80ce239c-d1f8-4afe-9c5d-7ca2f3bbd5ad:TheWhiteRoom/Blind-ends
+                            1ada0de3b31f729d76681844be6601a2~35: 7e89802d-722c-4c47-9c05-4efc18bc4002:TheWhiteRoom/Blind-wood-strip
+                            2461bef4554d2333c6bfc39c1ab8f112~36: 664eeee0-7baa-4108-9898-3b8633c8924a:TheWhiteRoom/Blind-material
+                            741ae2919adeff30aafe35435b03638a~37: 303fc0b1-31f2-4d0a-8c10-193369d41db7:TheWhiteRoom/Steel
+                            a4f4ae627cd6a202ae8191272ace2cb9~38: e23e8bf8-cf99-4d0d-82df-d93fca2e8fc5:TheWhiteRoom/Black-Raught-Iron
+                            40c0e6f1bba7da54e6ed50150d4e6d3b~39: a3852fff-fa1a-4eeb-bb32-3c77e20d81a0:TheWhiteRoom/Marble-harf
+                            80b73f2d1d17ff87a02e41b7dcd93101~40: afe38be5-1578-46d0-86f1-8d0d1a963383:TheWhiteRoom/Walls
+                            fa192c80008874be19bc9159fc32aeaf~41: dcb4694e-8767-44df-a588-5738d730ec84:TheWhiteRoom/Floor
+                            9fcd1f18d0925602f01e46cc8e8ed81d~42: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material
+                            b8cda831842d6a425fb2f7d9cb38dc3b~43: 8321b5dc-752d-4434-b7bb-aeb1d344ae9f:TheWhiteRoom/Carpet
+                            60922b102332ec59d71b7b566ca226d2~44: e4e08342-7580-4a59-8109-6ee605efac6d:TheWhiteRoom/C-Table-box-legs
+                            c8c8e4dcb0d8f0c67fc786ea2aafe014~45: f7f80ba2-ce06-4a33-9787-b9a9ef45cc5b:TheWhiteRoom/Chrome-Dull
+                            45a9ddbbd0cf987c266fd474fe859241~46: 47d4a738-00b3-4b36-9655-24314ac9b8b5:TheWhiteRoom/Rad-Knob-Outer
+                            ee7308908ecde241bfe55b82a487e89c~47: f64d1fda-c08c-4d17-8014-f9d2a8daf89a:TheWhiteRoom/Rad-Knob-Centre
+                            6b6f792e9fdbb2f2806461698656c0f5~48: 4d5f462d-e16e-4751-86b8-9b0c96c654bd:TheWhiteRoom/Rad-Panels-Enamel
+                            a0cd1b11206cf91f9aa2e83732e07b99~49: cbc2aa1b-ae91-4d22-8052-56bb692f1b82:TheWhiteRoom/White-pot.001
+                            9a991009ee359d6eeac61d07aceef0a7~50: e68268bb-d89f-4be1-8672-b4149b64d037:TheWhiteRoom/Chrome-steel-dull
+                            2629ff52cbebc8ce0917634de12560d1~51: 2c3e3999-2937-47b4-b665-057ef078914d:TheWhiteRoom/Radio-handle
+                            7ad3e80c28ab7d79ba319fb471a489fd~52: 2e6b68d4-85c4-4a49-83b3-1a197518e8d0:TheWhiteRoom/Radio-plastic
+                            6f540786d012d86135379eb7197737f6~53: 0f4ab09a-2b21-480f-9d17-20f0e726cce9:TheWhiteRoom/bush-logo
+                            ae5a3f9145834f68c0ee4b4119d0a511~54: d3e9da06-7dfe-4ea7-b3e3-f50f018aea68:TheWhiteRoom/Radio-dial-line
+                            3148232c2b61bd59683322dc26dc19f1~55: e7e4df15-a488-4586-bb6f-d0305fd5aaba:TheWhiteRoom/Radio-dialback
+                            7f0947a1481100d9181d22b3231c011f~56: a1802fe3-2698-4158-afa0-253464d7af34:TheWhiteRoom/Radio-dial-red
+                            d97facd0f974b90ffd1d6c62e0737c64~57: 970f1c60-6444-4c69-b75f-47a905b3886e:TheWhiteRoom/Radio-metal-ring
+                            e6c7c51d62aa8c9e65df56cc084b32c8~58: 2b95b922-eeb2-4309-a048-1135c3e8ec24:TheWhiteRoom/Radio-glass
+                            c7aea565b63bcec32f6c94e21d693aba~59: 705df016-6a38-4403-957a-55f709fd693f:TheWhiteRoom/Handle-chrome
+                            9437b5506cfa080dfb6fc0a5e981fab7~60: a6304547-e092-47c9-83a1-87ac7b0b8d19:TheWhiteRoom/Radio-inside
+                            4dabd9d835d65680651e77194eafc232~61: fd602ea7-fb24-436c-abe4-1d670827d3a8:TheWhiteRoom/Radio-knob
+                            1703c7615efa65a5bb684949b8ecfbeb~62: 6092ab80-6bc7-4cf1-ab23-09a1f76d6e01:TheWhiteRoom/Radio-suround
+                            dbad6a09a9d47ba2263bb84c58f50c46~63: 258acbec-7b5f-43cc-bcef-6ad3ad78b485:TheWhiteRoom/Radio-edges
+        -   Entity:
+                Id: 4e30ae6e-d5e5-4bca-bc0a-e355da2b0421
+                Name: Box1x1x1
+                Components:
+                    1d47a4b96cc9a0ec400abdef4ec71abc: !TransformComponent
+                        Id: 6a6832fc-4ed4-4d6c-8679-883b9fb4ef51
+                        Position: {X: 0.0421312526, Y: 2.238996, Z: -7.486418}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.707106769, W: 0.707106769}
+                        Scale: {X: 0.110622086, Y: 3.6087873, Z: 0.4336031}
+                        Children: {}
+                    687ff098549cd68bb1226c9b6de5fb34: !ModelComponent
+                        Id: cc8a4f2e-0198-44b5-9db2-f69eaad87ac1
+                        Enabled: false
+                        Model: 6f320f60-4f5b-469c-a9ce-8f90f76a3f26:Models/Box1x1x1
+                        Materials:
+                            508e866c67dd6ed8ff53036551d29b03~0: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material
+        -   Entity:
+                Id: 5c45193d-c119-4f11-ac31-e5c52354a99b
+                Name: WindowLightBlockers
+                Components:
+                    476390ef4c99be91a5a57159d37be5ab: !TransformComponent
+                        Id: 466bd8c7-6959-4011-83ae-d5fc3a6cbe30
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children:
+                            78039e602c56c0fdcc881afaebaa9133: ref!! 453d3a13-2820-4eea-aa48-fa628af3ab4b
+                            512ad8e4793c821915d2c29ab77ef49e: ref!! ebf88000-3295-4137-bbc7-cfb9ffe60958
+                            1bb3678610de949910a62e59acb42ba9: ref!! daccc270-0cc5-468f-92f6-77566291b839
+                            e79bf28bf3466aa0d704b4acdf51c5c7: ref!! 6a6832fc-4ed4-4d6c-8679-883b9fb4ef51
+                            1e58929a87e5ef1326222102e4e47c10: ref!! d4fcc9ad-2156-4c14-ae2e-ab11ee7a2e29
+                            3e1d8d4b7db1dd95f5380fc1c2090fe8: ref!! 9b64ee57-1e56-402a-a4ca-56d473696762
+                            59da5adf7b8197d37e63a8190effc30a: ref!! 40862b5a-ba57-49e6-9faf-35ec296c2912
+                            e99544d89cc88930df36246460d4bb47: ref!! 6fa329cb-a2f0-425b-a17b-4fbfb468413e
+        -   Entity:
+                Id: 830d5068-dcd8-40d4-9f94-26eb277c25cd
+                Name: Box1x1x1
+                Components:
+                    1d47a4b96cc9a0ec400abdef4ec71abc: !TransformComponent
+                        Id: d4fcc9ad-2156-4c14-ae2e-ab11ee7a2e29
+                        Position: {X: 0.04213135, Y: 3.86101246, Z: -7.486418}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.707106769, W: 0.707106769}
+                        Scale: {X: 0.110622086, Y: 3.6087873, Z: 0.4336031}
+                        Children: {}
+                    687ff098549cd68bb1226c9b6de5fb34: !ModelComponent
+                        Id: f73438e0-b086-4e16-8257-e9d856d64bfa
+                        Enabled: false
+                        Model: 6f320f60-4f5b-469c-a9ce-8f90f76a3f26:Models/Box1x1x1
+                        Materials:
+                            508e866c67dd6ed8ff53036551d29b03~0: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material
+        -   Entity:
+                Id: 8c75777f-0fe4-4051-8f59-21140bc7460a
+                Name: Box1x1x1
+                Components:
+                    1d47a4b96cc9a0ec400abdef4ec71abc: !TransformComponent
+                        Id: 9b64ee57-1e56-402a-a4ca-56d473696762
+                        Position: {X: 3.01376915, Y: 3.99069858, Z: -6.92002535}
+                        Rotation: {X: -0.176502168, Y: -0.176502138, Z: 0.684724033, W: 0.684724033}
+                        Scale: {X: 0.110622086, Y: 1.43176723, Z: 0.4336031}
+                        Children: {}
+                    687ff098549cd68bb1226c9b6de5fb34: !ModelComponent
+                        Id: 34dc2ffb-55d2-4c19-9f6d-44d065fed54b
+                        Model: 6f320f60-4f5b-469c-a9ce-8f90f76a3f26:Models/Box1x1x1
+                        Materials:
+                            508e866c67dd6ed8ff53036551d29b03~0: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material
+        -   Entity:
+                Id: ab1d263a-a4eb-4199-9abc-c065cac77377
+                Name: Cam
+                Components:
+                    a4bf774f654a1f9b966e9e2d0ac15574: !TransformComponent
+                        Id: 6e236bf3-0f2f-4619-9231-d5c42c33fc07
+                        Position: {X: 3.16649246, Y: 3.50059, Z: 3.577894}
+                        Rotation: {X: -0.126327246, Y: 0.192282453, Z: 0.024968287, W: 0.9728544}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    703cfcb7e2dd41f9ce371e133e781c2e: !CameraComponent
+                        Id: 9f018668-cb04-4582-97d0-77daae450e8d
+                        Name: null
+                        Projection: Perspective
+                        VerticalFieldOfView: 55.0
+                        Slot: f1ef5817-0725-4b1a-abc9-845d101ec0e6
+        -   Entity:
+                Id: b1b8fc98-1b73-402c-9a7d-80b9718fdfcd
+                Name: Entity
+                Components:
+                    5ad082711e71070300c2b88186e9ad1b: !TransformComponent
+                        Id: 23724891-516f-4062-824e-703420bc1f80
+                        Position: {X: 0.0460827351, Y: 2.5, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 20.0, Y: 20.0, Z: 20.0}
+                        Children: {}
+                    02e413addc57dfa1c522094afaa09b70: !VoxelVolumeComponent
+                        Id: 964fdfde-65a2-40c1-b37a-b999e936f12a
+                        VoxelizationMethod: !.VoxelizationMethodGeometry,FirstPersonShooter_VoxelGI.Game {}
+                        Storage: !Xenko.Rendering.Voxels.VoxelStorageClipmaps,FirstPersonShooter_VoxelGI.Game
+                            ClipResolution: x128
+                            RenderMethod: GeometryShader
+                            MipmapInner: true
+                        Attributes:
+                            1f3a7f4e38932bd3dabc24ca190b9056: !Xenko.Rendering.Voxels.VoxelAttributeEmissionOpacity,FirstPersonShooter_VoxelGI.Game
+                                VoxelLayout: !Xenko.Rendering.Voxels.VoxelLayoutIsotropic,FirstPersonShooter_VoxelGI.Game
+                                    maxBrightness: 8.0
+                                    StorageMethod: !Xenko.Rendering.Voxels.StorageMethodIndirect,FirstPersonShooter_VoxelGI.Game
+                                        TempStorageFormat: !Xenko.Rendering.Voxels.VoxelFragmentPackFloatR11G11B10,FirstPersonShooter_VoxelGI.Game {}
+                                        Filter: !Xenko.Rendering.Voxels.VoxelBufferWriteMax,FirstPersonShooter_VoxelGI.Game {}
+                                    StorageFormat: R10G10B10A2
+                                Modifiers:
+                                    cc0c54d09bde88cf8e29673ce250c770: !.VoxelModifierEmissionOpacityAntiAliasing,FirstPersonShooter_VoxelGI.Game {}
+                                LightFalloff: PhysicallyBasedButNotAccurate
+                        AproximateVoxelSize: 0.15
+                        VoxelVisualization: false
+                        VisualizeVoxels: false
+                        Visualization: !Xenko.Rendering.Voxels.VoxelVisualizationView,FirstPersonShooter_VoxelGI.Game
+                            Background: {R: 0, G: 0, B: 0, A: 255}
+                            MarchMethod: !Xenko.Rendering.Voxels.VoxelMarchBeam,FirstPersonShooter_VoxelGI.Game
+                                Steps: 200
+                                StepScale: 1.0
+                                BeamDiameter: 1.0
+                    d63c8dec4feeac3f1826bd36eb3225f4: !FirstPersonShooter_VoxelGI.GameProfiler,FirstPersonShooter_VoxelGI.Game
+                        Id: 6fe98905-3f65-4710-83c1-a78f64147401
+                        Enabled: true
+                        TextColor: {R: 144, G: 238, B: 144, A: 255}
+                        RefreshTime: 500.0
+                        SortingMode: ByTime
+                        FilteringMode: GpuEvents
+                        ResultPage: 1
+        -   Entity:
+                Id: b5daede9-3abb-4a0e-a9e7-af3d3d2bc81a
+                Name: GridBase10x10
+                Components:
+                    64c8a5f13365eb2bdd72ccd94aa82dde: !TransformComponent
+                        Id: 1552d889-6195-4b40-b4a1-96af3ee456ae
+                        Position: {X: 0.0, Y: 9.241633, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 13.6293755, Y: 1.0, Z: 3.564659}
+                        Children: {}
+                    f0e1ce2c849bc7859f660412c6707c46: !ModelComponent
+                        Id: 5bd8b283-e1d8-4d04-bd6e-1d89e5b3e58d
+                        Enabled: false
+                        Model: f15fc51f-4855-4bac-86dd-9967decc5202:Models/GridBase10x10
+                        Materials:
+                            9fbe16cf7eca2d8b0cc64666de9abc01~0: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material
+        -   Entity:
+                Id: bc7f97a2-1172-4459-82d0-e885d1b66ae5
+                Name: Box1x1x1
+                Components:
+                    1d47a4b96cc9a0ec400abdef4ec71abc: !TransformComponent
+                        Id: ebf88000-3295-4137-bbc7-cfb9ffe60958
+                        Position: {X: -1.87118721, Y: 2.254392, Z: -7.208304}
+                        Rotation: {X: 0.169975862, Y: 0.169975832, Z: 0.686373234, W: 0.686373234}
+                        Scale: {X: 0.38005653, Y: 3.6087873, Z: 1.03401589}
+                        Children: {}
+                    687ff098549cd68bb1226c9b6de5fb34: !ModelComponent
+                        Id: 8faca021-d1d0-42ba-a629-e37e56eb765e
+                        Enabled: false
+                        Model: 6f320f60-4f5b-469c-a9ce-8f90f76a3f26:Models/Box1x1x1
+                        Materials:
+                            508e866c67dd6ed8ff53036551d29b03~0: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material
+        -   Entity:
+                Id: cfac35e2-73de-4574-ad5b-32e0891ef503
+                Name: Box1x1x1
+                Components:
+                    1d47a4b96cc9a0ec400abdef4ec71abc: !TransformComponent
+                        Id: 453d3a13-2820-4eea-aa48-fa628af3ab4b
+                        Position: {X: -2.4300456, Y: 3.61830783, Z: -6.543556}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 0.275276363, Y: 3.6087873, Z: 0.307229549}
+                        Children: {}
+                    687ff098549cd68bb1226c9b6de5fb34: !ModelComponent
+                        Id: 8d3a7675-c915-413b-bf48-081dcad69165
+                        Enabled: false
+                        Model: 6f320f60-4f5b-469c-a9ce-8f90f76a3f26:Models/Box1x1x1
+                        Materials:
+                            508e866c67dd6ed8ff53036551d29b03~0: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material
+        -   Folder: null
+            Entity:
+                Id: d4f55155-caad-4d84-b4e1-cbc3dd3361f6
+                Name: Point light
+                Components:
+                    368b8c6412a3748701e2ece2b3a27ecb: !TransformComponent
+                        Id: 8b574a26-157c-4953-b5bf-10f781646a64
+                        Position: {X: -0.36898458, Y: 2.0, Z: -0.567896843}
+                        Rotation: {X: -0.03182386, Y: -0.856238067, Z: -0.2987031, W: -0.420261949}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    a4006ba42e9ce98ba35e3379721c411c: !LightComponent
+                        Id: a77ae62c-1baa-4210-a0d3-cf3da10417c6
+                        Type: !LightDirectional
+                            Color: !ColorRgbProvider
+                                Value: {R: 0.929411769, G: 0.8666667, B: 1.0}
+                            Shadow:
+                                Enabled: true
+                                Size: XLarge
+                                CascadeCount: OneCascade
+                                DepthRange:
+                                    IsAutomatic: false
+                                    ManualMaxDistance: 20.0
+                                PartitionMode: !LightDirectionalShadowMap.PartitionLogarithmic {}
+                                BiasParameters:
+                                    DepthBias: 0.001
+                                    NormalOffsetScale: 0.0
+                                ComputeTransmittance: false
+                        Intensity: 5.0
+        -   Entity:
+                Id: d5acb2b3-00d1-4bd2-8618-85680a4121f8
+                Name: Point light
+                Components:
+                    368b8c6412a3748701e2ece2b3a27ecb: !TransformComponent
+                        Id: a574bbcb-f796-4988-a29d-a4d8e99c0a5c
+                        Position: {X: 0.738052249, Y: 0.796249747, Z: 4.42544651}
+                        Rotation: {X: 0.9925019, Y: 0.004985271, Z: -0.04333357, W: 0.114181548}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    a4006ba42e9ce98ba35e3379721c411c: !LightComponent
+                        Id: 2cc2bdc5-b432-49bc-ba21-5079c5c87056
+                        Enabled: false
+                        Type: !LightSpot
+                            Color: !ColorRgbProvider
+                                Value: {R: 1.0, G: 1.0, B: 1.0}
+                            Range: 30.0
+                            UVScale: {X: 1.0, Y: 1.0}
+                            UVOffset: {X: 0.0, Y: 0.0}
+                            Shadow:
+                                BiasParameters:
+                                    DepthBias: 0.001
+                        Intensity: 100.0
+        -   Entity:
+                Id: df19d114-5b9c-404c-b6d2-ac737938f6d0
+                Name: Sphere
+                Components:
+                    bd6eb56edab4dd37f7562b714370dea0: !TransformComponent
+                        Id: 1c53e192-ae06-4c50-9517-294437f77d76
+                        Position: {X: 6.28006458, Y: 2.96761465, Z: -1.50248134}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 9.383262, Y: 3.144459, Z: 3.144459}
+                        Children: {}
+                    22db7703ef09cdd8d129a665013e4785: !ModelComponent
+                        Id: 42c3be33-2da3-4d0e-8792-d6cf776aae5c
+                        Enabled: false
+                        Model: 9b1daf0c-16a3-40d3-bfe5-7f24c2f4b1da:TheWhiteRoom/Sphere
+                        Materials: {}
+        -   Entity:
+                Id: f311ebbc-7b55-461c-999f-c90ebd83b3da
+                Name: Box1x1x1
+                Components:
+                    1d47a4b96cc9a0ec400abdef4ec71abc: !TransformComponent
+                        Id: 6fa329cb-a2f0-425b-a17b-4fbfb468413e
+                        Position: {X: -0.390072, Y: 3.61830783, Z: -7.83092356}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 0.275276363, Y: 3.6087873, Z: 1.0}
+                        Children: {}
+                    687ff098549cd68bb1226c9b6de5fb34: !ModelComponent
+                        Id: 351ce6c0-d37c-4261-8caf-0844db31182e
+                        Model: 6f320f60-4f5b-469c-a9ce-8f90f76a3f26:Models/Box1x1x1
+                        Materials:
+                            508e866c67dd6ed8ff53036551d29b03~0: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material

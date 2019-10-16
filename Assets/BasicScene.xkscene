@@ -1,0 +1,263 @@
+!SceneAsset
+Id: f76abca2-516f-4dae-aa18-a6cdf543a292
+SerializedVersion: {Xenko: 3.1.0.1}
+Tags: []
+ChildrenIds: []
+Offset: {X: 0.0, Y: 0.0, Z: 0.0}
+Hierarchy:
+    RootParts:
+        - ref!! c4036a0b-35b5-40d4-9a7f-20b7b4ef717e
+        - ref!! 8c137c64-7917-4c5b-ada1-571c0902a23c
+        - ref!! bdb73ab9-41dd-47d2-b96d-de4e1df99a76
+        - ref!! c009d549-355b-4d71-8c47-ac9bc412ca89
+        - ref!! 55459d28-4fcd-4a71-a3f6-39f3c6185f0d
+    Parts:
+        -   Folder: null
+            Entity:
+                Id: 3b57cc32-bd50-4817-9f1c-3df529fdaa1e
+                Name: GridBase10x10
+                Components:
+                    4eecb3c27affe3478bcc584553d59e41: !TransformComponent
+                        Id: 401ce0a0-5d91-4d26-bd42-2d3f322de14e
+                        Position*: {X: 2.6992712, Y: 0.5610547, Z: 4.75217152}
+                        Rotation*: {X: 0.707106948, Y: 0.70710665, Z: -1.74084676E-08, W: -4.440878E-08}
+                        Scale*: {X: 0.22716032, Y: 1.0, Z: 0.577202737}
+                        Children: {}
+                    7c901dfed21c864283aa0639481520b1: !ModelComponent
+                        Id: b5558b10-6c96-4854-a0b4-51e249c31b25
+                        Enabled*: false
+                        Model: f15fc51f-4855-4bac-86dd-9967decc5202:Models/GridBase10x10
+                        Materials: {}
+                    e892de73aae78041aa74ca19b0b9f867: !StaticColliderComponent
+                        Id: f652e096-c50b-48a6-b9a9-5439f11df4a9
+                        CanSleep: true
+                        Restitution: 0.0
+                        Friction: 0.5
+                        RollingFriction: 0.0
+                        CcdMotionThreshold: 0.0
+                        CcdSweptSphereRadius: 0.0
+                        IsTrigger: false
+                        ColliderShapes:
+                            6f9d4e7e5147bf47ad510aa5f27d122b: !BoxColliderShapeDesc
+                                Is2D: false
+                                Size: {X: 10.0, Y: 0.3, Z: 10.0}
+                                LocalOffset: {X: 0.0, Y: -0.15, Z: 0.0}
+                                LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+            Base:
+                BasePartAsset: d27b3f09-b009-4518-8ed0-e26c55a8493b:BlocksPrefabs/GridBase10x10
+                BasePartId: b045349c-565e-4488-9130-a795b0e3b229
+                InstanceId: cb3aa63a-8a4c-4135-b9b4-00eaede0911c
+        -   Entity:
+                Id: 55459d28-4fcd-4a71-a3f6-39f3c6185f0d
+                Name: Camera
+                Components:
+                    1c0cee4374ef158f8fb8c94397753daf: !TransformComponent
+                        Id: 2678eca6-0cd1-47cd-962a-4e2332888485
+                        Position: {X: 7.90838337, Y: 1.62794209, Z: 10.9584484}
+                        Rotation: {X: 0.0, Y: 0.243422091, Z: 0.0, W: 0.969920456}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    13f8f84059e25b5d500d471b66200fbb: !CameraComponent
+                        Id: a064d8d3-2fb6-489e-9198-996a1fd39b57
+                        Name: null
+                        Projection: Perspective
+                        Slot: f1ef5817-0725-4b1a-abc9-845d101ec0e6
+        -   Entity:
+                Id: 6610754f-0d7d-4d30-b9fd-e47b2c8b1493
+                Name: GridBase10x10
+                Components:
+                    4eecb3c27affe3478bcc584553d59e41: !TransformComponent
+                        Id: 8c8ab7b8-0242-4abb-92d3-23852f3f6fe7
+                        Position: {X: 5.0, Y: 0.0, Z: 5.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    7c901dfed21c864283aa0639481520b1: !ModelComponent
+                        Id: 9901f80d-5dee-463b-bf16-984362c3b7bd
+                        Model: f15fc51f-4855-4bac-86dd-9967decc5202:Models/GridBase10x10
+                        Materials:
+                            d82af043a71d2ed444e875800cf1322b*~0: 3506b9ed-af9f-4284-825f-25f1093a4299:Materials/BodyWhite
+                    e892de73aae78041aa74ca19b0b9f867: !StaticColliderComponent
+                        Id: e217a81a-6e2c-4d10-8c74-cd511d98e828
+                        CanSleep: true
+                        Restitution: 0.0
+                        Friction: 0.5
+                        RollingFriction: 0.0
+                        CcdMotionThreshold: 0.0
+                        CcdSweptSphereRadius: 0.0
+                        IsTrigger: false
+                        ColliderShapes:
+                            6f9d4e7e5147bf47ad510aa5f27d122b: !BoxColliderShapeDesc
+                                Is2D: false
+                                Size: {X: 10.0, Y: 0.3, Z: 10.0}
+                                LocalOffset: {X: 0.0, Y: -0.15, Z: 0.0}
+                                LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+            Base:
+                BasePartAsset: d27b3f09-b009-4518-8ed0-e26c55a8493b:BlocksPrefabs/GridBase10x10
+                BasePartId: b045349c-565e-4488-9130-a795b0e3b229
+                InstanceId: 568e17bf-c684-47eb-b6cc-0547535a001d
+        -   Folder: null
+            Entity:
+                Id: 68e07054-d92d-4d13-9bfe-766996a0d573
+                Name: GridBase10x10
+                Components:
+                    4eecb3c27affe3478bcc584553d59e41: !TransformComponent
+                        Id: 137bfd2c-c3a9-4762-b401-ae776d592918
+                        Position*: {X: 14.87949, Y: 0.0, Z: 5.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    7c901dfed21c864283aa0639481520b1: !ModelComponent
+                        Id: dc9fba3d-88e9-4f4e-9462-56e113504a84
+                        Model: f15fc51f-4855-4bac-86dd-9967decc5202:Models/GridBase10x10
+                        Materials:
+                            c8c3369c1640f7efcbf95e378f0277f6*~0: 3506b9ed-af9f-4284-825f-25f1093a4299:Materials/BodyWhite
+                    e892de73aae78041aa74ca19b0b9f867: !StaticColliderComponent
+                        Id: 6fc9df45-1c51-450f-b2d8-a3ad0d46a535
+                        CanSleep: true
+                        Restitution: 0.0
+                        Friction: 0.5
+                        RollingFriction: 0.0
+                        CcdMotionThreshold: 0.0
+                        CcdSweptSphereRadius: 0.0
+                        IsTrigger: false
+                        ColliderShapes:
+                            6f9d4e7e5147bf47ad510aa5f27d122b: !BoxColliderShapeDesc
+                                Is2D: false
+                                Size: {X: 10.0, Y: 0.3, Z: 10.0}
+                                LocalOffset: {X: 0.0, Y: -0.15, Z: 0.0}
+                                LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+            Base:
+                BasePartAsset: d27b3f09-b009-4518-8ed0-e26c55a8493b:BlocksPrefabs/GridBase10x10
+                BasePartId: b045349c-565e-4488-9130-a795b0e3b229
+                InstanceId: c53901fb-98f5-4e15-acdc-b16afd8bc35c
+        -   Entity:
+                Id: 8c137c64-7917-4c5b-ada1-571c0902a23c
+                Name: Voxel Volume
+                Components:
+                    b961bfbf0c53f6ba9539c7c182ae1bec: !TransformComponent
+                        Id: d1afa2f3-2344-4867-ad07-a77d130d0bde
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 40.0, Y: 40.0, Z: 40.0}
+                        Children: {}
+                    e38422ed9bc7cfe380b5c02b15c7b791: !VoxelVolumeComponent
+                        Id: 7383ecda-5f8a-4797-b305-24d1716dc836
+                        VoxelizationMethod: !.VoxelizationMethodGeometry,FirstPersonShooter_VoxelGI.Game {}
+                        Storage: !Xenko.Rendering.Voxels.VoxelStorageClipmaps,FirstPersonShooter_VoxelGI.Game
+                            ClipResolution: x128
+                            RenderMethod: GeometryShader
+                            MipmapInner: true
+                        Attributes:
+                            0e507175088b7d962d6f65efcb50165b: !Xenko.Rendering.Voxels.VoxelAttributeEmissionOpacity,FirstPersonShooter_VoxelGI.Game
+                                VoxelLayout: !Xenko.Rendering.Voxels.VoxelLayoutAnisotropic,FirstPersonShooter_VoxelGI.Game
+                                    StorageMethod: !Xenko.Rendering.Voxels.StorageMethodIndirect,FirstPersonShooter_VoxelGI.Game
+                                        TempStorageFormat: !Xenko.Rendering.Voxels.VoxelFragmentPackFloatR11G11B10,FirstPersonShooter_VoxelGI.Game {}
+                                        Filter: !Xenko.Rendering.Voxels.VoxelBufferWriteMax,FirstPersonShooter_VoxelGI.Game {}
+                                Modifiers: {}
+                        AproximateVoxelSize: 0.15
+                        VoxelVisualization: false
+                        VisualizeVoxels: false
+                        Visualization: !Xenko.Rendering.Voxels.VoxelVisualizationView,FirstPersonShooter_VoxelGI.Game
+                            Background: {R: 25, G: 25, B: 25, A: 255}
+                            MarchMethod: !Xenko.Rendering.Voxels.VoxelMarchBeam,FirstPersonShooter_VoxelGI.Game
+                                Steps: 200
+                                StepScale: 1.0
+                                BeamDiameter: 8.0
+        -   Folder: null
+            Entity:
+                Id: 8f955d37-1e94-4891-8767-c7f327c24d78
+                Name: GridBase10x10
+                Components:
+                    4eecb3c27affe3478bcc584553d59e41: !TransformComponent
+                        Id: 7759500b-2682-4867-b85b-7588f17186de
+                        Position*: {X: 5.454026, Y: 0.5610547, Z: 5.186217}
+                        Rotation*: {X: 0.707106769, Y: 0.7071068, Z: -3.090862E-08, W: -3.090862E-08}
+                        Scale*: {X: 0.22716032, Y: 1.0, Z: 0.577202737}
+                        Children: {}
+                    7c901dfed21c864283aa0639481520b1: !ModelComponent
+                        Id: d9a2eba5-3354-4745-8780-dac9caccb9bb
+                        Enabled*: true
+                        Model: f15fc51f-4855-4bac-86dd-9967decc5202:Models/GridBase10x10
+                        Materials: {}
+                    e892de73aae78041aa74ca19b0b9f867: !StaticColliderComponent
+                        Id: 24486e8a-2d3c-4c83-99c7-54b06a5a1c0d
+                        CanSleep: true
+                        Restitution: 0.0
+                        Friction: 0.5
+                        RollingFriction: 0.0
+                        CcdMotionThreshold: 0.0
+                        CcdSweptSphereRadius: 0.0
+                        IsTrigger: false
+                        ColliderShapes:
+                            6f9d4e7e5147bf47ad510aa5f27d122b: !BoxColliderShapeDesc
+                                Is2D: false
+                                Size: {X: 10.0, Y: 0.3, Z: 10.0}
+                                LocalOffset: {X: 0.0, Y: -0.15, Z: 0.0}
+                                LocalRotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+            Base:
+                BasePartAsset: d27b3f09-b009-4518-8ed0-e26c55a8493b:BlocksPrefabs/GridBase10x10
+                BasePartId: b045349c-565e-4488-9130-a795b0e3b229
+                InstanceId: 30f0f036-835a-4803-8aec-2cd635de8e77
+        -   Entity:
+                Id: bdb73ab9-41dd-47d2-b96d-de4e1df99a76
+                Name: Voxel light
+                Components:
+                    33d59ef8e081872296ab43b0c1aabe68: !TransformComponent
+                        Id: 1b9221e3-cb25-41c8-a701-bd0d13575442
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    d5fddd9bda2f7ecd56ddd350b1d4facf: !LightComponent
+                        Id: c1d30941-f940-4fdd-b056-103c2f67225d
+                        Type: !LightVoxel
+                            Volume: ref!! 7383ecda-5f8a-4797-b305-24d1716dc836
+                            DiffuseMarcher: !Xenko.Rendering.Voxels.VoxelMarchSetHemisphere12,FirstPersonShooter_VoxelGI.Game
+                                Marcher: !Xenko.Rendering.Voxels.VoxelMarchCone,FirstPersonShooter_VoxelGI.Game
+                                    Fast: false
+                                    Steps: 9
+                                    StepScale: 1.0
+                                    ConeRatio: 1.0
+                            SpecularMarcher: null
+                            BounceIntensityScale: 0.0
+                            SpecularIntensityScale: 0.0
+        -   Entity:
+                Id: c009d549-355b-4d71-8c47-ac9bc412ca89
+                Name: Directional light
+                Components:
+                    f4fbf47ce907632145b4325659d617f4: !TransformComponent
+                        Id: 9911265f-9c1a-455f-a586-a4606f20d3c4
+                        Position: {X: 5.25003147, Y: 2.0, Z: 6.28800058}
+                        Rotation: {X: 0.0, Y: 0.707106769, Z: 0.0, W: 0.7071068}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    97fa74f4dbc359c6e65bc1329589ed64: !LightComponent
+                        Id: 61c57ced-48ec-4d6e-97ee-0cfd15a71db2
+                        Type: !LightDirectional
+                            Color: !ColorRgbProvider
+                                Value: {R: 1.0, G: 1.0, B: 1.0}
+                            Shadow:
+                                Enabled: true
+                                Size: Large
+                                DepthRange: {}
+                                PartitionMode: !LightDirectionalShadowMap.PartitionLogarithmic {}
+                                BiasParameters:
+                                    DepthBias: 0.001
+                                    NormalOffsetScale: 0.0
+                                ComputeTransmittance: false
+                        Intensity: 3.0
+        -   Entity:
+                Id: c4036a0b-35b5-40d4-9a7f-20b7b4ef717e
+                Name: GridBase10x10
+                Components:
+                    4a533ba3e70504764208e75adc254ee5: !TransformComponent
+                        Id: ffe9d953-5b54-4718-97a1-b6cdc2710a17
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children:
+                            394cba398ccf04cf3f6ba3b6a4a251cd: ref!! 8c8ab7b8-0242-4abb-92d3-23852f3f6fe7
+                            c124a62d5866d32dc3e02f12f5f40329: ref!! 137bfd2c-c3a9-4762-b401-ae776d592918
+                            731f0d72076d537b14bdeda535f9a386: ref!! 7759500b-2682-4867-b85b-7588f17186de
+                            d5c2b975836e66d1e1382057c5dc744a: ref!! 401ce0a0-5d91-4d26-bd42-2d3f322de14e

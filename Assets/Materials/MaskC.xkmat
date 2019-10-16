@@ -62,7 +62,7 @@ Attributes:
                 Offset: {X: 0.0, Y: 0.0}
                 Swizzle: null
             RightChild: !ComputeFloat4
-                Value: {X: 5.0, Y: 9.0, Z: 50.0, W: 5.0}
+                Value: {X: 5.0, Y: 9.0, Z: 50.0, W: 0.0}
         Intensity: !ComputeFloat
             Value: 1.0
     Overrides:
