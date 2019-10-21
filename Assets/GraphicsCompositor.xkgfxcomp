@@ -204,7 +204,7 @@ SharedRenderers:
             RequiredApis: {}
             Overlays: {}
         SubsurfaceScatteringBlurEffect: null
-        MSAALevel: None
+        MSAALevel: X2
         MSAAResolver: {}
         VoxelStage: ref!! 25e9a2a1-4e58-4449-a9e5-8b35d1810077
         VoxelVisualization: {}
