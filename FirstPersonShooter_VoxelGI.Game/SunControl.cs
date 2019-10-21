@@ -27,18 +27,18 @@ namespace FirstPersonShooter_VoxelGI.Player
         }
 
         Vector2 rotationDirection = new Vector2(-0.826f,-2.51f);
-        public float speed = 0.02f;
+        public float speed = 3.14f/5.0f;
         public override void Update()
         {
             {
                 if (KeysLeft.Any(key => Input.IsKeyDown(key)))
-                    rotationDirection += -Vector2.UnitX * speed;
+                    rotationDirection += -Vector2.UnitX * speed * (float)Game.UpdateTime.Elapsed.TotalSeconds;
                 if (KeysRight.Any(key => Input.IsKeyDown(key)))
-                    rotationDirection += +Vector2.UnitX * speed;
+                    rotationDirection += +Vector2.UnitX * speed * (float)Game.UpdateTime.Elapsed.TotalSeconds;
                 if (KeysUp.Any(key => Input.IsKeyDown(key)))
-                    rotationDirection += +Vector2.UnitY * speed;
+                    rotationDirection += +Vector2.UnitY * speed * (float)Game.UpdateTime.Elapsed.TotalSeconds;
                 if (KeysDown.Any(key => Input.IsKeyDown(key)))
-                    rotationDirection += -Vector2.UnitY * speed;
+                    rotationDirection += -Vector2.UnitY * speed * (float)Game.UpdateTime.Elapsed.TotalSeconds;
 
                 var rotation = Quaternion.RotationYawPitchRoll(rotationDirection.X, rotationDirection.Y, 0);
 

@@ -602,7 +602,7 @@ Hierarchy:
                     fca51cc4ffbf2d55e6b9d979b838b114: !FirstPersonShooter_VoxelGI.Player.SunControl,FirstPersonShooter_VoxelGI.Game
                         Id: addbea30-fd79-4ddb-aba7-5fd3e6986ec1
                         Priority: -1000
-                        speed: 0.02
+                        speed: 0.4
                         KeysLeft:
                             ab2db8f8f641bef81b389419096528fc: Left
                         KeysRight:
