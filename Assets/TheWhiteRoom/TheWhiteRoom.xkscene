@@ -73,6 +73,10 @@ Hierarchy:
                                 ConeRatio: 1.0
                             BounceIntensityScale: 1.2
                             SpecularIntensityScale: 1.0
+                    d398517f3016bd74578a8ff0b890af4b: !FirstPersonShooter_VoxelGI.Player.LightToggler,FirstPersonShooter_VoxelGI.Game
+                        Id: 12603542-9dc2-41aa-8088-3d1a7e4ea812
+                        ToggleLight:
+                            77e2f739797946c01264873862b51d0a: G
         -   Entity:
                 Id: 357729fb-b18e-4b8d-ad04-3275d6241793
                 Name: Point light
@@ -187,6 +191,11 @@ Hierarchy:
                             4dabd9d835d65680651e77194eafc232~61: fd602ea7-fb24-436c-abe4-1d670827d3a8:TheWhiteRoom/Radio-knob
                             1703c7615efa65a5bb684949b8ecfbeb~62: 6092ab80-6bc7-4cf1-ab23-09a1f76d6e01:TheWhiteRoom/Radio-suround
                             dbad6a09a9d47ba2263bb84c58f50c46~63: 258acbec-7b5f-43cc-bcef-6ad3ad78b485:TheWhiteRoom/Radio-edges
+                    5e7892aeacbdabee32cdeec0d0d1f4d8: !FirstPersonShooter_VoxelGI.Player.EmissionToggler,FirstPersonShooter_VoxelGI.Game
+                        Id: 0c92f979-99e4-4ab3-9590-ed835a299d45
+                        materialIndex: 3
+                        ToggleEmission:
+                            24bf5bbedbd55cd655467e8b44aa4149: D2
         -   Entity:
                 Id: 4e30ae6e-d5e5-4bca-bc0a-e355da2b0421
                 Name: Box1x1x1
@@ -219,12 +228,16 @@ Hierarchy:
                             e79bf28bf3466aa0d704b4acdf51c5c7: ref!! 6a6832fc-4ed4-4d6c-8679-883b9fb4ef51
                             1e58929a87e5ef1326222102e4e47c10: ref!! d4fcc9ad-2156-4c14-ae2e-ab11ee7a2e29
                             3e1d8d4b7db1dd95f5380fc1c2090fe8: ref!! 9b64ee57-1e56-402a-a4ca-56d473696762
+                            bb6523f2bfe34031701b9ffc17fa56c4: ref!! 9facd7ba-d741-42dc-b336-c1537985147f
                             59da5adf7b8197d37e63a8190effc30a: ref!! 40862b5a-ba57-49e6-9faf-35ec296c2912
+                            1e251778bb2ac3b442a0a29a6adb6e5c: ref!! db44d33b-ae7a-4baf-8608-d1a20d728fbb
                             36a4f84d9124c307893f6d94a0717372: ref!! f7e2edd1-d42a-4c8b-a132-cc25db695be2
                             e99544d89cc88930df36246460d4bb47: ref!! 6fa329cb-a2f0-425b-a17b-4fbfb468413e
+                            fe714b2a4d07b29c80c7d2f7fe097aba: ref!! 0fe00a0c-4bdf-4d9b-b106-ecabb9b03405
                             44ebe48db5c77b5726385c7534f05df3: ref!! d15392f0-0a95-4c06-85a2-93f96709a189
                             d8ef03dafc6d26701b0b8ab5f7be526e: ref!! b3d14f37-4fb8-4151-8f34-8abbdbb15b9c
                             99b899d4ec878fbe00123335413862fd: ref!! 09ea404a-66ea-40d1-8990-c2784c241ba6
+                            96e7af426f044fc377a1918d418d4d03: ref!! ae07b44f-2264-4327-b3aa-2da2157a1d09
                             06ec09a13e987b37565d891bafbd8edc: ref!! 9a976926-a5ff-461e-b5fc-a93def876972
                             56d1676701bcd3d2cafefafb11380710: ref!! ae8a3988-c594-4c91-a284-865b2ca7a528
                             2d0f3e3f555b701cbe142c0de5c4d814: ref!! 0a71a370-4ac8-4f1e-9f29-729ed36b5f51
@@ -278,6 +291,22 @@ Hierarchy:
                         Model: 6f320f60-4f5b-469c-a9ce-8f90f76a3f26:Models/Box1x1x1
                         Materials:
                             508e866c67dd6ed8ff53036551d29b03~0: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material
+        -   Folder: null
+            Entity:
+                Id: 855b5521-8371-4883-95db-3b34ab7d3648
+                Name: Box1x1x1
+                Components:
+                    1d47a4b96cc9a0ec400abdef4ec71abc: !TransformComponent
+                        Id: 9facd7ba-d741-42dc-b336-c1537985147f
+                        Position: {X: 3.01376915, Y: 3.87204218, Z: -6.92002535}
+                        Rotation: {X: -0.176502168, Y: -0.176502138, Z: 0.684724033, W: 0.684724033}
+                        Scale: {X: 0.110622086, Y: 1.43176723, Z: 0.4336031}
+                        Children: {}
+                    687ff098549cd68bb1226c9b6de5fb34: !ModelComponent
+                        Id: 3b595e59-845f-4fe3-8a8f-ea948d420ab7
+                        Model: 6f320f60-4f5b-469c-a9ce-8f90f76a3f26:Models/Box1x1x1
+                        Materials:
+                            508e866c67dd6ed8ff53036551d29b03~0: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material
         -   Entity:
                 Id: 8c75777f-0fe4-4051-8f59-21140bc7460a
                 Name: Box1x1x1
@@ -295,14 +324,30 @@ Hierarchy:
                             508e866c67dd6ed8ff53036551d29b03~0: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material
         -   Folder: null
             Entity:
+                Id: 99b9e085-5ccc-490e-adfb-6663b0327405
+                Name: Box1x1x1
+                Components:
+                    1d47a4b96cc9a0ec400abdef4ec71abc: !TransformComponent
+                        Id: db44d33b-ae7a-4baf-8608-d1a20d728fbb
+                        Position: {X: 0.401631951, Y: 3.87331128, Z: -7.486418}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.707106769, W: 0.707106769}
+                        Scale: {X: 0.110622086, Y: 1.43176723, Z: 0.4336031}
+                        Children: {}
+                    687ff098549cd68bb1226c9b6de5fb34: !ModelComponent
+                        Id: 84870bd9-0d88-4f0c-8444-321ada1dd909
+                        Model: 6f320f60-4f5b-469c-a9ce-8f90f76a3f26:Models/Box1x1x1
+                        Materials:
+                            508e866c67dd6ed8ff53036551d29b03~0: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material
+        -   Folder: null
+            Entity:
                 Id: 9f9d4330-f1e8-4b3d-8884-d873a93c84fe
                 Name: Box1x1x1
                 Components:
                     1d47a4b96cc9a0ec400abdef4ec71abc: !TransformComponent
                         Id: ae8a3988-c594-4c91-a284-865b2ca7a528
-                        Position: {X: -2.0224123, Y: 3.95914388, Z: -6.97496462}
+                        Position: {X: -2.0224123, Y: 3.9026165, Z: -6.97496462}
                         Rotation: {X: 0.200622857, Y: 0.200622857, Z: 0.678049, W: 0.678049}
-                        Scale: {X: 0.17920132, Y: 1.63209271, Z: 0.38399896}
+                        Scale: {X: 0.2125991, Y: 1.63209271, Z: 0.38399896}
                         Children: {}
                     687ff098549cd68bb1226c9b6de5fb34: !ModelComponent
                         Id: 1633b6ec-0312-44b2-a398-9917b51f7a00
@@ -316,12 +361,28 @@ Hierarchy:
                 Components:
                     1d47a4b96cc9a0ec400abdef4ec71abc: !TransformComponent
                         Id: d15392f0-0a95-4c06-85a2-93f96709a189
-                        Position: {X: -2.66943145, Y: 3.61830783, Z: -6.86501}
+                        Position: {X: -2.59949327, Y: 3.61830783, Z: -6.86501}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-                        Scale: {X: 0.275276363, Y: 3.6087873, Z: 0.258703738}
+                        Scale: {X: 0.275276363, Y: 3.6087873, Z: 0.348865837}
                         Children: {}
                     687ff098549cd68bb1226c9b6de5fb34: !ModelComponent
                         Id: 62ee50cf-257d-4ed7-80ef-f5b85a6a8cbb
+                        Model: 6f320f60-4f5b-469c-a9ce-8f90f76a3f26:Models/Box1x1x1
+                        Materials:
+                            508e866c67dd6ed8ff53036551d29b03~0: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material
+        -   Folder: null
+            Entity:
+                Id: a4579b58-f5ea-4b32-8fe2-484a05d18483
+                Name: Box1x1x1
+                Components:
+                    1d47a4b96cc9a0ec400abdef4ec71abc: !TransformComponent
+                        Id: 0fe00a0c-4bdf-4d9b-b106-ecabb9b03405
+                        Position: {X: 1.29061949, Y: 3.61830783, Z: -7.61874962}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 0.275276363, Y: 3.6087873, Z: 0.292528838}
+                        Children: {}
+                    687ff098549cd68bb1226c9b6de5fb34: !ModelComponent
+                        Id: 9c702895-4c33-465c-ae95-d2d197a8a218
                         Model: 6f320f60-4f5b-469c-a9ce-8f90f76a3f26:Models/Box1x1x1
                         Materials:
                             508e866c67dd6ed8ff53036551d29b03~0: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material
@@ -425,6 +486,10 @@ Hierarchy:
                         SortingMode: ByTime
                         FilteringMode: GpuEvents
                         ResultPage: 1
+                    afa02018db1649eab5f718ad0f8745eb: !FirstPersonShooter_VoxelGI.Player.VoxelizationToggler,FirstPersonShooter_VoxelGI.Game
+                        Id: fa993457-b07b-42a0-a44e-896cd89cdf04
+                        ToggleVoxelization:
+                            d3eb0f8ec9988241801a700b5f16b8d0: V
         -   Entity:
                 Id: b5daede9-3abb-4a0e-a9e7-af3d3d2bc81a
                 Name: GridBase10x10
@@ -546,6 +611,10 @@ Hierarchy:
                             4a9f522728fcd989e186cca76eab1117: Up
                         KeysDown:
                             5d6c7ff4d6024d9b81a5fd94f173b2b5: Down
+                    f787b2aab06398b91ac12f10d88d7e9e: !FirstPersonShooter_VoxelGI.Player.LightToggler,FirstPersonShooter_VoxelGI.Game
+                        Id: 4b0ee1cd-ac72-4191-8f90-163756f5c87f
+                        ToggleLight:
+                            3b30d08e7535997163ad13f637608344: D1
         -   Entity:
                 Id: d5acb2b3-00d1-4bd2-8618-85680a4121f8
                 Name: Point light
@@ -586,6 +655,22 @@ Hierarchy:
                         Materials: {}
         -   Folder: null
             Entity:
+                Id: ea3646b0-beec-42f7-80a5-252e341a9d0b
+                Name: Box1x1x1
+                Components:
+                    1d47a4b96cc9a0ec400abdef4ec71abc: !TransformComponent
+                        Id: ae07b44f-2264-4327-b3aa-2da2157a1d09
+                        Position: {X: 3.51311636, Y: 3.61830783, Z: -6.75072}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 0.275276363, Y: 3.6087873, Z: 0.258703738}
+                        Children: {}
+                    687ff098549cd68bb1226c9b6de5fb34: !ModelComponent
+                        Id: e7c3f14f-6da9-4c1e-876c-f408c93bfedb
+                        Model: 6f320f60-4f5b-469c-a9ce-8f90f76a3f26:Models/Box1x1x1
+                        Materials:
+                            508e866c67dd6ed8ff53036551d29b03~0: 5ba773c8-c157-41ce-8db7-27a8c09b58c9:TheWhiteRoom/Material
+        -   Folder: null
+            Entity:
                 Id: f10be4a3-809d-4af0-bdc2-6dc098ec46b2
                 Name: Box1x1x1
                 Components:
@@ -606,9 +691,9 @@ Hierarchy:
                 Components:
                     1d47a4b96cc9a0ec400abdef4ec71abc: !TransformComponent
                         Id: 6fa329cb-a2f0-425b-a17b-4fbfb468413e
-                        Position: {X: -0.390072, Y: 3.61830783, Z: -7.83092356}
+                        Position: {X: -0.390072, Y: 3.10217166, Z: -7.517341}
                         Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-                        Scale: {X: 0.275276363, Y: 3.6087873, Z: 1.0}
+                        Scale: {X: 0.275276363, Y: 3.6087873, Z: 0.3085172}
                         Children: {}
                     687ff098549cd68bb1226c9b6de5fb34: !ModelComponent
                         Id: 351ce6c0-d37c-4261-8caf-0844db31182e
