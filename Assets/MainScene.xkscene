@@ -1781,6 +1781,7 @@ Hierarchy:
                         ResultPage: 1
                     27e7f8cbdeaa5c23beee1ca395df206e: !VoxelVolumeComponent
                         Id: 9dc77b58-1463-4da8-b081-1aa4d9b91545
+                        Voxelize: true
                         VoxelizationMethod: !.VoxelizationMethodGeometry,FirstPersonShooter_VoxelGI.Game {}
                         Storage: !Xenko.Rendering.Voxels.VoxelStorageClipmaps,FirstPersonShooter_VoxelGI.Game
                             ClipResolution: x128

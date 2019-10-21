@@ -143,6 +143,7 @@ Hierarchy:
                         Children: {}
                     e38422ed9bc7cfe380b5c02b15c7b791: !VoxelVolumeComponent
                         Id: 7383ecda-5f8a-4797-b305-24d1716dc836
+                        Voxelize: true
                         VoxelizationMethod: !.VoxelizationMethodGeometry,FirstPersonShooter_VoxelGI.Game {}
                         Storage: !Xenko.Rendering.Voxels.VoxelStorageClipmaps,FirstPersonShooter_VoxelGI.Game
                             ClipResolution: x128
@@ -155,6 +156,7 @@ Hierarchy:
                                         TempStorageFormat: !Xenko.Rendering.Voxels.VoxelFragmentPackFloatR11G11B10,FirstPersonShooter_VoxelGI.Game {}
                                         Filter: !Xenko.Rendering.Voxels.VoxelBufferWriteMax,FirstPersonShooter_VoxelGI.Game {}
                                 Modifiers: {}
+                                LightFalloff: Heuristic
                         AproximateVoxelSize: 0.15
                         VoxelVisualization: false
                         VisualizeVoxels: false

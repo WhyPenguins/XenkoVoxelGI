@@ -120,6 +120,7 @@ namespace Xenko.Rendering.Voxels
                 data.StorageContext = storageContext;
                 data.VoxelizationMethod = volume.VoxelizationMethod;
                 data.VoxelVisualization = volume.VoxelVisualization;
+                data.Voxelize = volume.Voxelize;
 
                 data.ReprView = volume.VoxelizationMethod.CollectViews(VoxelStage, volume, storageContext, Context);
 
@@ -138,6 +139,8 @@ namespace Xenko.Rendering.Voxels
                 // Draw all shadow views generated for the current view
                 foreach (var data in renderVoxelVolumeDataList)
                 {
+                    if (!data.Voxelize) continue;
+
                     RenderView voxelizeRenderView = data.ReprView;
 
                     //Render Shadow Maps

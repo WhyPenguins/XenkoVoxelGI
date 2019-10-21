@@ -12,6 +12,7 @@ namespace Xenko.Rendering.Voxels
     {
         public Matrix VoxelMatrix;
         public float AproxVoxelSize;
+        public bool Voxelize;
 
         public bool VisualizeVoxels;
         public IVoxelVisualization VoxelVisualization;
@@ -25,6 +26,7 @@ namespace Xenko.Rendering.Voxels
     {
         public RenderView ReprView;
 
+        public bool Voxelize;
         public bool VisualizeVoxels;
         public IVoxelVisualization VoxelVisualization;
 

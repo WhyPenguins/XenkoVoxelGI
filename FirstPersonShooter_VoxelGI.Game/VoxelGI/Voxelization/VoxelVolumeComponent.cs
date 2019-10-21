@@ -28,6 +28,9 @@ namespace Xenko.Rendering.Voxels
             set { enabled = value; Changed?.Invoke(this, null); }
         }
 
+        [DataMember(1)]
+        public bool Voxelize = true;
+
         [DataMember(5)]
         [NotNull]
         public IVoxelizationMethod VoxelizationMethod { get; set; } = new VoxelizationMethodGeometry();

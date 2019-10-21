@@ -391,6 +391,7 @@ Hierarchy:
                         Children: {}
                     02e413addc57dfa1c522094afaa09b70: !VoxelVolumeComponent
                         Id: 964fdfde-65a2-40c1-b37a-b999e936f12a
+                        Voxelize: true
                         VoxelizationMethod: !.VoxelizationMethodGeometry,FirstPersonShooter_VoxelGI.Game {}
                         Storage: !Xenko.Rendering.Voxels.VoxelStorageClipmaps,FirstPersonShooter_VoxelGI.Game
                             ClipResolution: x128

@@ -79,6 +79,7 @@ namespace Xenko.Engine.Processors
                     renderVoxelVolumes.Add(volume, data = new RenderVoxelVolume());
 
                 data.VoxelMatrix = volume.Entity.Transform.LocalMatrix;
+                data.Voxelize = volume.Voxelize;
                 data.AproxVoxelSize = volume.AproximateVoxelSize;
                 
                 data.VisualizeVoxels = volume.VisualizeVoxels;
